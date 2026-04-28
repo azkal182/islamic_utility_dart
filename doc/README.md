@@ -21,6 +21,8 @@
 - `doc/10-folder-structure-and-maintenance.md`
 - `doc/11-api-reference.md` ← bilingual user implementation guide
 - `doc/12-faq-troubleshooting.md` ← bilingual FAQ and troubleshooting guide
+- `doc/13-hijri-integration-guide.md` ← bilingual Hijri integration guide
+- `doc/backend/README.md` ← backend API spec (hijri adjustment service)
 
 Urutan baca yang direkomendasikan:
 
@@ -37,3 +39,5 @@ Urutan baca yang direkomendasikan:
 11. Folder Structure
 12. API Reference (User Guide)
 13. FAQ & Troubleshooting
+14. Hijri Integration Guide
+15. Backend API Spec (Hijri Adjustment)

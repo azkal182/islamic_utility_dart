@@ -118,5 +118,39 @@ dart test
 dart run example/islamic_utility_example.dart
 ```
 
-ID: Jika test gagal, cek perubahan terbaru di `docs/03*` dan `docs/11-api-reference.md`.
-EN: If tests fail, review recent changes in `docs/03*` and `docs/11-api-reference.md`.
+ID: Jika test gagal, cek perubahan terbaru di `doc/03*` dan `doc/11-api-reference.md`.
+EN: If tests fail, review recent changes in `doc/03*` and `doc/11-api-reference.md`.
+
+## 11) Metode Hijriyah mana yang sebaiknya dipakai?
+
+ID:
+- `calculatedLocal`: aman untuk offline, deterministic.
+- `ummAlQura`: bagus untuk kebutuhan kompatibilitas Umm al-Qura.
+- official (`withOfficial`): gunakan saat butuh koreksi authority (`kemenag_ri`) jika tersedia.
+
+EN:
+- `calculatedLocal`: safe offline, deterministic.
+- `ummAlQura`: useful for Umm al-Qura compatibility.
+- official (`withOfficial`): use when authority-based adjustment (`kemenag_ri`) is needed.
+
+## 12) Apa yang terjadi jika backend official down?
+
+ID:
+- Sistem fallback otomatis: remote -> cache -> local.
+- Jika cache tersedia, source akan `cache_adjusted`.
+- Jika tidak ada cache, source akan `local`.
+
+EN:
+- Fallback chain is automatic: remote -> cache -> local.
+- If cache exists, source becomes `cache_adjusted`.
+- If no cache exists, source becomes `local`.
+
+## 13) Kenapa hasil Hijriyah bisa berbeda antar metode?
+
+ID:
+- Perbedaan metode adalah hal normal.
+- Metode official dapat berbeda dari metode lokal/dataset karena keputusan authority.
+
+EN:
+- Method differences are expected.
+- Official method may differ from local/dataset methods due to authority decisions.

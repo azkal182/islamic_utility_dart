@@ -94,6 +94,9 @@ final next = prayerTimes.nextPrayer(date: nowUtc);
 - `dart run example/islamic_utility_example.dart`
 - `dart run example/method_comparison_example.dart`
 - `dart run example/custom_adjustment_example.dart`
+- `dart run example/hijri_methods_example.dart`
+- `dart run example/hijri_official_mock_example.dart`
+- `dart run example/hijri_official_http_example.dart`
 
 ## Testing
 
@@ -106,6 +109,8 @@ dart test
 - Index: `doc/README.md`
 - API Reference (Bilingual): `doc/11-api-reference.md`
 - FAQ & Troubleshooting (Bilingual): `doc/12-faq-troubleshooting.md`
+- Hijri Integration Guide (Bilingual): `doc/13-hijri-integration-guide.md`
+- Backend API Spec (Hijri Adjustment): `doc/backend/README.md`
 - Public API Spec: `doc/01-public-api-spec.md`
 - Core Calculation: `doc/02-calculation-core-spec.md`
 - Astronomical Engine: `doc/03-astronomical-formulas.md`

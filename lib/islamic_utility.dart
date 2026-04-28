@@ -1,5 +1,13 @@
 library;
 
+export 'src/calendar_hijri/adjustment/adjustment_cache.dart';
+export 'src/calendar_hijri/adjustment/adjustment_client.dart';
+export 'src/calendar_hijri/adjustment/http_hijri_adjustment_client.dart';
+export 'src/calendar_hijri/adjustment/adjustment_record.dart';
+export 'src/calendar_hijri/hijri_calendar.dart';
+export 'src/calendar_hijri/models/hijri_date.dart';
+export 'src/calendar_hijri/models/hijri_method.dart';
+export 'src/calendar_hijri/models/hijri_result_meta.dart';
 export 'src/models/calculation_method.dart';
 export 'src/models/calculation_parameters.dart';
 export 'src/models/coordinates.dart';

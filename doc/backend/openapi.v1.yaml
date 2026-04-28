@@ -1,0 +1,351 @@
+openapi: 3.0.3
+info:
+  title: Hijri Adjustment API
+  version: 1.0.0
+  description: Adjustment-only API for Hijri date corrections.
+servers:
+  - url: https://api.example.com
+security:
+  - bearerAuth: []
+tags:
+  - name: Adjustments
+    description: Hijri adjustment retrieval endpoints
+paths:
+  /v1/hijri/adjustments:
+    get:
+      tags: [Adjustments]
+      summary: Get adjustment records by date range
+      operationId: getAdjustments
+      parameters:
+        - $ref: '#/components/parameters/CountryParam'
+        - $ref: '#/components/parameters/FromParam'
+        - $ref: '#/components/parameters/ToParam'
+        - $ref: '#/components/parameters/AuthorityParam'
+        - $ref: '#/components/parameters/RegionScopeParam'
+      responses:
+        '200':
+          description: Adjustment dataset
+          headers:
+            ETag:
+              schema:
+                type: string
+            Cache-Control:
+              schema:
+                type: string
+                example: max-age=86400
+            X-RateLimit-Limit:
+              $ref: '#/components/headers/RateLimitLimit'
+            X-RateLimit-Remaining:
+              $ref: '#/components/headers/RateLimitRemaining'
+            X-RateLimit-Reset:
+              $ref: '#/components/headers/RateLimitReset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdjustmentDataset'
+              examples:
+                default:
+                  value:
+                    schema_version: 1.0.0
+                    authority: kemenag_ri
+                    generated_at: '2027-02-07T12:12:00Z'
+                    request_id: req_01HRP8V6A
+                    records:
+                      - id: adj_2027_1449_09_v3
+                        authority: kemenag_ri
+                        country: ID
+                        region_scope: national
+                        effective_from: '2027-02-08'
+                        effective_to: '2027-03-10'
+                        adjustment_days: 1
+                        reason: isbat_hilal
+                        revision: 3
+                        published_at: '2027-02-07T12:10:00Z'
+                        notes: Ramadan starts one day later than base method
+        '304':
+          description: Not modified
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/hijri/adjustments/latest:
+    get:
+      tags: [Adjustments]
+      summary: Get latest adjustments
+      operationId: getLatestAdjustments
+      parameters:
+        - $ref: '#/components/parameters/CountryParam'
+        - $ref: '#/components/parameters/AuthorityParam'
+        - $ref: '#/components/parameters/RegionScopeParam'
+      responses:
+        '200':
+          description: Latest adjustment records
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/components/headers/RateLimitLimit'
+            X-RateLimit-Remaining:
+              $ref: '#/components/headers/RateLimitRemaining'
+            X-RateLimit-Reset:
+              $ref: '#/components/headers/RateLimitReset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdjustmentDataset'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: APIKey
+  parameters:
+    CountryParam:
+      in: query
+      name: country
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-Z]{2}$'
+        minLength: 2
+        maxLength: 2
+        example: ID
+    FromParam:
+      in: query
+      name: from
+      required: true
+      schema:
+        type: string
+        format: date
+        example: '2027-01-01'
+    ToParam:
+      in: query
+      name: to
+      required: true
+      schema:
+        type: string
+        format: date
+        example: '2027-12-31'
+    AuthorityParam:
+      in: query
+      name: authority
+      required: false
+      schema:
+        type: string
+        enum: [kemenag_ri]
+        default: kemenag_ri
+    RegionScopeParam:
+      in: query
+      name: region_scope
+      required: false
+      schema:
+        type: string
+        enum: [national]
+        default: national
+  headers:
+    RateLimitLimit:
+      description: Max requests allowed in current window.
+      schema:
+        type: integer
+        minimum: 1
+    RateLimitRemaining:
+      description: Remaining requests in current window.
+      schema:
+        type: integer
+        minimum: 0
+    RateLimitReset:
+      description: Unix timestamp when window resets.
+      schema:
+        type: integer
+        minimum: 0
+  responses:
+    BadRequest:
+      description: Invalid query parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            invalidDate:
+              value:
+                error:
+                  code: INVALID_QUERY
+                  message: Parameter 'from' must be YYYY-MM-DD
+                  request_id: req_01HRP8V6A
+                  details:
+                    field: from
+    Unauthorized:
+      description: Missing or invalid bearer token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            unauthorized:
+              value:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid API token
+                  request_id: req_01HRP8V6A
+    Forbidden:
+      description: Plan does not allow this endpoint
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            forbidden:
+              value:
+                error:
+                  code: FORBIDDEN_PLAN
+                  message: Your current plan does not include this endpoint
+                  request_id: req_01HRP8V6A
+    RateLimited:
+      description: Too many requests
+      headers:
+        X-RateLimit-Limit:
+          $ref: '#/components/headers/RateLimitLimit'
+        X-RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimitRemaining'
+        X-RateLimit-Reset:
+          $ref: '#/components/headers/RateLimitReset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            limited:
+              value:
+                error:
+                  code: RATE_LIMITED
+                  message: Rate limit exceeded
+                  request_id: req_01HRP8V6A
+    InternalError:
+      description: Unexpected server failure
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          examples:
+            internal:
+              value:
+                error:
+                  code: INTERNAL_ERROR
+                  message: Internal server error
+                  request_id: req_01HRP8V6A
+  schemas:
+    AdjustmentDataset:
+      type: object
+      additionalProperties: false
+      required: [schema_version, authority, generated_at, request_id, records]
+      properties:
+        schema_version:
+          type: string
+          pattern: '^\d+\.\d+\.\d+$'
+          example: 1.0.0
+        authority:
+          type: string
+          enum: [kemenag_ri]
+        generated_at:
+          type: string
+          format: date-time
+        request_id:
+          type: string
+          minLength: 8
+          maxLength: 64
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdjustmentRecord'
+    AdjustmentRecord:
+      type: object
+      additionalProperties: false
+      required:
+        [id, authority, country, region_scope, effective_from, adjustment_days, reason, revision, published_at]
+      properties:
+        id:
+          type: string
+          minLength: 8
+          maxLength: 128
+        authority:
+          type: string
+          enum: [kemenag_ri]
+        country:
+          type: string
+          pattern: '^[A-Z]{2}$'
+          minLength: 2
+          maxLength: 2
+          example: ID
+        region_scope:
+          type: string
+          enum: [national]
+        effective_from:
+          type: string
+          format: date
+        effective_to:
+          type: string
+          format: date
+          nullable: true
+        adjustment_days:
+          type: integer
+          enum: [-1, 0, 1]
+        reason:
+          type: string
+          minLength: 3
+          maxLength: 64
+          example: isbat_hilal
+        revision:
+          type: integer
+          minimum: 1
+        published_at:
+          type: string
+          format: date-time
+        notes:
+          type: string
+          maxLength: 1024
+          nullable: true
+    ErrorEnvelope:
+      type: object
+      additionalProperties: false
+      required: [error]
+      properties:
+        error:
+          type: object
+          additionalProperties: false
+          required: [code, message, request_id]
+          properties:
+            code:
+              type: string
+              enum:
+                - INVALID_QUERY
+                - INVALID_DATE_RANGE
+                - UNAUTHORIZED
+                - FORBIDDEN_PLAN
+                - RATE_LIMITED
+                - CONFLICT_REVISION
+                - INTERNAL_ERROR
+            message:
+              type: string
+              minLength: 3
+              maxLength: 512
+            request_id:
+              type: string
+              minLength: 8
+              maxLength: 64
+            details:
+              type: object
+              additionalProperties: true
