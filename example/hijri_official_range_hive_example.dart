@@ -28,11 +28,11 @@ Future<void> main() async {
   );
 
   final results = await calendar.fromGregorianOfficialRange(
-    from: DateTime.utc(2026, 1, 15),
-    to: DateTime.utc(2026, 1, 30),
+    from: DateTime.utc(2026, 3, 15),
+    to: DateTime.utc(2026, 3, 20),
   );
 
-  var day = DateTime.utc(2026, 1, 15);
+  var day = DateTime.utc(2026, 3, 15);
   for (final item in results) {
     print(
       '${day.toIso8601String().split('T').first} -> ${item.year}-${item.month}-${item.day}'

@@ -1,6 +1,6 @@
 name: islamic_utility
 description: Prayer times, sunnah times, and qibla direction utilities with a Meeus-based astronomical engine.
-version: 1.3.0
+version: 1.4.0
 repository: https://github.com/azkal182/islamic_utility_dart.git
 
 environment:

@@ -31,6 +31,9 @@ Dokumen ini mendefinisikan kontrak API yang harus dipertahankan agar kompatibel 
 - `HijriAnchorCache`
 - `InMemoryHijriAnchorCache`
 - `HiveHijriAnchorCache`
+- `JavaneseCalendar`
+- `JavaneseDate`
+- `Pasaran`
 
 ## Tipe Data
 
@@ -158,6 +161,15 @@ Output derajat dari utara (0-360).
   - `cachedAt`
   - `ttl`
   - daftar record yang dibutuhkan resolver/provider
+
+## Kontrak API Pasaran Jawa
+
+- `JavaneseCalendar` wajib tersedia sebagai API tambahan (additive).
+- `fromGregorian(DateTime)` mengembalikan `JavaneseDate` berisi:
+  - `pasaran`
+  - `weton`
+- `fromGregorianRange({from, to})` mengembalikan rentang inklusif.
+- Penambahan API Pasaran Jawa tidak boleh mengubah behavior API existing (prayer/hijri).
 
 ## Kontrak Backward Compatibility
 

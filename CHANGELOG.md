@@ -1,3 +1,20 @@
+## 1.4.0
+
+- Improved official Hijri range resolution consistency:
+  - range prefetch now falls back to `fetchLatestAnchors(...)` once when
+    `fetchAnchorsRange(...)` returns empty records near boundary windows
+  - prevents unexpected local fallback mismatch for range mode
+- Kept range flow optimized (no per-day remote loop) while preserving
+  anchor-based official result parity.
+- Added/updated tests to lock boundary behavior:
+  - range empty-anchor + latest-anchor fallback case
+  - batch-only official range assertions remain enforced
+- Added transition-ready unified calendar facade usage updates and examples
+  alignment with official mode expectations.
+- Cleaned examples and docs for release safety:
+  - replaced hardcoded API keys with placeholders
+  - synchronized README/API docs with current public surface.
+
 ## 1.3.0
 
 - Added official Hijri range conversion API:
@@ -13,9 +30,19 @@
   - `HiveHijriAdjustmentCache`
   - `HiveHijriAnchorCache`
 - Added support for injecting `anchorCache` in `HijriCalendar.withOfficial(...)`.
+- Added Javanese calendar module:
+  - `JavaneseCalendar`
+  - `Pasaran` (`Legi`, `Pahing`, `Pon`, `Wage`, `Kliwon`)
+  - `JavaneseDate` (`pasaran`, `weton`)
+- Added transition-friendly unified facade:
+  - `UnifiedCalendar`
+  - `CalendarResolveOptions`
+  - `UnifiedCalendarDate`
 - Added examples:
   - `example/hijri_official_range_hive_example.dart`
   - `example/hijri_official_range_hive_flutter_example.dart`
+  - `example/javanese_pasaran_example.dart`
+  - `example/unified_calendar_example.dart`
 - Expanded and synchronized documentation:
   - `README.md`
   - `doc/01-public-api-spec.md`

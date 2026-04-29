@@ -1,15 +1,23 @@
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_cache.dart';
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_client.dart';
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_record.dart';
+import 'package:islamic_utility/src/calendar_hijri/adjustment/anchor_record.dart';
 import 'package:islamic_utility/src/calendar_hijri/providers/kemenag_official_hijri_provider.dart';
 import 'package:islamic_utility/src/calendar_hijri/providers/local_hijri_provider.dart';
 import 'package:test/test.dart';
 
 class _MockClient implements HijriAdjustmentClient {
-  _MockClient(this.result, {this.throwError = false});
+  _MockClient(
+    this.result, {
+    this.throwError = false,
+    this.anchorRangeResult = const AnchorFetchResult(statusCode: 200),
+    this.latestAnchorResult = const AnchorFetchResult(statusCode: 200),
+  });
 
   final AdjustmentFetchResult result;
   final bool throwError;
+  final AnchorFetchResult anchorRangeResult;
+  final AnchorFetchResult latestAnchorResult;
   int calls = 0;
   int anchorByDateCalls = 0;
   int anchorLatestCalls = 0;
@@ -54,7 +62,7 @@ class _MockClient implements HijriAdjustmentClient {
   @override
   Future<AnchorFetchResult> fetchLatestAnchors({String? etag}) async {
     anchorLatestCalls += 1;
-    return const AnchorFetchResult(statusCode: 200);
+    return latestAnchorResult;
   }
 
   @override
@@ -64,7 +72,7 @@ class _MockClient implements HijriAdjustmentClient {
     String? etag,
   }) async {
     anchorRangeCalls += 1;
-    return const AnchorFetchResult(statusCode: 200);
+    return anchorRangeResult;
   }
 }
 
@@ -238,6 +246,18 @@ void main() {
               ),
             ],
           ),
+          anchorRangeResult: AnchorFetchResult(
+            statusCode: 200,
+            records: [
+              HijriAnchorRecord(
+                officialGregorianDate: DateTime.utc(2026, 3, 21),
+                hijriYear: 1447,
+                hijriMonth: 10,
+                revision: 1,
+                publishedAt: DateTime.utc(2026, 3, 20),
+              ),
+            ],
+          ),
         );
 
         final provider = KemenagOfficialHijriProvider(
@@ -259,5 +279,44 @@ void main() {
         expect(client.anchorLatestCalls, 0);
       },
     );
+
+    test('range uses latest anchor once when range anchor is empty', () async {
+      final client = _MockClient(
+        const AdjustmentFetchResult(statusCode: 200, records: []),
+        anchorRangeResult: const AnchorFetchResult(
+          statusCode: 200,
+          records: [],
+        ),
+        latestAnchorResult: AnchorFetchResult(
+          statusCode: 200,
+          records: [
+            HijriAnchorRecord(
+              officialGregorianDate: DateTime.utc(2026, 3, 21),
+              hijriYear: 1447,
+              hijriMonth: 10,
+              revision: 1,
+              publishedAt: DateTime.utc(2026, 3, 20),
+            ),
+          ],
+        ),
+      );
+
+      final provider = KemenagOfficialHijriProvider(
+        baseProvider: LocalHijriProvider(),
+        adjustmentClient: client,
+        adjustmentCache: InMemoryHijriAdjustmentCache(),
+      );
+
+      final results = await provider.fromGregorianRangeAsync(
+        from: DateTime.utc(2026, 3, 15),
+        to: DateTime.utc(2026, 3, 16),
+      );
+
+      expect(results[0].meta.source, 'cache_anchor_adjusted');
+      expect(results[0].day, 25);
+      expect(client.anchorRangeCalls, 1);
+      expect(client.anchorLatestCalls, 1);
+      expect(client.anchorByDateCalls, 0);
+    });
   });
 }

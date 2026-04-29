@@ -133,6 +133,12 @@ Output:
 - `HijriAnchorCache`, `InMemoryHijriAnchorCache`, `HiveHijriAnchorCache`
 - `HttpHijriAdjustmentClient`
 - `RetryPolicy`
+- `JavaneseCalendar`
+- `JavaneseDate`
+- `Pasaran`
+- `UnifiedCalendar`
+- `UnifiedCalendarDate`
+- `CalendarResolveOptions`
 
 ### HijriMethod
 
@@ -285,10 +291,119 @@ Implementations:
   2. gunakan persistent cache
   3. log `meta.source` dan `meta.revision`
 
-## 4) Quick Checklist
+## 4) Javanese Calendar API
+
+### Pasaran
+
+Enum:
+- `legi`
+- `pahing`
+- `pon`
+- `wage`
+- `kliwon`
+
+Property:
+- `label` (`String`): `Legi`, `Pahing`, `Pon`, `Wage`, `Kliwon`
+
+### JavaneseDate
+
+```dart
+class JavaneseDate {
+  final Pasaran pasaran;
+  final String weton;
+}
+```
+
+### JavaneseCalendar
+
+```dart
+const JavaneseCalendar()
+```
+
+Functions:
+
+```dart
+JavaneseDate fromGregorian(DateTime date)
+```
+
+```dart
+List<JavaneseDate> fromGregorianRange({
+  required DateTime from,
+  required DateTime to,
+})
+```
+
+Notes:
+- `fromGregorianRange` returns inclusive range.
+- Existing APIs remain unchanged; Javanese calendar is additive.
+
+## 5) Quick Checklist
 
 1. Pilih `CalculationMethod` dan buat `PrayerTimes`.
 2. Jika butuh Hijri offline, gunakan `HijriCalendar()` + `HijriMethod.calculatedLocal` / `ummAlQura`.
 3. Jika butuh Hijri official, gunakan `HijriCalendar.withOfficial(...)`.
 4. Untuk range conversion gunakan `fromGregorianOfficialRange(...)`.
 5. Untuk Flutter production, pakai cache persistent (Hive) di app layer.
+
+## 6) Unified Calendar API (Transition Mode)
+
+### CalendarResolveOptions
+
+```dart
+const CalendarResolveOptions({
+  bool includeHijri = false,
+  bool includeJavanese = false,
+  HijriMethod hijriMethod = HijriMethod.calculatedLocal,
+})
+```
+
+### UnifiedCalendarDate
+
+```dart
+class UnifiedCalendarDate {
+  final DateTime gregorian;
+  final HijriDate? hijri;
+  final JavaneseDate? javanese;
+}
+```
+
+### UnifiedCalendar
+
+Constructors:
+
+```dart
+UnifiedCalendar()
+```
+
+```dart
+UnifiedCalendar.withOfficialHijri({
+  required HijriAdjustmentClient adjustmentClient,
+  HijriAdjustmentCache? cache,
+  HijriAnchorCache? anchorCache,
+  String authority = 'kemenag_ri',
+  String regionScope = 'national',
+  Duration cacheTtl = const Duration(hours: 24),
+})
+```
+
+Functions:
+
+```dart
+Future<UnifiedCalendarDate> resolve(
+  DateTime date, {
+  CalendarResolveOptions options = const CalendarResolveOptions(),
+})
+```
+
+```dart
+Future<List<UnifiedCalendarDate>> resolveRange({
+  required DateTime from,
+  required DateTime to,
+  CalendarResolveOptions options = const CalendarResolveOptions(),
+})
+```
+
+Notes:
+- Existing API remains valid and unchanged.
+- Unified facade is additive for transition.
+- Range + official Hijri uses batched range fetch flow.

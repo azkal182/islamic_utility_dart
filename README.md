@@ -11,6 +11,7 @@ ID: `islamic_utility` adalah package Dart untuk kalkulasi waktu sholat, sunnah t
 - Utilities: `currentPrayer`, `nextPrayer`, `timeForPrayer`
 - `SunnahTimes`: `middleOfTheNight`, `lastThirdOfTheNight`
 - `Qibla`: direction in degrees `0..360`
+- `JavaneseCalendar`: pasaran Jawa (`Legi`, `Pahing`, `Pon`, `Wage`, `Kliwon`)
 
 ID: Semua output `PrayerTimes` disimpan dalam UTC `DateTime`.
 
@@ -18,7 +19,7 @@ ID: Semua output `PrayerTimes` disimpan dalam UTC `DateTime`.
 
 ```yaml
 dependencies:
-  islamic_utility: ^1.3.0
+  islamic_utility: ^1.4.0
 ```
 
 ```bash
@@ -61,6 +62,10 @@ print('Qibla: ${Qibla.qibla(const Coordinates(-6.2, 106.8))}');
 - `HijriCalendar.withOfficial(...)`
 - `fromGregorianOfficial(...)`
 - `fromGregorianOfficialRange(from: ..., to: ...)`
+- `JavaneseCalendar.fromGregorian(...)`
+- `JavaneseCalendar.fromGregorianRange(...)`
+- `UnifiedCalendar.resolve(...)`
+- `UnifiedCalendar.resolveRange(...)`
 
 ID: Referensi API lengkap ada di `doc/11-api-reference.md`.
 
@@ -141,6 +146,33 @@ Range behavior:
 - Resolve per-day values from cache/local flow.
 - Avoid per-day remote loop in range mode.
 
+## Javanese Pasaran Quick Start
+
+```dart
+final java = const JavaneseCalendar();
+final item = java.fromGregorian(DateTime.utc(2026, 3, 21));
+print(item.pasaran.label); // Legi/Pahing/Pon/Wage/Kliwon
+print(item.weton); // e.g. "Sabtu Kliwon"
+```
+
+## Unified Calendar Quick Start (Transition-Friendly)
+
+```dart
+final unified = UnifiedCalendar();
+final result = await unified.resolve(
+  DateTime.utc(2026, 3, 21),
+  options: const CalendarResolveOptions(
+    includeHijri: true,
+    includeJavanese: true,
+    hijriMethod: HijriMethod.calculatedLocal,
+  ),
+);
+
+print(result.gregorian); // always available
+print(result.hijri); // optional, based on options
+print(result.javanese); // optional, based on options
+```
+
 ## Runnable Examples
 
 - `dart run example/islamic_utility_example.dart`
@@ -150,6 +182,8 @@ Range behavior:
 - `dart run example/hijri_official_mock_example.dart`
 - `dart run example/hijri_official_http_example.dart`
 - `dart run example/hijri_official_range_hive_example.dart`
+- `dart run example/javanese_pasaran_example.dart`
+- `dart run example/unified_calendar_example.dart`
 - `dart run example/hijri_syawal_boundary_anchor_example.dart`
 
 ## Flutter + Hive (Persistent Range Cache)

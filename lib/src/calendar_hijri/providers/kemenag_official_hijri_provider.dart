@@ -2,6 +2,7 @@ import 'package:islamic_utility/src/calendar_hijri/adjustment/anchor_cache.dart'
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_cache.dart';
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_client.dart';
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_record.dart';
+import 'package:islamic_utility/src/calendar_hijri/adjustment/anchor_record.dart';
 import 'package:islamic_utility/src/calendar_hijri/models/hijri_date.dart';
 import 'package:islamic_utility/src/calendar_hijri/models/hijri_method.dart';
 import 'package:islamic_utility/src/calendar_hijri/models/hijri_result_meta.dart';
@@ -146,11 +147,29 @@ class KemenagOfficialHijriProvider implements HijriProvider {
   }) async {
     final now = DateTime.now().toUtc();
     try {
+      List<HijriAnchorRecord> anchorRecords = const [];
+      String? anchorEtag;
       final remoteAnchors = await adjustmentClient.fetchAnchorsRange(
         from: start,
         to: end,
       );
       if (remoteAnchors.statusCode == 200) {
+        anchorRecords = remoteAnchors.records;
+        anchorEtag = remoteAnchors.etag;
+      }
+
+      // If range endpoint returns empty around month boundary, use latest once.
+      if (anchorRecords.isEmpty) {
+        final latest = await adjustmentClient.fetchLatestAnchors(
+          etag: anchorEtag,
+        );
+        if (latest.statusCode == 200 && latest.records.isNotEmpty) {
+          anchorRecords = latest.records;
+          anchorEtag = latest.etag ?? anchorEtag;
+        }
+      }
+
+      if (anchorRecords.isNotEmpty) {
         for (
           var day = start;
           !day.isAfter(end);
@@ -159,8 +178,8 @@ class KemenagOfficialHijriProvider implements HijriProvider {
           anchorCache.put(
             day,
             AnchorCacheEntry(
-              records: remoteAnchors.records,
-              etag: remoteAnchors.etag,
+              records: anchorRecords,
+              etag: anchorEtag,
               cachedAt: now,
               ttl: cacheTtl,
             ),

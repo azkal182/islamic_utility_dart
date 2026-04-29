@@ -1,11 +1,11 @@
 import 'package:islamic_utility/islamic_utility.dart';
 
 Future<void> main() async {
-  final targetDate = DateTime.utc(2026, 3, 20);
+  final targetDate = DateTime.utc(2026, 3, 15);
 
   final client = HttpHijriAdjustmentClient(
     baseUrl: 'http://localhost:3000/api',
-    apiKey: 'iuk_cf3ac869684fc686411962e39eca106f82b1934c3018bc4e',
+    apiKey: 'replace-with-your-api-key',
     retryPolicy: const RetryPolicy(
       maxRetries: 2,
       initialDelay: Duration(milliseconds: 300),
