@@ -25,6 +25,19 @@ class MockAdjustmentClient implements HijriAdjustmentClient {
   Future<AdjustmentFetchResult> fetchLatest({String? etag}) {
     return fetchByDate(date: DateTime.now().toUtc(), etag: etag);
   }
+
+  @override
+  Future<AnchorFetchResult> fetchAnchorsByDate({
+    required DateTime date,
+    String? etag,
+  }) async {
+    return const AnchorFetchResult(statusCode: 200);
+  }
+
+  @override
+  Future<AnchorFetchResult> fetchLatestAnchors({String? etag}) async {
+    return const AnchorFetchResult(statusCode: 200);
+  }
 }
 
 void main() async {
@@ -36,7 +49,9 @@ void main() async {
   final result = await calendar.fromGregorianOfficial(date);
 
   print('Gregorian: ${date.toIso8601String()}');
-  print('Official adjusted Hijri: ${result.year}-${result.month}-${result.day}');
+  print(
+    'Official adjusted Hijri: ${result.year}-${result.month}-${result.day}',
+  );
   print('Source: ${result.meta.source}');
   print('Adjusted days: ${result.meta.adjustmentDays}');
 }

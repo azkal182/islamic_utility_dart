@@ -59,4 +59,5 @@ Prinsip baseline:
 - `doc/backend/15-redis-cache-design.md`
 - `doc/backend/16-vps-deployment-guide.md`
 - `doc/backend/17-typescript-integration-snippets.md`
+- `doc/backend/18-backend-migration-to-anchor-first.md`
 - `doc/backend/openapi.v1.yaml`

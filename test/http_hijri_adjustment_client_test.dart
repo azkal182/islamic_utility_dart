@@ -76,6 +76,69 @@ void main() {
       expect(calls, greaterThanOrEqualTo(2));
     });
 
+    test('fetchLatestAnchors parses anchor records', () async {
+      final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      addTearDown(server.close);
+
+      server.listen((request) async {
+        expect(request.uri.path, '/v1/hijri/anchors/latest');
+        request.response.statusCode = 200;
+        request.response.headers.contentType = ContentType.json;
+        request.response.write(jsonEncode({
+          'records': [
+            {
+              'official_gregorian_date': '2026-01-31',
+              'hijri_year': 1447,
+              'hijri_month': 10,
+              'hijri_day': 1,
+              'revision': 1,
+              'published_at': '2026-01-30T00:00:00Z',
+              'authority': 'kemenag_ri',
+              'region_scope': 'national',
+            }
+          ],
+        }));
+        await request.response.close();
+      });
+
+      final client = HttpHijriAdjustmentClient(
+        baseUrl: 'http://127.0.0.1:${server.port}',
+        apiKey: 'x',
+      );
+
+      final result = await client.fetchLatestAnchors();
+      expect(result.statusCode, 200);
+      expect(result.records.length, 1);
+      expect(result.records.first.hijriMonth, 10);
+      expect(result.records.first.hijriDay, 1);
+      expect(result.records.first.officialGregorianDate, DateTime.utc(2026, 1, 31));
+    });
+
+    test('fetchAnchorsByDate sends date range query', () async {
+      final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      addTearDown(server.close);
+
+      server.listen((request) async {
+        expect(request.uri.path, '/v1/hijri/anchors');
+        expect(request.uri.queryParameters['from'], '2026-01-31');
+        expect(request.uri.queryParameters['to'], '2026-01-31');
+        request.response.statusCode = 200;
+        request.response.headers.contentType = ContentType.json;
+        request.response.write(jsonEncode({'records': []}));
+        await request.response.close();
+      });
+
+      final client = HttpHijriAdjustmentClient(
+        baseUrl: 'http://127.0.0.1:${server.port}',
+        apiKey: 'x',
+      );
+
+      final result = await client.fetchAnchorsByDate(
+        date: DateTime.utc(2026, 1, 31),
+      );
+      expect(result.statusCode, 200);
+    });
+
     test('uses Retry-After on 429 and calls retry logger', () async {
       final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
       addTearDown(server.close);

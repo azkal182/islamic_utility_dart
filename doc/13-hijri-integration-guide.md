@@ -78,6 +78,8 @@ print(result.meta.source); // remote_adjusted/cache_adjusted/local
 
 - `remote_adjusted`: adjustment applied from fresh API response.
 - `cache_adjusted`: adjustment applied from local cache.
+- `remote_anchor_adjusted`: anchor applied from fresh API response.
+- `cache_anchor_adjusted`: anchor applied from local cache.
 - `local`: no adjustment used (fallback).
 
 Fallback priority:
@@ -85,6 +87,31 @@ Fallback priority:
 1. remote adjustment
 2. cached adjustment
 3. local calculation
+
+Anchor-first mode priority (implemented):
+
+1. remote anchor
+2. cached anchor
+3. remote delta
+4. cached delta
+5. local
+
+## 7) Syawal Boundary Example
+
+Case:
+- Base predicts `2026-01-30` as `1 Syawal`
+- Official decides `2026-01-31` is `1 Syawal`
+
+With anchor record:
+- `official_gregorian_date = 2026-01-31`
+- `hijri = 1447-10-01`
+
+Expected:
+- `2026-01-30` is not day 1 of Syawal
+- `2026-01-31` is day 1 of Syawal
+
+Runnable sample:
+- `example/hijri_syawal_boundary_anchor_example.dart`
 
 ## 6) Integration Checklist
 

@@ -4,14 +4,16 @@ import 'dart:io';
 
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_client.dart';
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_record.dart';
+import 'package:islamic_utility/src/calendar_hijri/adjustment/anchor_record.dart';
 
-typedef RetryAttemptLogger = void Function(
-  int attempt,
-  Uri uri,
-  int? statusCode,
-  Duration nextDelay,
-  Object? error,
-);
+typedef RetryAttemptLogger =
+    void Function(
+      int attempt,
+      Uri uri,
+      int? statusCode,
+      Duration nextDelay,
+      Object? error,
+    );
 
 class RetryPolicy {
   const RetryPolicy({
@@ -59,10 +61,11 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
     required DateTime date,
     String? etag,
   }) async {
-    final day = DateTime.utc(date.year, date.month, date.day)
-        .toIso8601String()
-        .split('T')
-        .first;
+    final day = DateTime.utc(
+      date.year,
+      date.month,
+      date.day,
+    ).toIso8601String().split('T').first;
     final uri = Uri.parse(
       '$baseUrl/v1/hijri/adjustments?country=$country&from=$day&to=$day&authority=$authority&region_scope=$regionScope',
     );
@@ -78,13 +81,40 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
     return _fetchWithRetry(uri, etag: etag);
   }
 
+  @override
+  Future<AnchorFetchResult> fetchAnchorsByDate({
+    required DateTime date,
+    String? etag,
+  }) {
+    final day = DateTime.utc(
+      date.year,
+      date.month,
+      date.day,
+    ).toIso8601String().split('T').first;
+    final uri = Uri.parse(
+      '$baseUrl/v1/hijri/anchors?country=$country&from=$day&to=$day&authority=$authority&region_scope=$regionScope',
+    );
+
+    return _fetchAnchorWithRetry(uri, etag: etag);
+  }
+
+  @override
+  Future<AnchorFetchResult> fetchLatestAnchors({String? etag}) {
+    final uri = Uri.parse(
+      '$baseUrl/v1/hijri/anchors/latest?country=$country&authority=$authority&region_scope=$regionScope',
+    );
+    return _fetchAnchorWithRetry(uri, etag: etag);
+  }
+
   Future<AdjustmentFetchResult> _fetchWithRetry(Uri uri, {String? etag}) async {
     var attempt = 0;
     var delay = retryPolicy.initialDelay;
     while (true) {
       try {
-        final result = await _fetchOnce(uri, etag: etag)
-            .timeout(retryPolicy.timeoutPerAttempt);
+        final result = await _fetchOnce(
+          uri,
+          etag: etag,
+        ).timeout(retryPolicy.timeoutPerAttempt);
         final shouldRetryStatus =
             result.statusCode == HttpStatus.tooManyRequests ||
             (result.statusCode >= 500 && result.statusCode <= 599);
@@ -114,7 +144,58 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
       }
 
       attempt += 1;
-      final nextMs = (delay.inMilliseconds * retryPolicy.backoffMultiplier).round();
+      final nextMs = (delay.inMilliseconds * retryPolicy.backoffMultiplier)
+          .round();
+      delay = Duration(milliseconds: nextMs);
+      if (delay > retryPolicy.maxDelay) {
+        delay = retryPolicy.maxDelay;
+      }
+    }
+  }
+
+  Future<AnchorFetchResult> _fetchAnchorWithRetry(
+    Uri uri, {
+    String? etag,
+  }) async {
+    var attempt = 0;
+    var delay = retryPolicy.initialDelay;
+    while (true) {
+      try {
+        final result = await _fetchAnchorOnce(
+          uri,
+          etag: etag,
+        ).timeout(retryPolicy.timeoutPerAttempt);
+        final shouldRetryStatus =
+            result.statusCode == HttpStatus.tooManyRequests ||
+            (result.statusCode >= 500 && result.statusCode <= 599);
+        if (!shouldRetryStatus || attempt >= retryPolicy.maxRetries) {
+          return result;
+        }
+        final retryAfter = _clampRetryAfter(result.retryAfter);
+        final nextDelay = retryAfter ?? _withJitter(delay);
+        onRetryAttempt?.call(
+          attempt + 1,
+          uri,
+          result.statusCode,
+          nextDelay,
+          null,
+        );
+        await Future<void>.delayed(nextDelay);
+      } on SocketException catch (error) {
+        if (attempt >= retryPolicy.maxRetries) rethrow;
+        final nextDelay = _withJitter(delay);
+        onRetryAttempt?.call(attempt + 1, uri, null, nextDelay, error);
+        await Future<void>.delayed(nextDelay);
+      } on TimeoutException catch (error) {
+        if (attempt >= retryPolicy.maxRetries) rethrow;
+        final nextDelay = _withJitter(delay);
+        onRetryAttempt?.call(attempt + 1, uri, null, nextDelay, error);
+        await Future<void>.delayed(nextDelay);
+      }
+
+      attempt += 1;
+      final nextMs = (delay.inMilliseconds * retryPolicy.backoffMultiplier)
+          .round();
       delay = Duration(milliseconds: nextMs);
       if (delay > retryPolicy.maxDelay) {
         delay = retryPolicy.maxDelay;
@@ -152,12 +233,18 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
 
     final decoded = jsonDecode(body);
     if (decoded is! Map<String, dynamic>) {
-      return AdjustmentFetchResult(statusCode: response.statusCode, etag: responseEtag);
+      return AdjustmentFetchResult(
+        statusCode: response.statusCode,
+        etag: responseEtag,
+      );
     }
 
     final rawRecords = decoded['records'];
     if (rawRecords is! List) {
-      return AdjustmentFetchResult(statusCode: response.statusCode, etag: responseEtag);
+      return AdjustmentFetchResult(
+        statusCode: response.statusCode,
+        etag: responseEtag,
+      );
     }
 
     final records = <AdjustmentRecord>[];
@@ -176,8 +263,8 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
       }
       records.add(
         AdjustmentRecord(
-          effectiveFrom: DateTime.parse(from).toUtc(),
-          effectiveTo: to is String ? DateTime.parse(to).toUtc() : null,
+          effectiveFrom: _parseDateOnlyUtc(from),
+          effectiveTo: to is String ? _parseDateOnlyUtc(to) : null,
           adjustmentDays: adjustmentDays,
           revision: revision,
           publishedAt: DateTime.parse(publishedAt).toUtc(),
@@ -188,6 +275,89 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
     }
 
     return AdjustmentFetchResult(
+      statusCode: response.statusCode,
+      records: records,
+      etag: responseEtag,
+      retryAfter: _parseRetryAfter(response.headers.value('retry-after')),
+    );
+  }
+
+  Future<AnchorFetchResult> _fetchAnchorOnce(Uri uri, {String? etag}) async {
+    final request = await _httpClient.getUrl(uri);
+    request.headers.set(HttpHeaders.authorizationHeader, 'Bearer $apiKey');
+    request.headers.set(HttpHeaders.acceptHeader, 'application/json');
+    if (etag != null && etag.isNotEmpty) {
+      request.headers.set(HttpHeaders.ifNoneMatchHeader, etag);
+    }
+
+    final response = await request.close();
+    final responseEtag = response.headers.value(HttpHeaders.etagHeader);
+
+    if (response.statusCode == HttpStatus.notModified) {
+      return AnchorFetchResult(
+        statusCode: response.statusCode,
+        etag: responseEtag ?? etag,
+        retryAfter: _parseRetryAfter(response.headers.value('retry-after')),
+      );
+    }
+
+    final body = await utf8.decoder.bind(response).join();
+    if (response.statusCode != HttpStatus.ok) {
+      return AnchorFetchResult(
+        statusCode: response.statusCode,
+        etag: responseEtag,
+        retryAfter: _parseRetryAfter(response.headers.value('retry-after')),
+      );
+    }
+
+    final decoded = jsonDecode(body);
+    if (decoded is! Map<String, dynamic>) {
+      return AnchorFetchResult(
+        statusCode: response.statusCode,
+        etag: responseEtag,
+      );
+    }
+
+    final rawRecords = decoded['records'];
+    if (rawRecords is! List) {
+      return AnchorFetchResult(
+        statusCode: response.statusCode,
+        etag: responseEtag,
+      );
+    }
+
+    final records = <HijriAnchorRecord>[];
+    for (final row in rawRecords) {
+      if (row is! Map<String, dynamic>) continue;
+      final officialDate = row['official_gregorian_date'];
+      final hijriYear = row['hijri_year'];
+      final hijriMonth = row['hijri_month'];
+      final hijriDay = row['hijri_day'];
+      final revision = row['revision'];
+      final publishedAt = row['published_at'];
+      if (officialDate is! String ||
+          hijriYear is! int ||
+          hijriMonth is! int ||
+          revision is! int ||
+          publishedAt is! String) {
+        continue;
+      }
+      records.add(
+        HijriAnchorRecord(
+          officialGregorianDate: _parseDateOnlyUtc(officialDate),
+          hijriYear: hijriYear,
+          hijriMonth: hijriMonth,
+          hijriDay: hijriDay is int ? hijriDay : 1,
+          revision: revision,
+          publishedAt: DateTime.parse(publishedAt).toUtc(),
+          authority: (row['authority'] as String?) ?? authority,
+          regionScope: (row['region_scope'] as String?) ?? regionScope,
+          notes: row['notes'] as String?,
+        ),
+      );
+    }
+
+    return AnchorFetchResult(
       statusCode: response.statusCode,
       records: records,
       etag: responseEtag,
@@ -219,5 +389,17 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
     final maxJitterMs = retryPolicy.jitter.inMilliseconds;
     final jitterMs = DateTime.now().microsecond % (maxJitterMs + 1);
     return base + Duration(milliseconds: jitterMs);
+  }
+
+  DateTime _parseDateOnlyUtc(String value) {
+    final parts = value.split('-');
+    if (parts.length != 3) return DateTime.parse(value).toUtc();
+    final year = int.tryParse(parts[0]);
+    final month = int.tryParse(parts[1]);
+    final day = int.tryParse(parts[2]);
+    if (year == null || month == null || day == null) {
+      return DateTime.parse(value).toUtc();
+    }
+    return DateTime.utc(year, month, day);
   }
 }

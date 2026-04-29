@@ -97,6 +97,7 @@ final next = prayerTimes.nextPrayer(date: nowUtc);
 - `dart run example/hijri_methods_example.dart`
 - `dart run example/hijri_official_mock_example.dart`
 - `dart run example/hijri_official_http_example.dart`
+- `dart run example/hijri_syawal_boundary_anchor_example.dart`
 
 ## Testing
 

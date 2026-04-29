@@ -13,7 +13,10 @@ class _MockClient implements HijriAdjustmentClient {
   int calls = 0;
 
   @override
-  Future<AdjustmentFetchResult> fetchByDate({required DateTime date, String? etag}) async {
+  Future<AdjustmentFetchResult> fetchByDate({
+    required DateTime date,
+    String? etag,
+  }) async {
     calls += 1;
     if (throwError) throw Exception('network');
     return result;
@@ -22,6 +25,19 @@ class _MockClient implements HijriAdjustmentClient {
   @override
   Future<AdjustmentFetchResult> fetchLatest({String? etag}) {
     return fetchByDate(date: DateTime.now().toUtc(), etag: etag);
+  }
+
+  @override
+  Future<AnchorFetchResult> fetchAnchorsByDate({
+    required DateTime date,
+    String? etag,
+  }) async {
+    return const AnchorFetchResult(statusCode: 200);
+  }
+
+  @override
+  Future<AnchorFetchResult> fetchLatestAnchors({String? etag}) async {
+    return const AnchorFetchResult(statusCode: 200);
   }
 }
 
@@ -80,7 +96,9 @@ void main() {
 
       final provider = KemenagOfficialHijriProvider(
         baseProvider: LocalHijriProvider(),
-        adjustmentClient: _MockClient(const AdjustmentFetchResult(statusCode: 304)),
+        adjustmentClient: _MockClient(
+          const AdjustmentFetchResult(statusCode: 304),
+        ),
         adjustmentCache: cache,
       );
 
@@ -93,7 +111,10 @@ void main() {
     test('falls back to local on error without cache', () async {
       final provider = KemenagOfficialHijriProvider(
         baseProvider: LocalHijriProvider(),
-        adjustmentClient: _MockClient(const AdjustmentFetchResult(statusCode: 500), throwError: true),
+        adjustmentClient: _MockClient(
+          const AdjustmentFetchResult(statusCode: 500),
+          throwError: true,
+        ),
         adjustmentCache: InMemoryHijriAdjustmentCache(),
       );
 

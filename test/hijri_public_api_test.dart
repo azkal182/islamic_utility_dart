@@ -25,6 +25,19 @@ class _MockOfficialClient implements HijriAdjustmentClient {
   Future<AdjustmentFetchResult> fetchLatest({String? etag}) {
     return fetchByDate(date: DateTime.now().toUtc(), etag: etag);
   }
+
+  @override
+  Future<AnchorFetchResult> fetchAnchorsByDate({
+    required DateTime date,
+    String? etag,
+  }) async {
+    return const AnchorFetchResult(statusCode: 200);
+  }
+
+  @override
+  Future<AnchorFetchResult> fetchLatestAnchors({String? etag}) async {
+    return const AnchorFetchResult(statusCode: 200);
+  }
 }
 
 void main() {
@@ -37,10 +50,7 @@ void main() {
         date,
         method: HijriMethod.calculatedLocal,
       );
-      final umm = calendar.fromGregorian(
-        date,
-        method: HijriMethod.ummAlQura,
-      );
+      final umm = calendar.fromGregorian(date, method: HijriMethod.ummAlQura);
 
       expect(local.month, 9);
       expect(umm.month, 9);
