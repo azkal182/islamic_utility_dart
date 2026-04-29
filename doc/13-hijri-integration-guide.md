@@ -1,22 +1,21 @@
 # Hijri Integration Guide (Bilingual)
 
-This guide explains how to integrate Hijri features in `islamic_utility`.
+EN: This guide explains practical Hijri integration in `islamic_utility`.
+ID: Panduan ini menjelaskan integrasi praktis fitur Hijriyah di `islamic_utility`.
 
-Panduan ini menjelaskan cara integrasi fitur Hijriyah di `islamic_utility`.
-
-## 1) Choose Method / Pilih Metode
+## 1) Choose the Mode / Pilih Mode
 
 - `HijriMethod.calculatedLocal`
-  - EN: Offline civil/tabular calculation.
-  - ID: Perhitungan lokal offline.
+  - EN: Fully offline civil/tabular conversion.
+  - ID: Konversi lokal offline (civil/tabular).
 - `HijriMethod.ummAlQura`
-  - EN: Dataset-based Umm al-Qura conversion.
-  - ID: Konversi berbasis dataset Umm al-Qura.
-- `kemenagRiOfficial` (via `HijriCalendar.withOfficial`)
-  - EN: Local base + optional official adjustment API.
-  - ID: Basis lokal + adjustment API official opsional.
+  - EN: Offline conversion based on bundled Umm al-Qura data.
+  - ID: Konversi offline berbasis dataset Umm al-Qura.
+- `kemenagRiOfficial` via `HijriCalendar.withOfficial(...)`
+  - EN: Anchor-first official flow with API + cache + fallback.
+  - ID: Alur official anchor-first dengan API + cache + fallback.
 
-## 2) Local Method Example
+## 2) Local Offline Example
 
 ```dart
 import 'package:islamic_utility/islamic_utility.dart';
@@ -31,7 +30,7 @@ print('${result.year}-${result.month}-${result.day}');
 print(result.meta.source); // local_calculated_civil
 ```
 
-## 3) Umm al-Qura Method Example
+## 3) Umm al-Qura Offline Example
 
 ```dart
 final calendar = HijriCalendar();
@@ -44,79 +43,115 @@ print('${result.year}-${result.month}-${result.day}');
 print(result.meta.source); // ummalqura_local
 ```
 
-## 4) Official (Mock/Backend) Example
+## 4) Official Single-Date Example
 
 ```dart
-class MyAdjustmentClient implements HijriAdjustmentClient {
-  @override
-  Future<AdjustmentFetchResult> fetchByDate({required DateTime date, String? etag}) async {
-    return AdjustmentFetchResult(
-      statusCode: 200,
-      etag: 'v1',
-      records: [
-        AdjustmentRecord(
-          effectiveFrom: DateTime.utc(2024, 3, 1),
-          effectiveTo: DateTime.utc(2024, 3, 31),
-          adjustmentDays: 1,
-          revision: 1,
-          publishedAt: DateTime.utc(2024, 3, 10),
-        ),
-      ],
-    );
-  }
-}
-
-final calendar = HijriCalendar.withOfficial(
-  adjustmentClient: MyAdjustmentClient(),
+final client = HttpHijriAdjustmentClient(
+  baseUrl: 'https://your-backend.example.com/api',
+  apiKey: 'your-api-key',
 );
 
-final result = await calendar.fromGregorianOfficial(DateTime.utc(2024, 3, 11));
-print(result.meta.source); // remote_adjusted/cache_adjusted/local
+final calendar = HijriCalendar.withOfficial(
+  adjustmentClient: client,
+);
+
+final result = await calendar.fromGregorianOfficial(DateTime.utc(2026, 3, 21));
+print('${result.year}-${result.month}-${result.day}');
+print(result.meta.source);
 ```
 
-## 5) Source and Fallback Behavior
+## 5) Official Range Example (No Per-Day Remote Loop)
 
-- `remote_adjusted`: adjustment applied from fresh API response.
-- `cache_adjusted`: adjustment applied from local cache.
-- `remote_anchor_adjusted`: anchor applied from fresh API response.
-- `cache_anchor_adjusted`: anchor applied from local cache.
-- `local`: no adjustment used (fallback).
+```dart
+final results = await calendar.fromGregorianOfficialRange(
+  from: DateTime.utc(2026, 3, 15),
+  to: DateTime.utc(2026, 3, 30),
+);
+```
 
-Fallback priority:
+Behavior:
+- EN: Range flow performs remote prefetch once per dataset (`anchors` and `adjustments`), then resolves daily values from cache/local computation.
+- ID: Alur range melakukan prefetch remote sekali per jenis data (`anchors` dan `adjustments`), lalu resolusi harian dari cache/kalkulasi lokal.
 
-1. remote adjustment
-2. cached adjustment
-3. local calculation
+## 6) Persistent Cache (Hive)
 
-Anchor-first mode priority (implemented):
+### Dart CLI / Server
 
-1. remote anchor
-2. cached anchor
-3. remote delta
-4. cached delta
-5. local
+```dart
+import 'dart:io';
+import 'package:hive/hive.dart';
+import 'package:islamic_utility/islamic_utility.dart';
 
-## 7) Syawal Boundary Example
+final dir = Directory('.hive_cache')..createSync(recursive: true);
+Hive.init(dir.path);
 
-Case:
-- Base predicts `2026-01-30` as `1 Syawal`
-- Official decides `2026-01-31` is `1 Syawal`
+final adjustmentBox = await Hive.openBox<dynamic>('islamic_utility_adjustment_cache');
+final anchorBox = await Hive.openBox<dynamic>('islamic_utility_anchor_cache');
 
-With anchor record:
-- `official_gregorian_date = 2026-01-31`
-- `hijri = 1447-10-01`
+final calendar = HijriCalendar.withOfficial(
+  adjustmentClient: client,
+  cache: HiveHijriAdjustmentCache(adjustmentBox),
+  anchorCache: HiveHijriAnchorCache(anchorBox),
+);
+```
 
-Expected:
-- `2026-01-30` is not day 1 of Syawal
-- `2026-01-31` is day 1 of Syawal
+### Flutter App
 
-Runnable sample:
+```dart
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:islamic_utility/islamic_utility.dart';
+
+await Hive.initFlutter();
+final adjustmentBox = await Hive.openBox<dynamic>('islamic_utility_adjustment_cache');
+final anchorBox = await Hive.openBox<dynamic>('islamic_utility_anchor_cache');
+
+final calendar = HijriCalendar.withOfficial(
+  adjustmentClient: client,
+  cache: HiveHijriAdjustmentCache(adjustmentBox),
+  anchorCache: HiveHijriAnchorCache(anchorBox),
+);
+```
+
+## 7) Source Metadata and Fallback
+
+Common `meta.source` values:
+- `remote_anchor_adjusted`
+- `cache_anchor_adjusted`
+- `remote_adjusted`
+- `cache_adjusted`
+- `remote_noop`
+- `local`
+
+Meaning:
+- EN: `anchor` sources indicate anchor-first resolution path.
+- ID: source `anchor` menunjukkan jalur anchor-first yang dipakai.
+
+## 8) Fallback Priority
+
+For official mode:
+1. anchor from cache
+2. anchor from remote
+3. delta adjustment from cache/remote
+4. local calculated fallback
+
+For official range mode:
+1. prefetch anchors range
+2. prefetch adjustments range
+3. resolve each day from cache/local without per-day remote loop
+
+## 9) Production Checklist
+
+1. Use `HijriCalendar.withOfficial(...)`.
+2. Use persistent cache (`HiveHijriAdjustmentCache` + `HiveHijriAnchorCache`).
+3. Prefer `fromGregorianOfficialRange(...)` for calendar pages/list views.
+4. Keep `authority`, `regionScope`, and `country` consistent with backend policy.
+5. Log `meta.source`, `meta.revision`, and request IDs for observability.
+6. Add boundary tests (Ramadan/Syawal/Zulhijjah transitions).
+
+## 10) Runnable Examples
+
+- `example/hijri_official_mock_example.dart`
+- `example/hijri_official_http_example.dart`
+- `example/hijri_official_range_hive_example.dart`
+- `example/hijri_official_range_hive_flutter_example.dart`
 - `example/hijri_syawal_boundary_anchor_example.dart`
-
-## 6) Integration Checklist
-
-1. Start with `HijriCalendar()` for offline-safe integration.
-2. Add `withOfficial(...)` when backend is ready.
-3. Persist/replace in-memory cache for production apps.
-4. Log `meta.source` and `meta.revision` for observability.
-5. Add app-level tests for month-boundary dates.

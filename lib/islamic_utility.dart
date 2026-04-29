@@ -6,6 +6,8 @@ export 'src/calendar_hijri/adjustment/http_hijri_adjustment_client.dart';
 export 'src/calendar_hijri/adjustment/adjustment_record.dart';
 export 'src/calendar_hijri/adjustment/anchor_cache.dart';
 export 'src/calendar_hijri/adjustment/anchor_record.dart';
+export 'src/calendar_hijri/adjustment/hive_adjustment_cache.dart';
+export 'src/calendar_hijri/adjustment/hive_anchor_cache.dart';
 export 'src/calendar_hijri/hijri_calendar.dart';
 export 'src/calendar_hijri/models/hijri_date.dart';
 export 'src/calendar_hijri/models/hijri_method.dart';

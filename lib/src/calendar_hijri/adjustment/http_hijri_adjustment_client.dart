@@ -61,15 +61,25 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
     required DateTime date,
     String? etag,
   }) async {
-    final day = DateTime.utc(
-      date.year,
-      date.month,
-      date.day,
-    ).toIso8601String().split('T').first;
+    final day = _isoDate(date);
     final uri = Uri.parse(
       '$baseUrl/v1/hijri/adjustments?country=$country&from=$day&to=$day&authority=$authority&region_scope=$regionScope',
     );
 
+    return _fetchWithRetry(uri, etag: etag);
+  }
+
+  @override
+  Future<AdjustmentFetchResult> fetchRange({
+    required DateTime from,
+    required DateTime to,
+    String? etag,
+  }) {
+    final fromDay = _isoDate(from);
+    final toDay = _isoDate(to);
+    final uri = Uri.parse(
+      '$baseUrl/v1/hijri/adjustments?country=$country&from=$fromDay&to=$toDay&authority=$authority&region_scope=$regionScope',
+    );
     return _fetchWithRetry(uri, etag: etag);
   }
 
@@ -86,15 +96,25 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
     required DateTime date,
     String? etag,
   }) {
-    final day = DateTime.utc(
-      date.year,
-      date.month,
-      date.day,
-    ).toIso8601String().split('T').first;
+    final day = _isoDate(date);
     final uri = Uri.parse(
       '$baseUrl/v1/hijri/anchors?country=$country&from=$day&to=$day&authority=$authority&region_scope=$regionScope',
     );
 
+    return _fetchAnchorWithRetry(uri, etag: etag);
+  }
+
+  @override
+  Future<AnchorFetchResult> fetchAnchorsRange({
+    required DateTime from,
+    required DateTime to,
+    String? etag,
+  }) {
+    final fromDay = _isoDate(from);
+    final toDay = _isoDate(to);
+    final uri = Uri.parse(
+      '$baseUrl/v1/hijri/anchors?country=$country&from=$fromDay&to=$toDay&authority=$authority&region_scope=$regionScope',
+    );
     return _fetchAnchorWithRetry(uri, etag: etag);
   }
 
@@ -401,5 +421,13 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
       return DateTime.parse(value).toUtc();
     }
     return DateTime.utc(year, month, day);
+  }
+
+  String _isoDate(DateTime value) {
+    return DateTime.utc(
+      value.year,
+      value.month,
+      value.day,
+    ).toIso8601String().split('T').first;
   }
 }

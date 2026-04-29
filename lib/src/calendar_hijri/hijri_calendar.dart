@@ -1,5 +1,6 @@
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_cache.dart';
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_client.dart';
+import 'package:islamic_utility/src/calendar_hijri/adjustment/anchor_cache.dart';
 import 'package:islamic_utility/src/calendar_hijri/models/hijri_date.dart';
 import 'package:islamic_utility/src/calendar_hijri/models/hijri_method.dart';
 import 'package:islamic_utility/src/calendar_hijri/providers/kemenag_official_hijri_provider.dart';
@@ -8,26 +9,28 @@ import 'package:islamic_utility/src/calendar_hijri/providers/umm_al_qura_provide
 
 class HijriCalendar {
   HijriCalendar()
-      : _local = LocalHijriProvider(),
-        _ummAlQura = UmmAlQuraProvider(),
-        _official = null;
+    : _local = LocalHijriProvider(),
+      _ummAlQura = UmmAlQuraProvider(),
+      _official = null;
 
   HijriCalendar.withOfficial({
     required HijriAdjustmentClient adjustmentClient,
     HijriAdjustmentCache? cache,
+    HijriAnchorCache? anchorCache,
     String authority = 'kemenag_ri',
     String regionScope = 'national',
     Duration cacheTtl = const Duration(hours: 24),
-  })  : _local = LocalHijriProvider(),
-        _ummAlQura = UmmAlQuraProvider(),
-        _official = KemenagOfficialHijriProvider(
-          baseProvider: LocalHijriProvider(),
-          adjustmentClient: adjustmentClient,
-          adjustmentCache: cache ?? InMemoryHijriAdjustmentCache(),
-          authority: authority,
-          regionScope: regionScope,
-          cacheTtl: cacheTtl,
-        );
+  }) : _local = LocalHijriProvider(),
+       _ummAlQura = UmmAlQuraProvider(),
+       _official = KemenagOfficialHijriProvider(
+         baseProvider: LocalHijriProvider(),
+         adjustmentClient: adjustmentClient,
+         adjustmentCache: cache ?? InMemoryHijriAdjustmentCache(),
+         anchorCache: anchorCache,
+         authority: authority,
+         regionScope: regionScope,
+         cacheTtl: cacheTtl,
+       );
 
   final LocalHijriProvider _local;
   final UmmAlQuraProvider _ummAlQura;
@@ -56,5 +59,17 @@ class HijriCalendar {
       );
     }
     return _official.fromGregorianAsync(date);
+  }
+
+  Future<List<HijriDate>> fromGregorianOfficialRange({
+    required DateTime from,
+    required DateTime to,
+  }) async {
+    if (_official == null) {
+      throw StateError(
+        'HijriCalendar.withOfficial(...) is required for official method',
+      );
+    }
+    return _official.fromGregorianRangeAsync(from: from, to: to);
   }
 }

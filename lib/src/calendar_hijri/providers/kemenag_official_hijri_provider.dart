@@ -17,7 +17,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
     this.authority = 'kemenag_ri',
     this.regionScope = 'national',
     this.cacheTtl = const Duration(hours: 24),
-  })  : anchorCache = anchorCache ?? InMemoryHijriAnchorCache();
+  }) : anchorCache = anchorCache ?? InMemoryHijriAnchorCache();
 
   final HijriProvider baseProvider;
   final HijriAdjustmentClient adjustmentClient;
@@ -37,7 +37,17 @@ class KemenagOfficialHijriProvider implements HijriProvider {
   }
 
   Future<HijriDate> fromGregorianAsync(DateTime date) async {
-    final anchorResolved = await _resolveFromAnchor(date);
+    return _fromGregorianAsync(date, allowRemote: true);
+  }
+
+  Future<HijriDate> _fromGregorianAsync(
+    DateTime date, {
+    required bool allowRemote,
+  }) async {
+    final anchorResolved = await _resolveFromAnchor(
+      date,
+      allowRemote: allowRemote,
+    );
     if (anchorResolved != null) {
       return anchorResolved;
     }
@@ -58,36 +68,40 @@ class KemenagOfficialHijriProvider implements HijriProvider {
       }
     }
 
-    try {
-      final remote = await adjustmentClient.fetchByDate(
-        date: date,
-        etag: cached?.etag,
-      );
-      if (remote.statusCode == 200) {
-        adjustmentCache.put(
-          date,
-          AdjustmentCacheEntry(
-            records: remote.records,
-            etag: remote.etag,
-            cachedAt: DateTime.now().toUtc(),
-            ttl: cacheTtl,
-          ),
+    if (allowRemote) {
+      try {
+        final remote = await adjustmentClient.fetchByDate(
+          date: date,
+          etag: cached?.etag,
         );
-        candidateRecords = remote.records;
-        source = 'remote_adjusted';
-      } else if (remote.statusCode == 304 && cached != null) {
-        candidateRecords = cached.records;
-        source = 'cache_adjusted';
-      }
-    } catch (_) {
-      if (cached == null) {
-        source = 'local';
+        if (remote.statusCode == 200) {
+          adjustmentCache.put(
+            date,
+            AdjustmentCacheEntry(
+              records: remote.records,
+              etag: remote.etag,
+              cachedAt: DateTime.now().toUtc(),
+              ttl: cacheTtl,
+            ),
+          );
+          candidateRecords = remote.records;
+          source = 'remote_adjusted';
+        } else if (remote.statusCode == 304 && cached != null) {
+          candidateRecords = cached.records;
+          source = 'cache_adjusted';
+        }
+      } catch (_) {
+        if (cached == null) {
+          source = 'local';
+        }
       }
     }
 
     final selected = _pickRecord(candidateRecords, date);
     if (selected == null || selected.adjustmentDays == 0) {
-      final unadjustedSource = source == 'remote_adjusted' ? 'remote_noop' : source;
+      final unadjustedSource = source == 'remote_adjusted'
+          ? 'remote_noop'
+          : source;
       return HijriDate(
         year: base.year,
         month: base.month,
@@ -103,7 +117,91 @@ class KemenagOfficialHijriProvider implements HijriProvider {
     return _buildAdjusted(date, selected, source: source);
   }
 
-  Future<HijriDate?> _resolveFromAnchor(DateTime date) async {
+  Future<List<HijriDate>> fromGregorianRangeAsync({
+    required DateTime from,
+    required DateTime to,
+  }) async {
+    final start = DateTime.utc(from.year, from.month, from.day);
+    final end = DateTime.utc(to.year, to.month, to.day);
+    if (end.isBefore(start)) {
+      throw ArgumentError.value(to, 'to', 'must be on or after from');
+    }
+
+    await _prefetchRange(start: start, end: end);
+
+    final results = <HijriDate>[];
+    for (
+      var day = start;
+      !day.isAfter(end);
+      day = day.add(const Duration(days: 1))
+    ) {
+      results.add(await _fromGregorianAsync(day, allowRemote: false));
+    }
+    return results;
+  }
+
+  Future<void> _prefetchRange({
+    required DateTime start,
+    required DateTime end,
+  }) async {
+    final now = DateTime.now().toUtc();
+    try {
+      final remoteAnchors = await adjustmentClient.fetchAnchorsRange(
+        from: start,
+        to: end,
+      );
+      if (remoteAnchors.statusCode == 200) {
+        for (
+          var day = start;
+          !day.isAfter(end);
+          day = day.add(const Duration(days: 1))
+        ) {
+          anchorCache.put(
+            day,
+            AnchorCacheEntry(
+              records: remoteAnchors.records,
+              etag: remoteAnchors.etag,
+              cachedAt: now,
+              ttl: cacheTtl,
+            ),
+          );
+        }
+      }
+    } catch (_) {
+      // Fallback to per-day flow in fromGregorianAsync.
+    }
+
+    try {
+      final remoteAdjustments = await adjustmentClient.fetchRange(
+        from: start,
+        to: end,
+      );
+      if (remoteAdjustments.statusCode == 200) {
+        for (
+          var day = start;
+          !day.isAfter(end);
+          day = day.add(const Duration(days: 1))
+        ) {
+          adjustmentCache.put(
+            day,
+            AdjustmentCacheEntry(
+              records: remoteAdjustments.records,
+              etag: remoteAdjustments.etag,
+              cachedAt: now,
+              ttl: cacheTtl,
+            ),
+          );
+        }
+      }
+    } catch (_) {
+      // Fallback to per-day flow in fromGregorianAsync.
+    }
+  }
+
+  Future<HijriDate?> _resolveFromAnchor(
+    DateTime date, {
+    required bool allowRemote,
+  }) async {
     final cachedAnchor = anchorCache.get(date);
     if (cachedAnchor != null && cachedAnchor.isFresh) {
       final resolved = _anchorResolver.resolve(
@@ -127,6 +225,8 @@ class KemenagOfficialHijriProvider implements HijriProvider {
         );
       }
     }
+
+    if (!allowRemote) return null;
 
     try {
       final remote = await adjustmentClient.fetchAnchorsByDate(

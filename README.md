@@ -18,7 +18,7 @@ ID: Semua output `PrayerTimes` disimpan dalam UTC `DateTime`.
 
 ```yaml
 dependencies:
-  islamic_utility: ^1.1.0
+  islamic_utility: ^1.3.0
 ```
 
 ```bash
@@ -57,6 +57,10 @@ print('Qibla: ${Qibla.qibla(const Coordinates(-6.2, 106.8))}');
 - `PrayerTimes(...)`
 - `SunnahTimes(prayerTimes)`
 - `Qibla.qibla(coordinates)`
+- `HijriCalendar()`
+- `HijriCalendar.withOfficial(...)`
+- `fromGregorianOfficial(...)`
+- `fromGregorianOfficialRange(from: ..., to: ...)`
 
 ID: Referensi API lengkap ada di `doc/11-api-reference.md`.
 
@@ -89,6 +93,54 @@ final next = prayerTimes.nextPrayer(date: nowUtc);
 - `precision: true` -> keeps second-level precision
 - `precision: false` -> rounds to nearest minute
 
+## Hijri Quick Start
+
+### Offline (Local / Umm al-Qura)
+
+```dart
+final calendar = HijriCalendar();
+
+final local = calendar.fromGregorian(
+  DateTime.utc(2026, 3, 21),
+  method: HijriMethod.calculatedLocal,
+);
+
+final umm = calendar.fromGregorian(
+  DateTime.utc(2026, 3, 21),
+  method: HijriMethod.ummAlQura,
+);
+```
+
+### Official (Single Date)
+
+```dart
+final client = HttpHijriAdjustmentClient(
+  baseUrl: 'https://your-backend.example.com/api',
+  apiKey: 'your-api-key',
+);
+
+final calendar = HijriCalendar.withOfficial(
+  adjustmentClient: client,
+);
+
+final hijri = await calendar.fromGregorianOfficial(DateTime.utc(2026, 3, 21));
+print('${hijri.year}-${hijri.month}-${hijri.day} (${hijri.meta.source})');
+```
+
+### Official (Range, Optimized Fetch)
+
+```dart
+final results = await calendar.fromGregorianOfficialRange(
+  from: DateTime.utc(2026, 3, 15),
+  to: DateTime.utc(2026, 3, 30),
+);
+```
+
+Range behavior:
+- Prefetch `anchors` and `adjustments` by range.
+- Resolve per-day values from cache/local flow.
+- Avoid per-day remote loop in range mode.
+
 ## Runnable Examples
 
 - `dart run example/islamic_utility_example.dart`
@@ -97,7 +149,43 @@ final next = prayerTimes.nextPrayer(date: nowUtc);
 - `dart run example/hijri_methods_example.dart`
 - `dart run example/hijri_official_mock_example.dart`
 - `dart run example/hijri_official_http_example.dart`
+- `dart run example/hijri_official_range_hive_example.dart`
 - `dart run example/hijri_syawal_boundary_anchor_example.dart`
+
+## Flutter + Hive (Persistent Range Cache)
+
+`islamic_utility` tetap package Dart murni. Untuk Flutter, lakukan inisialisasi
+`Hive.initFlutter()` di layer aplikasi, lalu berikan `Box` ke helper example:
+`example/hijri_official_range_hive_flutter_example.dart`.
+
+```dart
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:islamic_utility/islamic_utility.dart';
+import 'package:your_app/hijri_official_range_hive_flutter_example.dart';
+
+Future<void> bootstrapHijri() async {
+  await Hive.initFlutter();
+  final adjustmentBox = await Hive.openBox<dynamic>(
+    'islamic_utility_adjustment_cache',
+  );
+  final anchorBox = await Hive.openBox<dynamic>(
+    'islamic_utility_anchor_cache',
+  );
+
+  final results = await convertRangeWithFlutterHive(
+    adjustmentBox: adjustmentBox,
+    anchorBox: anchorBox,
+    baseUrl: 'https://your-backend.example.com/api',
+    apiKey: 'your-api-key',
+    from: DateTime.utc(2026, 3, 15),
+    to: DateTime.utc(2026, 3, 30),
+  );
+
+  for (final item in results) {
+    print('${item.year}-${item.month}-${item.day} (${item.meta.source})');
+  }
+}
+```
 
 ## Testing
 

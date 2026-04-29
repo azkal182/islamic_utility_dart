@@ -27,6 +27,15 @@ class _MockOfficialClient implements HijriAdjustmentClient {
   }
 
   @override
+  Future<AdjustmentFetchResult> fetchRange({
+    required DateTime from,
+    required DateTime to,
+    String? etag,
+  }) {
+    return fetchByDate(date: from, etag: etag);
+  }
+
+  @override
   Future<AnchorFetchResult> fetchAnchorsByDate({
     required DateTime date,
     String? etag,
@@ -37,6 +46,15 @@ class _MockOfficialClient implements HijriAdjustmentClient {
   @override
   Future<AnchorFetchResult> fetchLatestAnchors({String? etag}) async {
     return const AnchorFetchResult(statusCode: 200);
+  }
+
+  @override
+  Future<AnchorFetchResult> fetchAnchorsRange({
+    required DateTime from,
+    required DateTime to,
+    String? etag,
+  }) {
+    return fetchAnchorsByDate(date: from, etag: etag);
   }
 }
 

@@ -1,6 +1,6 @@
 # API Reference (Bilingual: Indonesia + English)
 
-ID: Dokumen ini menjelaskan API publik `islamic_utility` untuk implementasi aplikasi.
+ID: Dokumen ini menjelaskan API publik `islamic_utility` untuk integrasi aplikasi.
 EN: This document describes the public `islamic_utility` API for app integration.
 
 ## Import
@@ -9,7 +9,9 @@ EN: This document describes the public `islamic_utility` API for app integration
 import 'package:islamic_utility/islamic_utility.dart';
 ```
 
-## Public Types / Tipe Publik
+## 1) Prayer API
+
+### Public Types
 
 - `Coordinates`
 - `CalculationMethod`
@@ -22,28 +24,18 @@ import 'package:islamic_utility/islamic_utility.dart';
 - `SunnahTimes`
 - `Qibla`
 
-## Coordinates
-
-ID: Menyimpan latitude dan longitude lokasi.
-EN: Holds location latitude and longitude.
+### Coordinates
 
 ```dart
 const Coordinates(double latitude, double longitude)
 ```
 
-Parameters:
-- `latitude` (`double`): `-90..90`
-- `longitude` (`double`): `-180..180`
+- `latitude`: `-90..90`
+- `longitude`: `-180..180`
 
-Output:
-- immutable `Coordinates` object.
+### CalculationMethod
 
-## CalculationMethod
-
-ID: Preset method perhitungan.
-EN: Preset calculation methods.
-
-Enum values:
+Enum:
 - `muslimWorldLeague`, `egyptian`, `indonesian`, `karachi`, `ummAlQura`
 - `qatar`, `dubai`, `kuwait`, `moonsightingCommittee`, `singapore`
 - `turkiye`, `tehran`, `northAmerica`, `morocco`, `other`
@@ -54,15 +46,7 @@ Property:
 CalculationParameters get parameters
 ```
 
-Output:
-- default `CalculationParameters` for the selected method.
-
-## CalculationParameters
-
-ID: Konfigurasi detail yang memengaruhi hasil jadwal.
-EN: Detailed configuration that affects schedule output.
-
-Constructor:
+### CalculationParameters
 
 ```dart
 CalculationParameters(
@@ -80,19 +64,6 @@ CalculationParameters(
 })
 ```
 
-Key fields / Parameter penting:
-- `method`: calculation preset
-- `fajrAngle`: fajr solar angle
-- `ishaAngle`: isha solar angle
-- `dhuhaOffsetMinutes`: minutes after sunrise for `dhuha` (default `20`)
-- `ishaInterval`: if set (`> 0`), isha is interval-based from maghrib
-- `maghribAngle`: optional angle-based maghrib
-- `madhab`: asr madhab (`shafi` or `hanafi`)
-- `shafaq`: moonsighting evening twilight type
-- `highLatitudeRule`: high-latitude fallback rule
-- `adjustments`: user minute offsets by prayer
-- `methodAdjustments`: built-in minute offsets by method
-
 Functions:
 
 ```dart
@@ -100,29 +71,11 @@ CalculationParameters copyWith({ ... })
 Map<Prayer, double> nightPortions()
 ```
 
-Outputs:
-- `copyWith`: new `CalculationParameters`
-- `nightPortions`: night fractions used by high-latitude fallback
+### Prayer enum
 
-## Prayer enum
-
-ID: Daftar prayer yang didukung API.
-EN: Prayer identifiers supported by the API.
-
-Values:
 - `imsak`, `fajr`, `dhuha`, `sunrise`, `dhuhr`, `asr`, `maghrib`, `isha`, `ishaBefore`, `fajrAfter`
 
-Notes:
-- `imsak`: default `10 minutes before fajr`
-- `dhuha`: default `sunrise + dhuhaOffsetMinutes`
-- `ishaBefore`, `fajrAfter`: cross-day boundary values
-
-## PrayerTimes
-
-ID: Class utama untuk menghasilkan jadwal sholat.
-EN: Main class for producing prayer schedules.
-
-Constructor:
+### PrayerTimes
 
 ```dart
 PrayerTimes({
@@ -133,13 +86,7 @@ PrayerTimes({
 })
 ```
 
-Parameters:
-- `date`: target date (UTC recommended)
-- `coordinates`: location coordinates
-- `calculationParameters`: method/config object
-- `precision`: second-level vs rounded-minute output
-
-Outputs (all UTC `DateTime`):
+Outputs (UTC):
 - `imsak`, `fajr`, `dhuha`, `sunrise`, `dhuhr`, `asr`, `maghrib`, `isha`, `ishaBefore`, `fajrAfter`
 
 Functions:
@@ -150,17 +97,7 @@ Prayer nextPrayer({DateTime? date})
 DateTime timeForPrayer(Prayer prayer)
 ```
 
-Function outputs:
-- `currentPrayer`: current prayer at a specific instant
-- `nextPrayer`: next prayer after a specific instant
-- `timeForPrayer`: schedule time for an enum value
-
-## SunnahTimes
-
-ID: Waktu sunnah turunan dari `PrayerTimes`.
-EN: Sunnah times derived from `PrayerTimes`.
-
-Constructor:
+### SunnahTimes
 
 ```dart
 SunnahTimes(PrayerTimes prayerTimes, {bool precision = true})
@@ -170,37 +107,188 @@ Outputs:
 - `middleOfTheNight`
 - `lastThirdOfTheNight`
 
-## Qibla
-
-ID: Menghitung arah kiblat dari lokasi.
-EN: Computes qibla direction from coordinates.
+### Qibla
 
 ```dart
 static double qibla(Coordinates coordinates)
 ```
 
 Output:
-- `double` degrees from north (`0..360`).
+- Degree from north (`0..360`).
 
-## Supporting Enums / Enum Pendukung
+## 2) Hijri API
 
-- `Madhab`: `shafi`, `hanafi`
-- `HighLatitudeRule`: `middleOfTheNight`, `seventhOfTheNight`, `twilightAngle`
-- `Shafaq`: `general`, `ahmer`, `abyad`
+### Public Types
 
-## Integration Contract / Kontrak Integrasi
+- `HijriCalendar`
+- `HijriMethod`
+- `HijriDate`
+- `HijriResultMeta`
+- `HijriAdjustmentClient`
+- `AdjustmentFetchResult`
+- `AnchorFetchResult`
+- `AdjustmentRecord`
+- `HijriAnchorRecord`
+- `HijriAdjustmentCache`, `InMemoryHijriAdjustmentCache`, `HiveHijriAdjustmentCache`
+- `HijriAnchorCache`, `InMemoryHijriAnchorCache`, `HiveHijriAnchorCache`
+- `HttpHijriAdjustmentClient`
+- `RetryPolicy`
 
-- ID: Semua output `PrayerTimes` adalah UTC.
-- EN: All `PrayerTimes` outputs are UTC.
-- ID: Selalu kirim argumen `date` eksplisit pada `currentPrayer`/`nextPrayer`.
-- EN: Always pass explicit `date` for `currentPrayer`/`nextPrayer`.
-- ID: Konversi timezone dilakukan di layer presentasi.
-- EN: Apply timezone conversion in the presentation layer.
+### HijriMethod
 
-## Quick Integration Checklist
+Enum:
+- `calculatedLocal`
+- `ummAlQura`
+- `kemenagRiOfficial`
 
-1. Choose a `CalculationMethod`.
-2. Build `CalculationParameters` (optionally with `copyWith`).
-3. Create `PrayerTimes` using date + coordinates.
-4. Read prayer fields or call `currentPrayer` / `nextPrayer`.
-5. Use `Qibla.qibla` for qibla direction.
+### HijriDate and HijriResultMeta
+
+```dart
+class HijriDate {
+  final int year;
+  final int month;
+  final int day;
+  final HijriResultMeta meta;
+}
+```
+
+```dart
+class HijriResultMeta {
+  final String source;
+  final bool isAdjusted;
+  final int adjustmentDays;
+  final String? authority;
+  final int? revision;
+}
+```
+
+### HijriCalendar
+
+Constructors:
+
+```dart
+HijriCalendar()
+```
+
+```dart
+HijriCalendar.withOfficial({
+  required HijriAdjustmentClient adjustmentClient,
+  HijriAdjustmentCache? cache,
+  HijriAnchorCache? anchorCache,
+  String authority = 'kemenag_ri',
+  String regionScope = 'national',
+  Duration cacheTtl = const Duration(hours: 24),
+})
+```
+
+Functions:
+
+```dart
+HijriDate fromGregorian(
+  DateTime date, {
+  HijriMethod method = HijriMethod.calculatedLocal,
+})
+```
+
+```dart
+Future<HijriDate> fromGregorianOfficial(DateTime date)
+```
+
+```dart
+Future<List<HijriDate>> fromGregorianOfficialRange({
+  required DateTime from,
+  required DateTime to,
+})
+```
+
+Notes:
+- `fromGregorianOfficialRange` melakukan prefetch range (`anchors` + `adjustments`) lalu resolve lokal per tanggal.
+- Untuk mode range, request harian remote dihindari selama cache range masih berlaku.
+
+### HijriAdjustmentClient
+
+```dart
+abstract class HijriAdjustmentClient {
+  Future<AdjustmentFetchResult> fetchByDate({required DateTime date, String? etag});
+  Future<AdjustmentFetchResult> fetchLatest({String? etag});
+  Future<AdjustmentFetchResult> fetchRange({
+    required DateTime from,
+    required DateTime to,
+    String? etag,
+  });
+
+  Future<AnchorFetchResult> fetchAnchorsByDate({required DateTime date, String? etag});
+  Future<AnchorFetchResult> fetchLatestAnchors({String? etag});
+  Future<AnchorFetchResult> fetchAnchorsRange({
+    required DateTime from,
+    required DateTime to,
+    String? etag,
+  });
+}
+```
+
+Default behavior:
+- `fetchLatest` default ke `fetchByDate(nowUtc)`.
+- `fetchRange` default ke `fetchByDate(from)` (override untuk implementasi range aktual).
+- `fetchLatestAnchors` default ke `fetchAnchorsByDate(nowUtc)`.
+- `fetchAnchorsRange` default ke `fetchAnchorsByDate(from)` (override untuk implementasi range aktual).
+
+### HttpHijriAdjustmentClient
+
+```dart
+HttpHijriAdjustmentClient({
+  required String baseUrl,
+  required String apiKey,
+  String country = 'ID',
+  String authority = 'kemenag_ri',
+  String regionScope = 'national',
+  RetryPolicy retryPolicy = const RetryPolicy(),
+  RetryAttemptLogger? onRetryAttempt,
+  HttpClient? httpClient,
+})
+```
+
+Supports:
+- `fetchByDate`, `fetchLatest`, `fetchRange`
+- `fetchAnchorsByDate`, `fetchLatestAnchors`, `fetchAnchorsRange`
+- ETag (`If-None-Match`)
+- retry for `429` and `5xx`
+- `Retry-After` parsing and clamp
+
+### Cache Interfaces
+
+```dart
+abstract class HijriAdjustmentCache {
+  AdjustmentCacheEntry? get(DateTime date);
+  void put(DateTime date, AdjustmentCacheEntry entry);
+}
+```
+
+```dart
+abstract class HijriAnchorCache {
+  AnchorCacheEntry? get(DateTime date);
+  void put(DateTime date, AnchorCacheEntry entry);
+}
+```
+
+Implementations:
+- In-memory: `InMemoryHijriAdjustmentCache`, `InMemoryHijriAnchorCache`
+- Persistent (Hive): `HiveHijriAdjustmentCache`, `HiveHijriAnchorCache`
+
+## 3) Integration Contract
+
+- Prayer outputs (`PrayerTimes`) are UTC.
+- Gunakan `date` eksplisit pada `currentPrayer` / `nextPrayer`.
+- Timezone conversion dilakukan di presentation/UI layer.
+- Untuk Hijri official production:
+  1. gunakan `withOfficial(...)`
+  2. gunakan persistent cache
+  3. log `meta.source` dan `meta.revision`
+
+## 4) Quick Checklist
+
+1. Pilih `CalculationMethod` dan buat `PrayerTimes`.
+2. Jika butuh Hijri offline, gunakan `HijriCalendar()` + `HijriMethod.calculatedLocal` / `ummAlQura`.
+3. Jika butuh Hijri official, gunakan `HijriCalendar.withOfficial(...)`.
+4. Untuk range conversion gunakan `fromGregorianOfficialRange(...)`.
+5. Untuk Flutter production, pakai cache persistent (Hive) di app layer.

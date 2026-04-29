@@ -11,6 +11,10 @@ class _MockClient implements HijriAdjustmentClient {
   final AdjustmentFetchResult result;
   final bool throwError;
   int calls = 0;
+  int anchorByDateCalls = 0;
+  int anchorLatestCalls = 0;
+  int rangeCalls = 0;
+  int anchorRangeCalls = 0;
 
   @override
   Future<AdjustmentFetchResult> fetchByDate({
@@ -28,15 +32,38 @@ class _MockClient implements HijriAdjustmentClient {
   }
 
   @override
+  Future<AdjustmentFetchResult> fetchRange({
+    required DateTime from,
+    required DateTime to,
+    String? etag,
+  }) async {
+    rangeCalls += 1;
+    if (throwError) throw Exception('network');
+    return result;
+  }
+
+  @override
   Future<AnchorFetchResult> fetchAnchorsByDate({
     required DateTime date,
     String? etag,
   }) async {
+    anchorByDateCalls += 1;
     return const AnchorFetchResult(statusCode: 200);
   }
 
   @override
   Future<AnchorFetchResult> fetchLatestAnchors({String? etag}) async {
+    anchorLatestCalls += 1;
+    return const AnchorFetchResult(statusCode: 200);
+  }
+
+  @override
+  Future<AnchorFetchResult> fetchAnchorsRange({
+    required DateTime from,
+    required DateTime to,
+    String? etag,
+  }) async {
+    anchorRangeCalls += 1;
     return const AnchorFetchResult(statusCode: 200);
   }
 }
@@ -194,5 +221,43 @@ void main() {
       expect(result.meta.adjustmentDays, -1);
       expect(result.meta.revision, 2);
     });
+
+    test(
+      'range conversion prefetches once and avoids per-day fetch loop',
+      () async {
+        final client = _MockClient(
+          AdjustmentFetchResult(
+            statusCode: 200,
+            records: [
+              AdjustmentRecord(
+                effectiveFrom: DateTime.utc(2024, 3, 1),
+                effectiveTo: DateTime.utc(2024, 3, 31),
+                adjustmentDays: 1,
+                revision: 1,
+                publishedAt: DateTime.utc(2024, 3, 10),
+              ),
+            ],
+          ),
+        );
+
+        final provider = KemenagOfficialHijriProvider(
+          baseProvider: LocalHijriProvider(),
+          adjustmentClient: client,
+          adjustmentCache: InMemoryHijriAdjustmentCache(),
+        );
+
+        final result = await provider.fromGregorianRangeAsync(
+          from: DateTime.utc(2024, 3, 11),
+          to: DateTime.utc(2024, 3, 13),
+        );
+
+        expect(result.length, 3);
+        expect(client.rangeCalls, 1);
+        expect(client.anchorRangeCalls, 1);
+        expect(client.calls, 0);
+        expect(client.anchorByDateCalls, 0);
+        expect(client.anchorLatestCalls, 0);
+      },
+    );
   });
 }

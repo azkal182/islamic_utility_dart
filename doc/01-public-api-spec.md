@@ -14,6 +14,23 @@ Dokumen ini mendefinisikan kontrak API yang harus dipertahankan agar kompatibel 
 - `Qibla`
 - `HighLatitudeRule`
 - `Shafaq`
+- `HijriCalendar`
+- `HijriMethod`
+- `HijriDate`
+- `HijriResultMeta`
+- `HijriAdjustmentClient`
+- `AdjustmentFetchResult`
+- `AnchorFetchResult`
+- `AdjustmentRecord`
+- `HijriAnchorRecord`
+- `HttpHijriAdjustmentClient`
+- `RetryPolicy`
+- `HijriAdjustmentCache`
+- `InMemoryHijriAdjustmentCache`
+- `HiveHijriAdjustmentCache`
+- `HijriAnchorCache`
+- `InMemoryHijriAnchorCache`
+- `HiveHijriAnchorCache`
 
 ## Tipe Data
 
@@ -116,6 +133,31 @@ Output derajat dari utara (0-360).
 - `timeForPrayer` harus selalu mengembalikan field yang sesuai enum.
 - `currentPrayer` untuk waktu sebelum `fajr` harus mengembalikan `ishaBefore`.
 - `nextPrayer` untuk waktu setelah `isha` harus mengembalikan `fajrAfter`.
+
+## Kontrak API Hijri
+
+- `HijriCalendar()` wajib tersedia untuk mode offline (`calculatedLocal`/`ummAlQura`).
+- `HijriCalendar.withOfficial(...)` wajib menerima:
+  - `adjustmentClient`
+  - optional `cache`
+  - optional `anchorCache`
+  - `authority`, `regionScope`, `cacheTtl`
+- `fromGregorianOfficial(DateTime)` wajib tersedia untuk konversi tanggal tunggal official.
+- `fromGregorianOfficialRange({from, to})` wajib tersedia untuk konversi rentang tanggal official.
+- `fromGregorianOfficialRange` harus mendukung alur prefetch range lalu resolusi harian tanpa loop remote per tanggal (selama cache range valid).
+
+## Kontrak Client & Cache Hijri
+
+- `HijriAdjustmentClient` wajib memiliki:
+  - `fetchByDate`, `fetchLatest`, `fetchRange`
+  - `fetchAnchorsByDate`, `fetchLatestAnchors`, `fetchAnchorsRange`
+- Implementasi default `fetchRange` dan `fetchAnchorsRange` boleh fallback ke versi per-date, tetapi implementasi HTTP production sebaiknya override dengan query range sebenarnya.
+- `HijriAdjustmentCache` dan `HijriAnchorCache` wajib mempertahankan kontrak `get(DateTime)` dan `put(DateTime, Entry)`.
+- Implementasi in-memory dan persistent (Hive) harus menjaga format data kompatibel terhadap:
+  - `etag`
+  - `cachedAt`
+  - `ttl`
+  - daftar record yang dibutuhkan resolver/provider
 
 ## Kontrak Backward Compatibility
 

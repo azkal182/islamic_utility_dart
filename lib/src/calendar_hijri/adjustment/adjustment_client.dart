@@ -39,6 +39,14 @@ abstract class HijriAdjustmentClient {
     return fetchByDate(date: DateTime.now().toUtc(), etag: etag);
   }
 
+  Future<AdjustmentFetchResult> fetchRange({
+    required DateTime from,
+    required DateTime to,
+    String? etag,
+  }) {
+    return fetchByDate(date: from, etag: etag);
+  }
+
   Future<AnchorFetchResult> fetchAnchorsByDate({
     required DateTime date,
     String? etag,
@@ -46,5 +54,13 @@ abstract class HijriAdjustmentClient {
 
   Future<AnchorFetchResult> fetchLatestAnchors({String? etag}) {
     return fetchAnchorsByDate(date: DateTime.now().toUtc(), etag: etag);
+  }
+
+  Future<AnchorFetchResult> fetchAnchorsRange({
+    required DateTime from,
+    required DateTime to,
+    String? etag,
+  }) {
+    return fetchAnchorsByDate(date: from, etag: etag);
   }
 }

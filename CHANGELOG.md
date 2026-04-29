@@ -1,3 +1,31 @@
+## 1.3.0
+
+- Added official Hijri range conversion API:
+  - `HijriCalendar.fromGregorianOfficialRange({from, to})`
+- Added range fetch contracts in `HijriAdjustmentClient`:
+  - `fetchRange(...)`
+  - `fetchAnchorsRange(...)`
+- Added HTTP range fetch implementation in `HttpHijriAdjustmentClient`:
+  - adjustments range endpoint
+  - anchors range endpoint
+- Optimized official range flow to avoid per-day remote fetch loops after range prefetch.
+- Added persistent cache implementations using Hive:
+  - `HiveHijriAdjustmentCache`
+  - `HiveHijriAnchorCache`
+- Added support for injecting `anchorCache` in `HijriCalendar.withOfficial(...)`.
+- Added examples:
+  - `example/hijri_official_range_hive_example.dart`
+  - `example/hijri_official_range_hive_flutter_example.dart`
+- Expanded and synchronized documentation:
+  - `README.md`
+  - `doc/01-public-api-spec.md`
+  - `doc/11-api-reference.md`
+  - `doc/13-hijri-integration-guide.md`
+- Added and updated tests for:
+  - HTTP range request behavior
+  - official provider range prefetch behavior
+  - no per-day anchor remote calls in range mode
+
 ## 1.2.0
 
 - Added Hijri calendar foundation module (`calendar_hijri`) with modular structure.
