@@ -86,5 +86,11 @@ class HiveHijriAnchorCache implements HijriAnchorCache {
     });
   }
 
-  String _key(DateTime date) => '${date.year}-${date.month}-${date.day}';
+  /// Key is per Gregorian year-month because anchor records represent
+  /// month-boundary data (awal bulan) that is valid for the whole month.
+  /// UTC is used to avoid date boundary mismatches for WIB (UTC+7) users.
+  String _key(DateTime date) {
+    final utc = date.toUtc();
+    return '${utc.year}-${utc.month}';
+  }
 }

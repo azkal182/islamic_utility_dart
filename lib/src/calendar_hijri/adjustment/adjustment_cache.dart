@@ -33,5 +33,10 @@ class InMemoryHijriAdjustmentCache implements HijriAdjustmentCache {
     _store[_key(date)] = entry;
   }
 
-  String _key(DateTime date) => '${date.year}-${date.month}-${date.day}';
+  /// UTC is used to avoid date boundary mismatches for WIB (UTC+7) users
+  /// who may pass local DateTime without explicit UTC conversion.
+  String _key(DateTime date) {
+    final utc = date.toUtc();
+    return '${utc.year}-${utc.month}-${utc.day}';
+  }
 }

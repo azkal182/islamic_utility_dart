@@ -146,75 +146,148 @@ class KemenagOfficialHijriProvider implements HijriProvider {
     required DateTime end,
   }) async {
     final now = DateTime.now().toUtc();
-    try {
-      List<HijriAnchorRecord> anchorRecords = const [];
-      String? anchorEtag;
-      final remoteAnchors = await adjustmentClient.fetchAnchorsRange(
-        from: start,
-        to: end,
-      );
-      if (remoteAnchors.statusCode == 200) {
-        anchorRecords = remoteAnchors.records;
-        anchorEtag = remoteAnchors.etag;
-      }
 
-      // If range endpoint returns empty around month boundary, use latest once.
-      if (anchorRecords.isEmpty) {
-        final latest = await adjustmentClient.fetchLatestAnchors(
-          etag: anchorEtag,
+    // ── Anchor prefetch ───────────────────────────────────────────────────────
+    // Check if every day in the range already has a fresh anchor cache entry.
+    // With the month-based key, a single cached entry covers the whole month,
+    // so this check is O(days) but nearly always a single Hive lookup.
+    final anchorMissing = _anyDayMissingAnchor(start: start, end: end);
+    if (anchorMissing) {
+      try {
+        // Use the existing ETag (if any) for a conditional request so the
+        // server can respond 304 when data is unchanged.
+        final existingAnchorEntry = anchorCache.get(start);
+        List<HijriAnchorRecord> anchorRecords = const [];
+        String? anchorEtag;
+        final remoteAnchors = await adjustmentClient.fetchAnchorsRange(
+          from: start,
+          to: end,
+          etag: existingAnchorEntry?.etag,
         );
-        if (latest.statusCode == 200 && latest.records.isNotEmpty) {
-          anchorRecords = latest.records;
-          anchorEtag = latest.etag ?? anchorEtag;
+        if (remoteAnchors.statusCode == 200) {
+          anchorRecords = remoteAnchors.records;
+          anchorEtag = remoteAnchors.etag;
+        } else if (remoteAnchors.statusCode == 304 &&
+            existingAnchorEntry != null) {
+          // Server confirmed data unchanged — refresh TTL without re-fetching.
+          anchorRecords = existingAnchorEntry.records;
+          anchorEtag = existingAnchorEntry.etag;
         }
-      }
 
-      if (anchorRecords.isNotEmpty) {
-        for (
-          var day = start;
-          !day.isAfter(end);
-          day = day.add(const Duration(days: 1))
-        ) {
-          anchorCache.put(
-            day,
-            AnchorCacheEntry(
-              records: anchorRecords,
-              etag: anchorEtag,
-              cachedAt: now,
-              ttl: cacheTtl,
-            ),
+        // If range endpoint returns empty around month boundary, use latest once.
+        if (anchorRecords.isEmpty) {
+          final latest = await adjustmentClient.fetchLatestAnchors(
+            etag: anchorEtag,
           );
+          if (latest.statusCode == 200 && latest.records.isNotEmpty) {
+            anchorRecords = latest.records;
+            anchorEtag = latest.etag ?? anchorEtag;
+          }
         }
+
+        if (anchorRecords.isNotEmpty) {
+          for (
+            var day = start;
+            !day.isAfter(end);
+            day = day.add(const Duration(days: 1))
+          ) {
+            anchorCache.put(
+              day,
+              AnchorCacheEntry(
+                records: anchorRecords,
+                etag: anchorEtag,
+                cachedAt: now,
+                ttl: cacheTtl,
+              ),
+            );
+          }
+        }
+      } catch (_) {
+        // Fallback to per-day flow in fromGregorianAsync.
       }
-    } catch (_) {
-      // Fallback to per-day flow in fromGregorianAsync.
     }
 
-    try {
-      final remoteAdjustments = await adjustmentClient.fetchRange(
-        from: start,
-        to: end,
-      );
-      if (remoteAdjustments.statusCode == 200) {
-        for (
-          var day = start;
-          !day.isAfter(end);
-          day = day.add(const Duration(days: 1))
-        ) {
-          adjustmentCache.put(
-            day,
-            AdjustmentCacheEntry(
-              records: remoteAdjustments.records,
-              etag: remoteAdjustments.etag,
-              cachedAt: now,
-              ttl: cacheTtl,
-            ),
-          );
+    // ── Adjustment prefetch ───────────────────────────────────────────────────
+    final adjustmentMissing = _anyDayMissingAdjustment(start: start, end: end);
+    if (adjustmentMissing) {
+      try {
+        final existingAdjEntry = adjustmentCache.get(start);
+        final remoteAdjustments = await adjustmentClient.fetchRange(
+          from: start,
+          to: end,
+          etag: existingAdjEntry?.etag,
+        );
+        if (remoteAdjustments.statusCode == 200) {
+          for (
+            var day = start;
+            !day.isAfter(end);
+            day = day.add(const Duration(days: 1))
+          ) {
+            adjustmentCache.put(
+              day,
+              AdjustmentCacheEntry(
+                records: remoteAdjustments.records,
+                etag: remoteAdjustments.etag,
+                cachedAt: now,
+                ttl: cacheTtl,
+              ),
+            );
+          }
+        } else if (remoteAdjustments.statusCode == 304 &&
+            existingAdjEntry != null) {
+          // Refresh TTL for all days using cached data.
+          for (
+            var day = start;
+            !day.isAfter(end);
+            day = day.add(const Duration(days: 1))
+          ) {
+            adjustmentCache.put(
+              day,
+              AdjustmentCacheEntry(
+                records: existingAdjEntry.records,
+                etag: existingAdjEntry.etag,
+                cachedAt: now,
+                ttl: cacheTtl,
+              ),
+            );
+          }
         }
+      } catch (_) {
+        // Fallback to per-day flow in fromGregorianAsync.
       }
-    } catch (_) {
-      // Fallback to per-day flow in fromGregorianAsync.
     }
+  }
+
+  /// Returns true if any day in [start]..[end] has no fresh anchor cache entry.
+  bool _anyDayMissingAnchor({
+    required DateTime start,
+    required DateTime end,
+  }) {
+    for (
+      var day = start;
+      !day.isAfter(end);
+      day = day.add(const Duration(days: 1))
+    ) {
+      final entry = anchorCache.get(day);
+      if (entry == null || !entry.isFresh) return true;
+    }
+    return false;
+  }
+
+  /// Returns true if any day in [start]..[end] has no fresh adjustment cache entry.
+  bool _anyDayMissingAdjustment({
+    required DateTime start,
+    required DateTime end,
+  }) {
+    for (
+      var day = start;
+      !day.isAfter(end);
+      day = day.add(const Duration(days: 1))
+    ) {
+      final entry = adjustmentCache.get(day);
+      if (entry == null || !entry.isFresh) return true;
+    }
+    return false;
   }
 
   Future<HijriDate?> _resolveFromAnchor(
@@ -253,15 +326,19 @@ class KemenagOfficialHijriProvider implements HijriProvider {
         etag: cachedAnchor?.etag,
       );
       if (remote.statusCode == 200) {
-        anchorCache.put(
-          date,
-          AnchorCacheEntry(
-            records: remote.records,
-            etag: remote.etag,
-            cachedAt: DateTime.now().toUtc(),
-            ttl: cacheTtl,
-          ),
-        );
+        // Only cache non-empty records to avoid storing a miss that would
+        // prevent fetchLatestAnchors fallback from caching its own result.
+        if (remote.records.isNotEmpty) {
+          anchorCache.put(
+            date,
+            AnchorCacheEntry(
+              records: remote.records,
+              etag: remote.etag,
+              cachedAt: DateTime.now().toUtc(),
+              ttl: cacheTtl,
+            ),
+          );
+        }
         final resolved = _anchorResolver.resolve(
           date: date,
           records: remote.records,
@@ -283,10 +360,26 @@ class KemenagOfficialHijriProvider implements HijriProvider {
           );
         }
 
+        // fetchAnchorsByDate returned no matching records for this date
+        // (e.g. no anchor in this date range) — fall back to latest anchors.
+        // Use remote.etag as the conditional ETag so the server can respond
+        // with 304 if the latest data is unchanged since the previous fetch.
         final latest = await adjustmentClient.fetchLatestAnchors(
-          etag: cachedAnchor?.etag,
+          etag: remote.etag,
         );
-        if (latest.statusCode == 200) {
+        if (latest.statusCode == 200 && latest.records.isNotEmpty) {
+          // Persist to cache so subsequent single-date queries for other days
+          // in the same Gregorian month hit cache (month-based key) instead
+          // of triggering another double-fetch cycle.
+          anchorCache.put(
+            date,
+            AnchorCacheEntry(
+              records: latest.records,
+              etag: latest.etag ?? remote.etag,
+              cachedAt: DateTime.now().toUtc(),
+              ttl: cacheTtl,
+            ),
+          );
           final latestResolved = _anchorResolver.resolve(
             date: date,
             records: latest.records,

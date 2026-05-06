@@ -1,4 +1,31 @@
+## 1.4.1
+
+- Fixed anchor cache key strategy: switched from per-day to per Gregorian
+  year-month (`YYYY-MM`), since anchor records represent month-boundary data
+  valid for the entire month. The old per-day key caused a cache miss on
+  every new day even when the anchor for that month had already been fetched.
+- Fixed `fetchLatestAnchors` result not being saved to `anchorCache` in
+  `_resolveFromAnchor`: subsequent single-date queries for other days in the
+  same month now hit the cache instead of triggering a double HTTP call cycle.
+- Fixed stale ETag passed to `fetchLatestAnchors` in `_resolveFromAnchor`:
+  now uses `remote.etag` (from `fetchAnchorsByDate`) instead of the outdated
+  `cachedAnchor?.etag`, enabling correct `304 Not Modified` handling.
+- Fixed `fetchAnchorsByDate` response with empty records being stored in cache:
+  empty records are no longer cached, preventing a stale cache entry that would
+  block the `fetchLatestAnchors` fallback from persisting its result.
+- Fixed cache key UTC normalization across all four cache implementations
+  (`InMemoryHijriAdjustmentCache`, `HiveHijriAdjustmentCache`,
+  `InMemoryHijriAnchorCache`, `HiveHijriAnchorCache`): keys are now derived
+  from `date.toUtc()` to prevent cache misses for WIB (UTC+7) callers who
+  pass a local `DateTime` near midnight.
+- Fixed `_prefetchRange` always re-fetching regardless of cache state:
+  added `_anyDayMissingAnchor` and `_anyDayMissingAdjustment` guards so the
+  method skips HTTP calls entirely when all days in the requested range are
+  already covered by a fresh cache entry. Also threads ETag through the range
+  fetch for proper 304 conditional-request support.
+
 ## 1.4.0
+
 
 - Improved official Hijri range resolution consistency:
   - range prefetch now falls back to `fetchLatestAnchors(...)` once when

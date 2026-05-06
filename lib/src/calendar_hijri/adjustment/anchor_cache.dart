@@ -33,5 +33,13 @@ class InMemoryHijriAnchorCache implements HijriAnchorCache {
     _store[_key(date)] = entry;
   }
 
-  String _key(DateTime date) => '${date.year}-${date.month}-${date.day}';
+  /// Key is per Gregorian year-month because anchor records represent
+  /// month-boundary data (awal bulan) that is valid for the whole month.
+  /// Using per-day keys caused cache misses on every new day even when
+  /// the anchor for that month was already fetched.
+  /// UTC is used to avoid date boundary mismatches for WIB (UTC+7) users.
+  String _key(DateTime date) {
+    final utc = date.toUtc();
+    return '${utc.year}-${utc.month}';
+  }
 }
