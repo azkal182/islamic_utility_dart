@@ -22,7 +22,7 @@
 - `doc/11-api-reference.md` ← bilingual user implementation guide
 - `doc/12-faq-troubleshooting.md` ← bilingual FAQ and troubleshooting guide
 - `doc/13-hijri-integration-guide.md` ← bilingual Hijri integration guide
-- `doc/backend/README.md` ← backend API spec (hijri adjustment service)
+- `doc/backend/README.md` ← backend API spec (anchor-first Hijri service)
 
 Urutan baca yang direkomendasikan:
 

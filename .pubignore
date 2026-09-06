@@ -1,0 +1,7 @@
+# Local and generated artifacts.
+.dart_tool/
+build/
+.hive_cache/
+.git/
+.github/
+MCP_PROJECT_GUIDE.md

@@ -121,6 +121,62 @@ void main() {
       );
     });
 
+    test(
+      'fetchAnchorsRange includes predecessor in resolver records',
+      () async {
+        final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+        addTearDown(server.close);
+
+        server.listen((request) async {
+          request.response.statusCode = 200;
+          request.response.headers.contentType = ContentType.json;
+          request.response.write(
+            jsonEncode({
+              'predecessor': {
+                'official_gregorian_date': '2026-01-20',
+                'hijri_year': 1447,
+                'hijri_month': 8,
+                'hijri_day': 1,
+                'revision': 1,
+                'published_at': '2026-01-19T00:00:00Z',
+              },
+              'records': [
+                {
+                  'official_gregorian_date': '2026-02-19',
+                  'hijri_year': 1447,
+                  'hijri_month': 9,
+                  'hijri_day': 1,
+                  'revision': 1,
+                  'published_at': '2026-02-18T00:00:00Z',
+                },
+              ],
+            }),
+          );
+          await request.response.close();
+        });
+
+        final client = HttpHijriAdjustmentClient(
+          baseUrl: 'http://127.0.0.1:${server.port}',
+          apiKey: 'x',
+        );
+
+        final result = await client.fetchAnchorsRange(
+          from: DateTime.utc(2026, 2, 1),
+          to: DateTime.utc(2026, 2, 28),
+        );
+
+        expect(result.records.length, 2);
+        expect(
+          result.records.first.officialGregorianDate,
+          DateTime.utc(2026, 1, 20),
+        );
+        expect(
+          result.records.last.officialGregorianDate,
+          DateTime.utc(2026, 2, 19),
+        );
+      },
+    );
+
     test('fetchAnchorsByDate sends date range query', () async {
       final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
       addTearDown(server.close);

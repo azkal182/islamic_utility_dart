@@ -131,19 +131,21 @@ ID:
 EN:
 - `calculatedLocal`: safe offline, deterministic.
 - `ummAlQura`: useful for Umm al-Qura compatibility.
-- official (`withOfficial`): use when authority-based adjustment (`kemenag_ri`) is needed.
+- official (`withOfficial`): use when authority-based Hijri anchors (`kemenag_ri`) are needed.
 
 ## 12) Apa yang terjadi jika backend official down?
 
 ID:
 - Sistem fallback otomatis: remote -> cache -> local.
-- Jika cache tersedia, source akan `cache_adjusted`.
-- Jika tidak ada cache, source akan `local`.
+- Jika anchor tersedia, source akan `cache_anchor` atau `cache_anchor_provisional`.
+- Jika anchor belum cukup, source akan `local_fallback` dengan `meta.isProvisional == true`.
+- Untuk pemanggilan range, sistem memvalidasi urutan harian. Jika terjadi tanggal duplikat atau lompat, method melempar `StateError`; client harus menangani error tersebut dan tidak menampilkan hasil parsial sebagai data official.
 
 EN:
 - Fallback chain is automatic: remote -> cache -> local.
-- If cache exists, source becomes `cache_adjusted`.
-- If no cache exists, source becomes `local`.
+- If a valid anchor exists, source becomes `cache_anchor` or `cache_anchor_provisional`.
+- If anchors are incomplete, source becomes `local_fallback` with `meta.isProvisional == true`.
+- For range calls, daily continuity is validated. If a duplicate or skipped Hijri date is detected, the method throws `StateError`; the client must handle it and must not present partial output as official data.
 
 ## 13) Kenapa hasil Hijriyah bisa berbeda antar metode?
 

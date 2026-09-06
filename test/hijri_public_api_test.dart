@@ -77,6 +77,7 @@ void main() {
     test('official method works via withOfficial constructor', () async {
       final calendar = HijriCalendar.withOfficial(
         adjustmentClient: _MockOfficialClient(),
+        allowLegacyAdjustments: true,
       );
 
       final result = await calendar.fromGregorianOfficial(

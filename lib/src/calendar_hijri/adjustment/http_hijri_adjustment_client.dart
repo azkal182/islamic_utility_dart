@@ -377,6 +377,18 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
       );
     }
 
+    // The API exposes the nearest active anchor before the requested range as
+    // `predecessor`. Include it in the resolver dataset so callers can start
+    // a range in the middle of a Hijri month without mixing in local fallback.
+    final rawPredecessor = decoded['predecessor'];
+    if (rawPredecessor is Map<String, dynamic>) {
+      final predecessor = _parseAnchorRecord(rawPredecessor);
+      if (predecessor != null &&
+          !records.any((record) => _sameAnchor(record, predecessor))) {
+        records.insert(0, predecessor);
+      }
+    }
+
     return AnchorFetchResult(
       statusCode: response.statusCode,
       records: records,
@@ -421,6 +433,42 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
       return DateTime.parse(value).toUtc();
     }
     return DateTime.utc(year, month, day);
+  }
+
+  HijriAnchorRecord? _parseAnchorRecord(Map<String, dynamic> row) {
+    final officialDate = row['official_gregorian_date'];
+    final hijriYear = row['hijri_year'];
+    final hijriMonth = row['hijri_month'];
+    final hijriDay = row['hijri_day'];
+    final revision = row['revision'];
+    final publishedAt = row['published_at'];
+    if (officialDate is! String ||
+        hijriYear is! int ||
+        hijriMonth is! int ||
+        revision is! int ||
+        publishedAt is! String) {
+      return null;
+    }
+    return HijriAnchorRecord(
+      officialGregorianDate: _parseDateOnlyUtc(officialDate),
+      hijriYear: hijriYear,
+      hijriMonth: hijriMonth,
+      hijriDay: hijriDay is int ? hijriDay : 1,
+      revision: revision,
+      publishedAt: DateTime.parse(publishedAt).toUtc(),
+      authority: (row['authority'] as String?) ?? authority,
+      regionScope: (row['region_scope'] as String?) ?? regionScope,
+      notes: row['notes'] as String?,
+    );
+  }
+
+  bool _sameAnchor(HijriAnchorRecord left, HijriAnchorRecord right) {
+    return left.officialGregorianDate == right.officialGregorianDate &&
+        left.hijriYear == right.hijriYear &&
+        left.hijriMonth == right.hijriMonth &&
+        left.revision == right.revision &&
+        left.authority == right.authority &&
+        left.regionScope == right.regionScope;
   }
 
   String _isoDate(DateTime value) {

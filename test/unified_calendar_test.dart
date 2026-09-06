@@ -112,7 +112,7 @@ void main() {
       );
 
       expect(results.length, 6);
-      expect(client.fetchRangeCalls, 1);
+      expect(client.fetchRangeCalls, 0);
       expect(client.fetchAnchorsRangeCalls, 1);
       expect(client.fetchByDateCalls, 0);
       expect(client.fetchAnchorsByDateCalls, 0);

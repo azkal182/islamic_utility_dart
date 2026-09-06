@@ -163,6 +163,9 @@ class HijriResultMeta {
   final String source;
   final bool isAdjusted;
   final int adjustmentDays;
+  final bool isProvisional;
+  final DateTime? anchorDate;
+  final DateTime? nextAnchorDate;
   final String? authority;
   final int? revision;
 }
@@ -184,6 +187,7 @@ HijriCalendar.withOfficial({
   String authority = 'kemenag_ri',
   String regionScope = 'national',
   Duration cacheTtl = const Duration(hours: 24),
+  bool allowLegacyAdjustments = false,
 })
 ```
 
@@ -208,8 +212,44 @@ Future<List<HijriDate>> fromGregorianOfficialRange({
 ```
 
 Notes:
-- `fromGregorianOfficialRange` melakukan prefetch range (`anchors` + `adjustments`) lalu resolve lokal per tanggal.
+- `fromGregorianOfficial` is a single-date lookup. If no usable anchor is
+  available, it may return `local_fallback` with `meta.isProvisional == true`;
+  callers must not present that result as final official data.
+- `fromGregorianOfficialRange` melakukan prefetch anchor lalu resolve lokal per tanggal.
 - Untuk mode range, request harian remote dihindari selama cache range masih berlaku.
+- Anchor masa depan tidak pernah digunakan untuk tanggal target.
+- Jika anchor sebelumnya/berikutnya belum tersedia, hasil dapat memiliki `meta.isProvisional == true`.
+- Range melakukan prefetch hingga 35 hari sebelum tanggal `from` untuk mencari anchor pendahulu.
+- Jika hasil range memiliki tanggal Hijriyah lompat atau duplikat, method melempar `StateError` dan tidak mengembalikan hasil parsial.
+- Client wajib menangani `StateError`, lalu meminta anchor pendahulu atau menampilkan status bahwa data official belum lengkap.
+- Mode adjustment lama hanya aktif jika `allowLegacyAdjustments: true`.
+
+The anchor HTTP response may include a `predecessor` record outside the
+requested `from`/`to` dates. The Dart HTTP client merges this record into the
+anchor dataset used by the resolver, while older responses containing only
+`records` remain supported:
+
+```json
+{
+  "schema_version": "1.1.0",
+  "generated_at": "2026-09-06T19:33:33.029Z",
+  "predecessor": {
+    "official_gregorian_date": "2026-01-20",
+    "hijri_year": 1447,
+    "hijri_month": 8,
+    "hijri_day": 1,
+    "revision": 1,
+    "published_at": "2026-01-19T00:00:00Z",
+    "status": "final"
+  },
+  "records": []
+}
+```
+
+`published_at` describes the official publication/correction time and is not
+used as the Gregorian-to-Hijri calculation anchor. `generated_at` describes
+when the response dataset was generated. Timestamps must be timezone-aware;
+the production contract uses UTC RFC3339 (`Z`).
 
 ### HijriAdjustmentClient
 
@@ -281,6 +321,22 @@ Implementations:
 - In-memory: `InMemoryHijriAdjustmentCache`, `InMemoryHijriAnchorCache`
 - Persistent (Hive): `HiveHijriAdjustmentCache`, `HiveHijriAnchorCache`
 
+Anchor cache keys are based on the supplied Gregorian calendar date, not on
+`DateTime.toUtc()`. This avoids shifting a local midnight into the previous
+calendar date. The cache stores the anchor dataset associated with each queried
+date; the resolver still filters out future anchors.
+
+Official anchor contract:
+
+1. `official_gregorian_date` is the first day of the Hijri month.
+2. For one authority and region, only one active/final anchor may exist for a
+   given Hijri year and month.
+3. A revision replaces the previous record; the old record is retained only
+   as audit history.
+4. The distance between consecutive anchors must be 29 or 30 days.
+5. The API does not need a new endpoint, but a range must include the nearest
+   preceding anchor when the requested range starts after a month boundary.
+
 ## 3) Integration Contract
 
 - Prayer outputs (`PrayerTimes`) are UTC.
@@ -289,7 +345,7 @@ Implementations:
 - Untuk Hijri official production:
   1. gunakan `withOfficial(...)`
   2. gunakan persistent cache
-  3. log `meta.source` dan `meta.revision`
+  3. log `meta.source`, `meta.revision`, dan `meta.isProvisional`
 
 ## 4) Javanese Calendar API
 

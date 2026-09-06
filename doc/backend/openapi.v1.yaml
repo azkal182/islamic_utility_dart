@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Hijri Adjustment API
+  title: Hijri Anchor API
   version: 1.0.0
-  description: Adjustment-only API for Hijri date corrections.
+  description: Anchor-first API for official Hijri month boundaries. Adjustment endpoints remain available for legacy clients.
 servers:
   - url: https://api.example.com
 security:
@@ -10,6 +10,8 @@ security:
 tags:
   - name: Adjustments
     description: Hijri adjustment retrieval endpoints
+  - name: Anchors
+    description: Official Hijri month-start anchor retrieval endpoints
 paths:
   /v1/hijri/adjustments:
     get:
@@ -97,6 +99,69 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AdjustmentDataset'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/hijri/anchors:
+    get:
+      tags: [Anchors]
+      summary: Get official Hijri anchors by Gregorian date range
+      operationId: getAnchors
+      parameters:
+        - $ref: '#/components/parameters/CountryParam'
+        - $ref: '#/components/parameters/FromParam'
+        - $ref: '#/components/parameters/ToParam'
+        - $ref: '#/components/parameters/AuthorityParam'
+        - $ref: '#/components/parameters/RegionScopeParam'
+      responses:
+        '200':
+          description: Official anchor dataset
+          headers:
+            ETag:
+              schema: {type: string}
+            Cache-Control:
+              schema: {type: string, example: max-age=86400}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnchorDataset'
+        '304':
+          description: Not modified
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/hijri/anchors/latest:
+    get:
+      tags: [Anchors]
+      summary: Get the latest official Hijri anchors
+      operationId: getLatestAnchors
+      parameters:
+        - $ref: '#/components/parameters/CountryParam'
+        - $ref: '#/components/parameters/AuthorityParam'
+        - $ref: '#/components/parameters/RegionScopeParam'
+      responses:
+        '200':
+          description: Latest official anchor dataset
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnchorDataset'
+        '304':
+          description: Not modified
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -248,6 +313,81 @@ components:
                   message: Internal server error
                   request_id: req_01HRP8V6A
   schemas:
+    AnchorDataset:
+      type: object
+      additionalProperties: false
+      required: [schema_version, authority, generated_at, request_id, records]
+      properties:
+        schema_version:
+          type: string
+          pattern: '^\d+\.\d+\.\d+$'
+          example: 1.0.0
+        authority:
+          type: string
+          enum: [kemenag_ri]
+        generated_at:
+          type: string
+          format: date-time
+        request_id:
+          type: string
+          minLength: 8
+          maxLength: 64
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnchorRecord'
+    AnchorRecord:
+      type: object
+      additionalProperties: false
+      required:
+        [id, authority, country, region_scope, official_gregorian_date, hijri_year, hijri_month, hijri_day, revision, published_at, status]
+      properties:
+        id:
+          type: string
+          minLength: 8
+          maxLength: 128
+        authority:
+          type: string
+          enum: [kemenag_ri]
+        country:
+          type: string
+          pattern: '^[A-Z]{2}$'
+          minLength: 2
+          maxLength: 2
+          example: ID
+        region_scope:
+          type: string
+          enum: [national]
+        official_gregorian_date:
+          type: string
+          format: date
+        hijri_year:
+          type: integer
+          minimum: 1
+        hijri_month:
+          type: integer
+          minimum: 1
+          maximum: 12
+        hijri_day:
+          type: integer
+          enum: [1]
+        revision:
+          type: integer
+          minimum: 1
+        published_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [provisional, final, superseded]
+        reason:
+          type: string
+          maxLength: 64
+          nullable: true
+        notes:
+          type: string
+          maxLength: 1024
+          nullable: true
     AdjustmentDataset:
       type: object
       additionalProperties: false

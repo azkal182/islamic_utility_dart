@@ -59,7 +59,8 @@ Arti: tanggal Gregorian tersebut dipatok menjadi tanggal Hijriyah official terse
    - gunakan anchor sebagai titik referensi bulan,
    - derive hari-hari berikutnya dari anchor.
 4. Jika anchor tidak tersedia:
-   - fallback ke chain existing: remote delta/cache/local (sementara transisi).
+   - fallback ke local dengan `meta.isProvisional == true`.
+5. Delta hanya tersedia sebagai compatibility mode eksplisit.
 
 ## 5. Perubahan yang Akan Dikerjakan di Package
 
@@ -95,27 +96,33 @@ Tambahkan `AnchorResolver`:
 
 `KemenagOfficialHijriProvider` akan:
 
-1. prioritas pakai anchor record,
-2. jika belum ada anchor, fallback ke delta record (backward compatibility),
-3. jika keduanya tidak ada, fallback local.
+1. prioritas pakai anchor record yang tidak berada di masa depan,
+2. tandai hasil provisional jika batas bulan berikutnya belum diketahui,
+3. fallback local dengan `meta.isProvisional == true`.
 
 ### 5.4 Backward Compatibility
 
 Selama migrasi, package tetap mendukung delta agar backend lama tidak putus.
+Mode ini harus diaktifkan dengan `allowLegacyAdjustments: true` dan tidak
+dipakai untuk integrasi baru.
 
 Prioritas resolver selama transisi:
 
-1. anchor official
-2. delta official
-3. cache
-4. local
+1. anchor valid dari cache
+2. anchor valid dari remote
+3. anchor provisional
+4. local fallback provisional
+5. delta legacy jika diaktifkan eksplisit
 
 ## 6. Metadata Output yang Diperbarui
 
 `HijriResultMeta.source` akan diperluas:
 
-- `remote_anchor_adjusted`
-- `cache_anchor_adjusted`
+- `remote_anchor`
+- `cache_anchor`
+- `remote_anchor_provisional`
+- `cache_anchor_provisional`
+- `local_fallback`
 - `remote_adjusted` (delta)
 - `cache_adjusted` (delta)
 - `local`
@@ -127,7 +134,9 @@ Tambahkan test baru:
 1. anchor map correct start day (official 1 Ramadan).
 2. anchor boundary month transition.
 3. conflict resolution antar anchor revision.
-4. fallback anchor -> delta -> local.
+4. regression: anchor masa depan tidak boleh dipakai.
+5. regression: bulan 29 dan 30 hari berdasarkan dua anchor.
+6. regression: cache local midnight versus UTC.
 5. regression: existing prayer tests tetap hijau.
 
 ## 8. Kenapa Perubahan Ini Dibutuhkan
@@ -144,7 +153,7 @@ Sudah tersedia:
 - `HijriCalendar`
 - local provider
 - Umm al-Qura provider
-- official provider (anchor-first + delta fallback)
+- official provider (anchor-first + local provisional fallback)
 - HTTP adjustment client + retry/backoff
 
 Implementasi anchor-first yang sudah aktif:
@@ -153,16 +162,16 @@ Implementasi anchor-first yang sudah aktif:
 - anchor cache contract
 - anchor resolver
 - official provider flow:
-  1. remote anchor
-  2. cached anchor
-  3. remote delta
-  4. cached delta
-  5. local
+  1. cached anchor valid
+  2. remote anchor valid
+  3. anchor provisional
+  4. local fallback provisional
 - HTTP client endpoint:
   - `/v1/hijri/anchors`
   - `/v1/hijri/anchors/latest`
 
 Fase berikutnya:
 
-- hardening formula month transition anchor untuk panjang bulan 29/30 berbasis data authority jika tersedia.
+- publish anchor awal setiap bulan Hijriah yang sudah final.
 - tambah integration tests dengan fixture official real-world multi bulan.
+- migrasikan client lama dari adjustment ke anchor lalu pensiunkan endpoint adjustment.

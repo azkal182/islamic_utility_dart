@@ -13,12 +13,14 @@ class KemenagOfficialHijriProvider implements HijriProvider {
   KemenagOfficialHijriProvider({
     required this.baseProvider,
     required this.adjustmentClient,
-    required this.adjustmentCache,
+    HijriAdjustmentCache? adjustmentCache,
     HijriAnchorCache? anchorCache,
     this.authority = 'kemenag_ri',
     this.regionScope = 'national',
     this.cacheTtl = const Duration(hours: 24),
-  }) : anchorCache = anchorCache ?? InMemoryHijriAnchorCache();
+    this.allowLegacyAdjustments = false,
+  }) : adjustmentCache = adjustmentCache ?? InMemoryHijriAdjustmentCache(),
+       anchorCache = anchorCache ?? InMemoryHijriAnchorCache();
 
   final HijriProvider baseProvider;
   final HijriAdjustmentClient adjustmentClient;
@@ -27,6 +29,9 @@ class KemenagOfficialHijriProvider implements HijriProvider {
   final String authority;
   final String regionScope;
   final Duration cacheTtl;
+
+  /// Legacy compatibility switch. New integrations should leave this false.
+  final bool allowLegacyAdjustments;
   final AnchorResolver _anchorResolver = const AnchorResolver();
 
   @override
@@ -57,6 +62,18 @@ class KemenagOfficialHijriProvider implements HijriProvider {
       date,
       method: HijriMethod.calculatedLocal,
     );
+
+    if (!allowLegacyAdjustments) {
+      return HijriDate(
+        year: base.year,
+        month: base.month,
+        day: base.day,
+        meta: const HijriResultMeta(
+          source: 'local_fallback',
+          isProvisional: true,
+        ),
+      );
+    }
 
     final cached = adjustmentCache.get(date);
     List<AdjustmentRecord> candidateRecords = cached?.records ?? const [];
@@ -138,7 +155,41 @@ class KemenagOfficialHijriProvider implements HijriProvider {
     ) {
       results.add(await _fromGregorianAsync(day, allowRemote: false));
     }
+    _validateOfficialContinuity(results, start: start);
     return results;
+  }
+
+  void _validateOfficialContinuity(
+    List<HijriDate> results, {
+    required DateTime start,
+  }) {
+    for (var i = 1; i < results.length; i++) {
+      final previous = results[i - 1];
+      final current = results[i];
+      final sameMonth =
+          previous.year == current.year &&
+          previous.month == current.month &&
+          current.day == previous.day + 1;
+      final monthBoundary =
+          previous.day >= 29 &&
+          current.day == 1 &&
+          (current.month == previous.month + 1 ||
+              (previous.month == 12 && current.month == 1));
+      if (!sameMonth && !monthBoundary) {
+        final previousDate = start.add(Duration(days: i - 1));
+        final currentDate = start.add(Duration(days: i));
+        throw StateError(
+          'Official Hijri range is incomplete or inconsistent: '
+          '${previousDate.toIso8601String().split('T').first} '
+          '${previous.year}-${previous.month}-${previous.day} '
+          '(${previous.meta.source}) -> '
+          '${currentDate.toIso8601String().split('T').first} '
+          '${current.year}-${current.month}-${current.day} '
+          '(${current.meta.source}). '
+          'Publish/fetch the preceding Hijri anchor before resolving this range.',
+        );
+      }
+    }
   }
 
   Future<void> _prefetchRange({
@@ -146,6 +197,11 @@ class KemenagOfficialHijriProvider implements HijriProvider {
     required DateTime end,
   }) async {
     final now = DateTime.now().toUtc();
+    // Include the preceding possible month boundary. Without this lookback,
+    // a range that starts in the middle of a Hijri month has no prior anchor;
+    // the resolver then falls back locally and can duplicate the next official
+    // month-start anchor (for example, 1 Ramadan on two Gregorian dates).
+    final anchorQueryStart = start.subtract(const Duration(days: 35));
 
     // ── Anchor prefetch ───────────────────────────────────────────────────────
     // Check if every day in the range already has a fresh anchor cache entry.
@@ -156,11 +212,11 @@ class KemenagOfficialHijriProvider implements HijriProvider {
       try {
         // Use the existing ETag (if any) for a conditional request so the
         // server can respond 304 when data is unchanged.
-        final existingAnchorEntry = anchorCache.get(start);
+        final existingAnchorEntry = anchorCache.get(anchorQueryStart);
         List<HijriAnchorRecord> anchorRecords = const [];
         String? anchorEtag;
         final remoteAnchors = await adjustmentClient.fetchAnchorsRange(
-          from: start,
+          from: anchorQueryStart,
           to: end,
           etag: existingAnchorEntry?.etag,
         );
@@ -174,7 +230,8 @@ class KemenagOfficialHijriProvider implements HijriProvider {
           anchorEtag = existingAnchorEntry.etag;
         }
 
-        // If range endpoint returns empty around month boundary, use latest once.
+        // If range endpoint returns empty, use latest once. The resolver still
+        // rejects a latest anchor that is in the future for the target date.
         if (anchorRecords.isEmpty) {
           final latest = await adjustmentClient.fetchLatestAnchors(
             etag: anchorEtag,
@@ -207,9 +264,9 @@ class KemenagOfficialHijriProvider implements HijriProvider {
       }
     }
 
-    // ── Adjustment prefetch ───────────────────────────────────────────────────
+    // ── Legacy adjustment prefetch ─────────────────────────────────────────────
     final adjustmentMissing = _anyDayMissingAdjustment(start: start, end: end);
-    if (adjustmentMissing) {
+    if (allowLegacyAdjustments && adjustmentMissing) {
       try {
         final existingAdjEntry = adjustmentCache.get(start);
         final remoteAdjustments = await adjustmentClient.fetchRange(
@@ -259,10 +316,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
   }
 
   /// Returns true if any day in [start]..[end] has no fresh anchor cache entry.
-  bool _anyDayMissingAnchor({
-    required DateTime start,
-    required DateTime end,
-  }) {
+  bool _anyDayMissingAnchor({required DateTime start, required DateTime end}) {
     for (
       var day = start;
       !day.isAfter(end);
@@ -308,9 +362,14 @@ class KemenagOfficialHijriProvider implements HijriProvider {
           month: resolved.month,
           day: resolved.day,
           meta: HijriResultMeta(
-            source: 'cache_anchor_adjusted',
-            isAdjusted: true,
+            source: resolved.meta.source == 'anchor_provisional'
+                ? 'cache_anchor_provisional'
+                : 'cache_anchor',
+            isAdjusted: false,
             adjustmentDays: resolved.meta.adjustmentDays,
+            isProvisional: resolved.meta.isProvisional,
+            anchorDate: resolved.meta.anchorDate,
+            nextAnchorDate: resolved.meta.nextAnchorDate,
             authority: resolved.meta.authority,
             revision: resolved.meta.revision,
           ),
@@ -351,9 +410,14 @@ class KemenagOfficialHijriProvider implements HijriProvider {
             month: resolved.month,
             day: resolved.day,
             meta: HijriResultMeta(
-              source: 'remote_anchor_adjusted',
-              isAdjusted: true,
+              source: resolved.meta.source == 'anchor_provisional'
+                  ? 'remote_anchor_provisional'
+                  : 'remote_anchor',
+              isAdjusted: false,
               adjustmentDays: resolved.meta.adjustmentDays,
+              isProvisional: resolved.meta.isProvisional,
+              anchorDate: resolved.meta.anchorDate,
+              nextAnchorDate: resolved.meta.nextAnchorDate,
               authority: resolved.meta.authority,
               revision: resolved.meta.revision,
             ),
@@ -361,16 +425,59 @@ class KemenagOfficialHijriProvider implements HijriProvider {
         }
 
         // fetchAnchorsByDate returned no matching records for this date
-        // (e.g. no anchor in this date range) — fall back to latest anchors.
+        // (e.g. no anchor exactly on this date). Look back far enough to find
+        // the preceding month boundary before considering the latest set.
+        final historical = await adjustmentClient.fetchAnchorsRange(
+          from: date.subtract(const Duration(days: 35)),
+          to: date,
+          etag: remote.etag,
+        );
+        if (historical.statusCode == 200 && historical.records.isNotEmpty) {
+          anchorCache.put(
+            date,
+            AnchorCacheEntry(
+              records: historical.records,
+              etag: historical.etag ?? remote.etag,
+              cachedAt: DateTime.now().toUtc(),
+              ttl: cacheTtl,
+            ),
+          );
+          final historicalResolved = _anchorResolver.resolve(
+            date: date,
+            records: historical.records,
+            authority: authority,
+            regionScope: regionScope,
+          );
+          if (historicalResolved != null) {
+            return HijriDate(
+              year: historicalResolved.year,
+              month: historicalResolved.month,
+              day: historicalResolved.day,
+              meta: HijriResultMeta(
+                source: historicalResolved.meta.source == 'anchor_provisional'
+                    ? 'remote_anchor_provisional'
+                    : 'remote_anchor',
+                isAdjusted: false,
+                adjustmentDays: historicalResolved.meta.adjustmentDays,
+                isProvisional: historicalResolved.meta.isProvisional,
+                anchorDate: historicalResolved.meta.anchorDate,
+                nextAnchorDate: historicalResolved.meta.nextAnchorDate,
+                authority: historicalResolved.meta.authority,
+                revision: historicalResolved.meta.revision,
+              ),
+            );
+          }
+        }
+
+        // No historical anchor was found — fall back to latest anchors.
         // Use remote.etag as the conditional ETag so the server can respond
         // with 304 if the latest data is unchanged since the previous fetch.
         final latest = await adjustmentClient.fetchLatestAnchors(
           etag: remote.etag,
         );
         if (latest.statusCode == 200 && latest.records.isNotEmpty) {
-          // Persist to cache so subsequent single-date queries for other days
-          // in the same Gregorian month hit cache (month-based key) instead
-          // of triggering another double-fetch cycle.
+          // Persist the response for this queried calendar date. The resolver
+          // still filters the record set by target date.
           anchorCache.put(
             date,
             AnchorCacheEntry(
@@ -392,9 +499,14 @@ class KemenagOfficialHijriProvider implements HijriProvider {
               month: latestResolved.month,
               day: latestResolved.day,
               meta: HijriResultMeta(
-                source: 'remote_anchor_adjusted',
-                isAdjusted: true,
+                source: latestResolved.meta.source == 'anchor_provisional'
+                    ? 'remote_anchor_provisional'
+                    : 'remote_anchor',
+                isAdjusted: false,
                 adjustmentDays: latestResolved.meta.adjustmentDays,
+                isProvisional: latestResolved.meta.isProvisional,
+                anchorDate: latestResolved.meta.anchorDate,
+                nextAnchorDate: latestResolved.meta.nextAnchorDate,
                 authority: latestResolved.meta.authority,
                 revision: latestResolved.meta.revision,
               ),
@@ -416,9 +528,14 @@ class KemenagOfficialHijriProvider implements HijriProvider {
             month: resolved.month,
             day: resolved.day,
             meta: HijriResultMeta(
-              source: 'cache_anchor_adjusted',
-              isAdjusted: true,
+              source: resolved.meta.source == 'anchor_provisional'
+                  ? 'cache_anchor_provisional'
+                  : 'cache_anchor',
+              isAdjusted: false,
               adjustmentDays: resolved.meta.adjustmentDays,
+              isProvisional: resolved.meta.isProvisional,
+              anchorDate: resolved.meta.anchorDate,
+              nextAnchorDate: resolved.meta.nextAnchorDate,
               authority: resolved.meta.authority,
               revision: resolved.meta.revision,
             ),

@@ -12,8 +12,8 @@ ID: Panduan ini menjelaskan integrasi praktis fitur Hijriyah di `islamic_utility
   - EN: Offline conversion based on bundled Umm al-Qura data.
   - ID: Konversi offline berbasis dataset Umm al-Qura.
 - `kemenagRiOfficial` via `HijriCalendar.withOfficial(...)`
-  - EN: Anchor-first official flow with API + cache + fallback.
-  - ID: Alur official anchor-first dengan API + cache + fallback.
+  - EN: Anchor-first official flow with API + cache + explicit provisional fallback.
+  - ID: Alur official anchor-first dengan API + cache + fallback provisional yang eksplisit.
 
 ## 2) Local Offline Example
 
@@ -70,8 +70,37 @@ final results = await calendar.fromGregorianOfficialRange(
 ```
 
 Behavior:
-- EN: Range flow performs remote prefetch once per dataset (`anchors` and `adjustments`), then resolves daily values from cache/local computation.
-- ID: Alur range melakukan prefetch remote sekali per jenis data (`anchors` dan `adjustments`), lalu resolusi harian dari cache/kalkulasi lokal.
+- EN: Range flow prefetches anchors once, then resolves daily values from cache.
+- ID: Alur range melakukan prefetch anchor sekali, lalu resolusi harian dari cache.
+- EN: The client never uses an anchor dated after the requested Gregorian date.
+- ID: Client tidak pernah menggunakan anchor yang tanggalnya berada setelah tanggal Gregorian target.
+- EN: An anchor without a following boundary may produce only a provisional result; the client does not assume every Hijri month has 30 days.
+- ID: Anchor tanpa batas bulan berikutnya hanya boleh menghasilkan data provisional; client tidak mengasumsikan semua bulan Hijriah memiliki 30 hari.
+- EN: For an official result across a Hijri month boundary, the cache/API must contain the preceding and following month anchors.
+- ID: Untuk hasil official yang melewati pergantian bulan Hijriah, cache/API harus memiliki anchor bulan sebelumnya dan berikutnya.
+- EN: Range resolution validates daily continuity. If fallback and official anchors create a duplicate or skipped Hijri date, it throws `StateError` instead of returning an unsafe range.
+- ID: Resolusi range memvalidasi kontinuitas harian. Jika fallback dan anchor official menghasilkan tanggal Hijriah duplikat atau lompat, method melempar `StateError` dan tidak mengembalikan range yang berbahaya.
+- EN: A single-date lookup may return `local_fallback` when no official anchor is available; this is different from range behavior and must be treated as provisional.
+- ID: Lookup satu tanggal dapat mengembalikan `local_fallback` ketika anchor official belum tersedia; ini berbeda dari perilaku range dan wajib diperlakukan sebagai provisional.
+
+The anchor response can contain a `predecessor` outside the requested range.
+The HTTP client merges it into the resolver dataset, so a range beginning in
+the middle of a Hijri month can be resolved without repeating the first day.
+Responses from older API versions that contain only `records` remain supported.
+
+Handle the range error explicitly:
+
+```dart
+try {
+  final results = await calendar.fromGregorianOfficialRange(
+    from: from,
+    to: to,
+  );
+} on StateError {
+  // Request/publish the preceding official anchor, or show that
+  // official data is incomplete. Do not silently present the range as final.
+}
+```
 
 ## 6) Persistent Cache (Hive)
 
@@ -85,12 +114,10 @@ import 'package:islamic_utility/islamic_utility.dart';
 final dir = Directory('.hive_cache')..createSync(recursive: true);
 Hive.init(dir.path);
 
-final adjustmentBox = await Hive.openBox<dynamic>('islamic_utility_adjustment_cache');
 final anchorBox = await Hive.openBox<dynamic>('islamic_utility_anchor_cache');
 
 final calendar = HijriCalendar.withOfficial(
   adjustmentClient: client,
-  cache: HiveHijriAdjustmentCache(adjustmentBox),
   anchorCache: HiveHijriAnchorCache(anchorBox),
 );
 ```
@@ -102,12 +129,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:islamic_utility/islamic_utility.dart';
 
 await Hive.initFlutter();
-final adjustmentBox = await Hive.openBox<dynamic>('islamic_utility_adjustment_cache');
 final anchorBox = await Hive.openBox<dynamic>('islamic_utility_anchor_cache');
 
 final calendar = HijriCalendar.withOfficial(
   adjustmentClient: client,
-  cache: HiveHijriAdjustmentCache(adjustmentBox),
   anchorCache: HiveHijriAnchorCache(anchorBox),
 );
 ```
@@ -115,38 +140,48 @@ final calendar = HijriCalendar.withOfficial(
 ## 7) Source Metadata and Fallback
 
 Common `meta.source` values:
-- `remote_anchor_adjusted`
-- `cache_anchor_adjusted`
-- `remote_adjusted`
-- `cache_adjusted`
-- `remote_noop`
+- `remote_anchor`
+- `cache_anchor`
+- `remote_anchor_provisional`
+- `cache_anchor_provisional`
+- `local_fallback`
 - `local`
+- `remote_adjusted` / `cache_adjusted` (legacy only)
 
 Meaning:
-- EN: `anchor` sources indicate anchor-first resolution path.
-- ID: source `anchor` menunjukkan jalur anchor-first yang dipakai.
+- EN: `*_anchor` means the result was resolved from an anchor that is not in the future.
+- ID: `*_anchor` berarti hasil dihitung dari anchor yang tidak berada di masa depan.
+- EN: `*_provisional` means the next month boundary is not known yet; do not present it as final official data.
+- ID: `*_provisional` berarti batas bulan berikutnya belum diketahui; jangan menampilkannya sebagai data official final.
+- EN: `local_fallback` is still a usable calculated date, but it is provisional and is not an official authority result.
+- ID: `local_fallback` tetap menghasilkan tanggal kalkulasi yang dapat dipakai, tetapi bersifat provisional dan bukan hasil official authority.
 
 ## 8) Fallback Priority
 
 For official mode:
-1. anchor from cache
-2. anchor from remote
-3. delta adjustment from cache/remote
-4. local calculated fallback
+1. valid anchor from cache (`anchorDate <= targetDate`)
+2. valid anchor from remote
+3. provisional anchor result when the next boundary is not known
+4. local calculated fallback (`meta.isProvisional == true`)
+
+Legacy adjustment mode is disabled by default. It can be enabled temporarily with
+`allowLegacyAdjustments: true`, but it should not be used for new integrations.
 
 For official range mode:
 1. prefetch anchors range
-2. prefetch adjustments range
-3. resolve each day from cache/local without per-day remote loop
+2. resolve each day from cache/local without per-day remote loop
+3. reject an inconsistent sequence with `StateError`
 
 ## 9) Production Checklist
 
 1. Use `HijriCalendar.withOfficial(...)`.
-2. Use persistent cache (`HiveHijriAdjustmentCache` + `HiveHijriAnchorCache`).
+2. Use persistent anchor cache (`HiveHijriAnchorCache`).
 3. Prefer `fromGregorianOfficialRange(...)` for calendar pages/list views.
 4. Keep `authority`, `regionScope`, and `country` consistent with backend policy.
 5. Log `meta.source`, `meta.revision`, and request IDs for observability.
 6. Add boundary tests (Ramadan/Syawal/Zulhijjah transitions).
+7. Treat `local_fallback` and `*_provisional` as non-final data.
+8. When publishing a revised anchor, increase `revision`; old records must be superseded.
 
 ## 10) Runnable Examples
 
@@ -154,4 +189,3 @@ For official range mode:
 - `example/hijri_official_http_example.dart`
 - `example/hijri_official_range_hive_example.dart`
 - `example/hijri_official_range_hive_flutter_example.dart`
-- `example/hijri_syawal_boundary_anchor_example.dart`

@@ -132,6 +132,19 @@ final hijri = await calendar.fromGregorianOfficial(DateTime.utc(2026, 3, 21));
 print('${hijri.year}-${hijri.month}-${hijri.day} (${hijri.meta.source})');
 ```
 
+Official mode uses Hijri month-start anchors. An anchor is valid only for its
+date and later dates; a future anchor is never used to resolve historical
+dates. For a final result across a month boundary, the API/cache must contain
+the preceding and following month anchors. If that information is incomplete,
+the result can be `local_fallback` or `*_provisional`; inspect
+`result.meta.isProvisional` before presenting it as official. A range lookup
+rejects an inconsistent sequence with `StateError` instead of returning a
+duplicate or skipped Hijri date.
+
+The old adjustment flow is disabled by default. It can be enabled temporarily
+for migration with `allowLegacyAdjustments: true`, but new integrations should
+publish and consume anchors instead.
+
 ### Official (Range, Optimized Fetch)
 
 ```dart
@@ -141,10 +154,25 @@ final results = await calendar.fromGregorianOfficialRange(
 );
 ```
 
+Handle incomplete official data explicitly:
+
+```dart
+try {
+  final results = await calendar.fromGregorianOfficialRange(from: from, to: to);
+} on StateError {
+  // The API/cache is missing a preceding anchor or the sequence is invalid.
+  // Do not present a partial result as final official data.
+}
+```
+
 Range behavior:
-- Prefetch `anchors` and `adjustments` by range.
+- Prefetch `anchors` by range, including up to 35 days before the requested
+  start date to find the preceding month boundary.
 - Resolve per-day values from cache/local flow.
 - Avoid per-day remote loop in range mode.
+- Never use an anchor dated after the requested Gregorian date.
+- Reject an incomplete or inconsistent sequence with `StateError`; publish the
+  preceding official anchor before retrying the range.
 
 ## Javanese Pasaran Quick Start
 
@@ -184,7 +212,6 @@ print(result.javanese); // optional, based on options
 - `dart run example/hijri_official_range_hive_example.dart`
 - `dart run example/javanese_pasaran_example.dart`
 - `dart run example/unified_calendar_example.dart`
-- `dart run example/hijri_syawal_boundary_anchor_example.dart`
 
 ## Flutter + Hive (Persistent Range Cache)
 
@@ -199,15 +226,11 @@ import 'package:your_app/hijri_official_range_hive_flutter_example.dart';
 
 Future<void> bootstrapHijri() async {
   await Hive.initFlutter();
-  final adjustmentBox = await Hive.openBox<dynamic>(
-    'islamic_utility_adjustment_cache',
-  );
-  final anchorBox = await Hive.openBox<dynamic>(
-    'islamic_utility_anchor_cache',
-  );
+final anchorBox = await Hive.openBox<dynamic>(
+  'islamic_utility_anchor_cache',
+);
 
   final results = await convertRangeWithFlutterHive(
-    adjustmentBox: adjustmentBox,
     anchorBox: anchorBox,
     baseUrl: 'https://your-backend.example.com/api',
     apiKey: 'your-api-key',
@@ -233,7 +256,7 @@ dart test
 - API Reference (Bilingual): `doc/11-api-reference.md`
 - FAQ & Troubleshooting (Bilingual): `doc/12-faq-troubleshooting.md`
 - Hijri Integration Guide (Bilingual): `doc/13-hijri-integration-guide.md`
-- Backend API Spec (Hijri Adjustment): `doc/backend/README.md`
+- Backend API Spec (Hijri Anchor-First): `doc/backend/README.md`
 - Public API Spec: `doc/01-public-api-spec.md`
 - Core Calculation: `doc/02-calculation-core-spec.md`
 - Astronomical Engine: `doc/03-astronomical-formulas.md`

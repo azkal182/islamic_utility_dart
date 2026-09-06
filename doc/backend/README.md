@@ -1,15 +1,16 @@
 # Backend API Spec (Hijri Adjustment Service)
 
-Dokumen di folder ini adalah spesifikasi backend untuk fitur kalender Hijriyah dengan model **adjustment-only API**.
+Dokumen di folder ini adalah spesifikasi backend untuk fitur kalender Hijriyah dengan model **anchor-first API**. Endpoint adjustment lama tetap didokumentasikan untuk masa transisi dan kompatibilitas client lama.
 
 Tujuan:
 - Engine Hijriyah lokal di package tetap menjadi perhitungan dasar (offline-first).
-- Backend hanya mengirim data koreksi resmi (`adjustment`) jika ada penetapan otoritas.
+- Backend mengirim anchor awal bulan Hijriah resmi sebagai sumber utama.
+- Endpoint adjustment tetap dapat dipertahankan tanpa dipakai oleh client anchor-only.
 - Integrasi backend bersifat optional (bisa free/paid tier).
 
 ## Scope
 
-- API untuk membaca data adjustment Hijriyah.
+- API untuk membaca data anchor Hijriyah dan endpoint adjustment legacy.
 - Autentikasi, kuota/rate limit, cache, error contract, dan SLA operasional.
 - Aturan conflict resolution dan fallback untuk client package.
 
@@ -38,7 +39,7 @@ Tujuan:
 Prinsip baseline:
 - HTTP contract tetap mengacu ke `doc/backend/openapi.v1.yaml`.
 - Service architecture harus layered (api/application/domain/infrastructure).
-- Integrasi Dart package menggunakan adjustment-only contract.
+- Integrasi Dart package menggunakan anchor-first contract; adjustment hanya legacy opt-in.
 
 ## Daftar Dokumen
 
@@ -60,4 +61,5 @@ Prinsip baseline:
 - `doc/backend/16-vps-deployment-guide.md`
 - `doc/backend/17-typescript-integration-snippets.md`
 - `doc/backend/18-backend-migration-to-anchor-first.md`
+- `doc/backend/19-anchor-api-contract.md`
 - `doc/backend/openapi.v1.yaml`

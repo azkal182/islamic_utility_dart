@@ -1,3 +1,16 @@
+## 1.5.0
+
+- Added support for the official anchor API `predecessor` field. The HTTP
+  client now includes the preceding active anchor in the resolver dataset while
+  preserving compatibility with responses that only contain `records`.
+- Improved official range safety: ranges are validated for daily continuity and
+  reject duplicate or skipped Hijri dates instead of returning an unsafe
+  result.
+- Official range prefetch now looks back up to 35 days for the preceding
+  month-boundary anchor.
+- Documented provisional local fallback, `StateError` handling, anchor
+  requirements, cache behavior, and UTC timestamp expectations.
+
 ## 1.4.1
 
 - Fixed anchor cache key strategy: switched from per-day to per Gregorian

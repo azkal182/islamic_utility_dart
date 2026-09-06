@@ -2,6 +2,7 @@ import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_cache.d
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_client.dart';
 import 'package:islamic_utility/src/calendar_hijri/adjustment/adjustment_record.dart';
 import 'package:islamic_utility/src/calendar_hijri/adjustment/anchor_record.dart';
+import 'package:islamic_utility/src/calendar_hijri/adjustment/anchor_cache.dart';
 import 'package:islamic_utility/src/calendar_hijri/providers/kemenag_official_hijri_provider.dart';
 import 'package:islamic_utility/src/calendar_hijri/providers/local_hijri_provider.dart';
 import 'package:test/test.dart';
@@ -101,6 +102,7 @@ void main() {
         baseProvider: LocalHijriProvider(),
         adjustmentClient: client,
         adjustmentCache: InMemoryHijriAdjustmentCache(),
+        allowLegacyAdjustments: true,
       );
 
       final result = await provider.fromGregorianAsync(date);
@@ -135,6 +137,7 @@ void main() {
           const AdjustmentFetchResult(statusCode: 304),
         ),
         adjustmentCache: cache,
+        allowLegacyAdjustments: true,
       );
 
       final result = await provider.fromGregorianAsync(date);
@@ -151,6 +154,7 @@ void main() {
           throwError: true,
         ),
         adjustmentCache: InMemoryHijriAdjustmentCache(),
+        allowLegacyAdjustments: true,
       );
 
       final result = await provider.fromGregorianAsync(date);
@@ -182,6 +186,7 @@ void main() {
         baseProvider: LocalHijriProvider(),
         adjustmentClient: client,
         adjustmentCache: cache,
+        allowLegacyAdjustments: true,
       );
 
       final result = await provider.fromGregorianAsync(date);
@@ -223,6 +228,7 @@ void main() {
         baseProvider: LocalHijriProvider(),
         adjustmentClient: client,
         adjustmentCache: InMemoryHijriAdjustmentCache(),
+        allowLegacyAdjustments: true,
       );
 
       final result = await provider.fromGregorianAsync(date);
@@ -264,6 +270,7 @@ void main() {
           baseProvider: LocalHijriProvider(),
           adjustmentClient: client,
           adjustmentCache: InMemoryHijriAdjustmentCache(),
+          allowLegacyAdjustments: true,
         );
 
         final result = await provider.fromGregorianRangeAsync(
@@ -280,7 +287,7 @@ void main() {
       },
     );
 
-    test('range uses latest anchor once when range anchor is empty', () async {
+    test('does not use a future latest anchor for an earlier range', () async {
       final client = _MockClient(
         const AdjustmentFetchResult(statusCode: 200, records: []),
         anchorRangeResult: const AnchorFetchResult(
@@ -312,11 +319,56 @@ void main() {
         to: DateTime.utc(2026, 3, 16),
       );
 
-      expect(results[0].meta.source, 'cache_anchor_adjusted');
-      expect(results[0].day, 25);
+      expect(results[0].meta.source, 'local_fallback');
+      expect(results[0].meta.isProvisional, isTrue);
       expect(client.anchorRangeCalls, 1);
       expect(client.anchorLatestCalls, 1);
       expect(client.anchorByDateCalls, 0);
+    });
+
+    test('uses a preceding anchor for a range starting mid-month', () async {
+      final client = _MockClient(
+        const AdjustmentFetchResult(statusCode: 200, records: []),
+        anchorRangeResult: AnchorFetchResult(
+          statusCode: 200,
+          records: [
+            HijriAnchorRecord(
+              officialGregorianDate: DateTime.utc(2026, 1, 20),
+              hijriYear: 1447,
+              hijriMonth: 8,
+              revision: 1,
+              publishedAt: DateTime.utc(2026, 1, 19),
+            ),
+            HijriAnchorRecord(
+              officialGregorianDate: DateTime.utc(2026, 2, 19),
+              hijriYear: 1447,
+              hijriMonth: 9,
+              revision: 1,
+              publishedAt: DateTime.utc(2026, 2, 18),
+            ),
+          ],
+        ),
+      );
+
+      final provider = KemenagOfficialHijriProvider(
+        baseProvider: LocalHijriProvider(),
+        adjustmentClient: client,
+        anchorCache: InMemoryHijriAnchorCache(),
+      );
+
+      final results = await provider.fromGregorianRangeAsync(
+        from: DateTime.utc(2026, 2, 18),
+        to: DateTime.utc(2026, 2, 19),
+      );
+
+      expect(results[0].year, 1447);
+      expect(results[0].month, 8);
+      expect(results[0].day, 30);
+      expect(results[1].year, 1447);
+      expect(results[1].month, 9);
+      expect(results[1].day, 1);
+      expect(results[0].meta.source, 'cache_anchor');
+      expect(results[1].meta.source, 'cache_anchor_provisional');
     });
   });
 }

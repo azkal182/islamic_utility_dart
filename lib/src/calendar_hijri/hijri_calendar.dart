@@ -20,6 +20,7 @@ class HijriCalendar {
     String authority = 'kemenag_ri',
     String regionScope = 'national',
     Duration cacheTtl = const Duration(hours: 24),
+    bool allowLegacyAdjustments = false,
   }) : _local = LocalHijriProvider(),
        _ummAlQura = UmmAlQuraProvider(),
        _official = KemenagOfficialHijriProvider(
@@ -30,6 +31,7 @@ class HijriCalendar {
          authority: authority,
          regionScope: regionScope,
          cacheTtl: cacheTtl,
+         allowLegacyAdjustments: allowLegacyAdjustments,
        );
 
   final LocalHijriProvider _local;
