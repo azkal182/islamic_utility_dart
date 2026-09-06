@@ -1,3 +1,15 @@
+## 1.5.1
+
+- Official Hijri ranges now continue several future months from the last
+  available anchor using an anchored local fallback instead of failing only
+  because a future anchor is missing.
+- Added `HijriResultMeta.validationStatus` with `official`,
+  `inferred_validated`, and `provisional` states.
+- Reconciled provisional results when a later anchor moves by `+1` or `-1`
+  day, preventing duplicate or skipped Hijri day 1 values.
+- Range prefetch now uses conditional ETag requests to detect new anchor
+  revisions before the previous cache TTL expires.
+
 ## 1.5.0
 
 - Added support for the official anchor API `predecessor` field. The HTTP

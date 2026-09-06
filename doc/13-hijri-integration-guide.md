@@ -151,8 +151,14 @@ Common `meta.source` values:
 Meaning:
 - EN: `*_anchor` means the result was resolved from an anchor that is not in the future.
 - ID: `*_anchor` berarti hasil dihitung dari anchor yang tidak berada di masa depan.
-- EN: `*_provisional` means the next month boundary is not known yet; do not present it as final official data.
-- ID: `*_provisional` berarti batas bulan berikutnya belum diketahui; jangan menampilkannya sebagai data official final.
+- EN: `*_provisional` means the result is extrapolated from the last anchor or
+  is not backed by a direct monthly anchor; do not present it as final official data.
+- ID: `*_provisional` berarti hasil diekstrapolasi dari anchor terakhir atau
+  tidak memiliki anchor bulanan langsung; jangan menampilkannya sebagai data official final.
+- EN: `meta.validationStatus == inferred_validated` means a missing
+  intermediate anchor is consistent with a later official anchor.
+- ID: `meta.validationStatus == inferred_validated` berarti anchor antara yang
+  hilang konsisten dengan anchor resmi berikutnya.
 - EN: `local_fallback` is still a usable calculated date, but it is provisional and is not an official authority result.
 - ID: `local_fallback` tetap menghasilkan tanggal kalkulasi yang dapat dipakai, tetapi bersifat provisional dan bukan hasil official authority.
 
@@ -162,7 +168,7 @@ For official mode:
 1. valid anchor from cache (`anchorDate <= targetDate`)
 2. valid anchor from remote
 3. provisional anchor result when the next boundary is not known
-4. local calculated fallback (`meta.isProvisional == true`)
+4. anchored local fallback (`meta.isProvisional == true`)
 
 Legacy adjustment mode is disabled by default. It can be enabled temporarily with
 `allowLegacyAdjustments: true`, but it should not be used for new integrations.
@@ -170,7 +176,8 @@ Legacy adjustment mode is disabled by default. It can be enabled temporarily wit
 For official range mode:
 1. prefetch anchors range
 2. resolve each day from cache/local without per-day remote loop
-3. reject an inconsistent sequence with `StateError`
+3. continue missing future months as provisional anchored fallback
+4. reject only an inconsistent sequence with `StateError`
 
 ## 9) Production Checklist
 

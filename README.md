@@ -134,12 +134,13 @@ print('${hijri.year}-${hijri.month}-${hijri.day} (${hijri.meta.source})');
 
 Official mode uses Hijri month-start anchors. An anchor is valid only for its
 date and later dates; a future anchor is never used to resolve historical
-dates. For a final result across a month boundary, the API/cache must contain
-the preceding and following month anchors. If that information is incomplete,
-the result can be `local_fallback` or `*_provisional`; inspect
-`result.meta.isProvisional` before presenting it as official. A range lookup
-rejects an inconsistent sequence with `StateError` instead of returning a
-duplicate or skipped Hijri date.
+dates. If the following anchor is missing, the provider continues from the
+last anchor using an anchored local fallback. Inspect
+`result.meta.isProvisional` before presenting it as official. If a later anchor
+confirms the inferred boundaries, `result.meta.validationStatus` is
+`inferred_validated`. A range lookup does not fail merely because future
+anchors are missing; it rejects only an inconsistent sequence with
+`StateError` instead of returning a duplicate or skipped Hijri date.
 
 The old adjustment flow is disabled by default. It can be enabled temporarily
 for migration with `allowLegacyAdjustments: true`, but new integrations should
@@ -154,13 +155,13 @@ final results = await calendar.fromGregorianOfficialRange(
 );
 ```
 
-Handle incomplete official data explicitly:
+Handle invalid official data explicitly:
 
 ```dart
 try {
   final results = await calendar.fromGregorianOfficialRange(from: from, to: to);
 } on StateError {
-  // The API/cache is missing a preceding anchor or the sequence is invalid.
+  // The anchor sequence is invalid or contains a duplicate/skip.
   // Do not present a partial result as final official data.
 }
 ```
@@ -171,8 +172,12 @@ Range behavior:
 - Resolve per-day values from cache/local flow.
 - Avoid per-day remote loop in range mode.
 - Never use an anchor dated after the requested Gregorian date.
-- Reject an incomplete or inconsistent sequence with `StateError`; publish the
-  preceding official anchor before retrying the range.
+- Continue several future months from the last anchor using an anchored local
+  fallback and mark them provisional.
+- Reconcile the provisional segment when a later anchor is received; the new
+  anchor always wins and affected cache entries must be refreshed.
+- Reject only an inconsistent sequence with `StateError`; missing future
+  anchors alone are not an error.
 
 ## Javanese Pasaran Quick Start
 

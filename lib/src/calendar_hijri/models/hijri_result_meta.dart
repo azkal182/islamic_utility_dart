@@ -8,6 +8,7 @@ class HijriResultMeta {
     this.nextAnchorDate,
     this.authority,
     this.revision,
+    this.validationStatus = 'official',
   });
 
   final String source;
@@ -18,4 +19,10 @@ class HijriResultMeta {
   final DateTime? nextAnchorDate;
   final String? authority;
   final int? revision;
+
+  /// Describes how strongly the result is supported by official anchors.
+  ///
+  /// Values currently used by the official provider are `official`,
+  /// `inferred_validated`, and `provisional`.
+  final String validationStatus;
 }

@@ -168,6 +168,7 @@ class HijriResultMeta {
   final DateTime? nextAnchorDate;
   final String? authority;
   final int? revision;
+  final String validationStatus;
 }
 ```
 
@@ -218,10 +219,17 @@ Notes:
 - `fromGregorianOfficialRange` melakukan prefetch anchor lalu resolve lokal per tanggal.
 - Untuk mode range, request harian remote dihindari selama cache range masih berlaku.
 - Anchor masa depan tidak pernah digunakan untuk tanggal target.
-- Jika anchor sebelumnya/berikutnya belum tersedia, hasil dapat memiliki `meta.isProvisional == true`.
+- Jika anchor berikutnya belum tersedia, sistem tetap menghitung beberapa bulan
+  ke depan dari anchor terakhir menggunakan fallback lokal yang di-anchor dan
+  memberi `meta.isProvisional == true`.
+- Jika hasil fallback di antara dua anchor cocok dengan anchor berikutnya,
+  `meta.validationStatus` bernilai `inferred_validated`. Ini tervalidasi secara
+  kontinuitas, tetapi bukan pengganti anchor resmi langsung.
 - Range melakukan prefetch hingga 35 hari sebelum tanggal `from` untuk mencari anchor pendahulu.
-- Jika hasil range memiliki tanggal Hijriyah lompat atau duplikat, method melempar `StateError` dan tidak mengembalikan hasil parsial.
-- Client wajib menangani `StateError`, lalu meminta anchor pendahulu atau menampilkan status bahwa data official belum lengkap.
+- Jika hasil range memiliki tanggal Hijriyah lompat, duplikat, atau data anchor
+  konflik, method melempar `StateError` dan tidak mengembalikan hasil parsial.
+- Ketiadaan anchor masa depan saja bukan `StateError`; client harus memeriksa
+  `meta.isProvisional` dan `meta.validationStatus`.
 - Mode adjustment lama hanya aktif jika `allowLegacyAdjustments: true`.
 
 The anchor HTTP response may include a `predecessor` record outside the

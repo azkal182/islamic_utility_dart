@@ -71,6 +71,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
         meta: const HijriResultMeta(
           source: 'local_fallback',
           isProvisional: true,
+          validationStatus: 'provisional',
         ),
       );
     }
@@ -186,7 +187,8 @@ class KemenagOfficialHijriProvider implements HijriProvider {
           '${currentDate.toIso8601String().split('T').first} '
           '${current.year}-${current.month}-${current.day} '
           '(${current.meta.source}). '
-          'Publish/fetch the preceding Hijri anchor before resolving this range.',
+          'Verify active anchor revisions and the Gregorian/Hijri boundary '
+          'before resolving this range.',
         );
       }
     }
@@ -204,64 +206,61 @@ class KemenagOfficialHijriProvider implements HijriProvider {
     final anchorQueryStart = start.subtract(const Duration(days: 35));
 
     // ── Anchor prefetch ───────────────────────────────────────────────────────
-    // Check if every day in the range already has a fresh anchor cache entry.
-    // With the month-based key, a single cached entry covers the whole month,
-    // so this check is O(days) but nearly always a single Hive lookup.
-    final anchorMissing = _anyDayMissingAnchor(start: start, end: end);
-    if (anchorMissing) {
-      try {
-        // Use the existing ETag (if any) for a conditional request so the
-        // server can respond 304 when data is unchanged.
-        final existingAnchorEntry = anchorCache.get(anchorQueryStart);
-        List<HijriAnchorRecord> anchorRecords = const [];
-        String? anchorEtag;
-        final remoteAnchors = await adjustmentClient.fetchAnchorsRange(
-          from: anchorQueryStart,
-          to: end,
-          etag: existingAnchorEntry?.etag,
-        );
-        if (remoteAnchors.statusCode == 200) {
-          anchorRecords = remoteAnchors.records;
-          anchorEtag = remoteAnchors.etag;
-        } else if (remoteAnchors.statusCode == 304 &&
-            existingAnchorEntry != null) {
-          // Server confirmed data unchanged — refresh TTL without re-fetching.
-          anchorRecords = existingAnchorEntry.records;
-          anchorEtag = existingAnchorEntry.etag;
-        }
-
-        // If range endpoint returns empty, use latest once. The resolver still
-        // rejects a latest anchor that is in the future for the target date.
-        if (anchorRecords.isEmpty) {
-          final latest = await adjustmentClient.fetchLatestAnchors(
-            etag: anchorEtag,
-          );
-          if (latest.statusCode == 200 && latest.records.isNotEmpty) {
-            anchorRecords = latest.records;
-            anchorEtag = latest.etag ?? anchorEtag;
-          }
-        }
-
-        if (anchorRecords.isNotEmpty) {
-          for (
-            var day = start;
-            !day.isAfter(end);
-            day = day.add(const Duration(days: 1))
-          ) {
-            anchorCache.put(
-              day,
-              AnchorCacheEntry(
-                records: anchorRecords,
-                etag: anchorEtag,
-                cachedAt: now,
-                ttl: cacheTtl,
-              ),
-            );
-          }
-        }
-      } catch (_) {
-        // Fallback to per-day flow in fromGregorianAsync.
+    // Always perform a conditional anchor request for a range. This allows a
+    // newly published revision to invalidate fresh-looking provisional cache
+    // entries immediately; an unchanged dataset is still a cheap 304.
+    try {
+      // Entries are stored by requested range day, so use [start] rather
+      // than [anchorQueryStart] to retrieve the cached ETag.
+      final existingAnchorEntry = anchorCache.get(start);
+      List<HijriAnchorRecord> anchorRecords = const [];
+      String? anchorEtag;
+      final remoteAnchors = await adjustmentClient.fetchAnchorsRange(
+        from: anchorQueryStart,
+        to: end,
+        etag: existingAnchorEntry?.etag,
+      );
+      if (remoteAnchors.statusCode == 200) {
+        anchorRecords = remoteAnchors.records;
+        anchorEtag = remoteAnchors.etag;
+      } else if (remoteAnchors.statusCode == 304 &&
+          existingAnchorEntry != null) {
+        // Server confirmed data unchanged — refresh TTL without re-fetching.
+        anchorRecords = existingAnchorEntry.records;
+        anchorEtag = existingAnchorEntry.etag;
       }
+
+      // If range endpoint returns empty, use latest once. The resolver still
+      // rejects a latest anchor that is in the future for the target date.
+      if (anchorRecords.isEmpty) {
+        final latest = await adjustmentClient.fetchLatestAnchors(
+          etag: anchorEtag,
+        );
+        if (latest.statusCode == 200 && latest.records.isNotEmpty) {
+          anchorRecords = latest.records;
+          anchorEtag = latest.etag ?? anchorEtag;
+        }
+      }
+
+      if (anchorRecords.isNotEmpty) {
+        for (
+          var day = start;
+          !day.isAfter(end);
+          day = day.add(const Duration(days: 1))
+        ) {
+          anchorCache.put(
+            day,
+            AnchorCacheEntry(
+              records: anchorRecords,
+              etag: anchorEtag,
+              cachedAt: now,
+              ttl: cacheTtl,
+            ),
+          );
+        }
+      }
+    } catch (_) {
+      // Fallback to the existing cache/per-day flow in fromGregorianAsync.
     }
 
     // ── Legacy adjustment prefetch ─────────────────────────────────────────────
@@ -315,19 +314,6 @@ class KemenagOfficialHijriProvider implements HijriProvider {
     }
   }
 
-  /// Returns true if any day in [start]..[end] has no fresh anchor cache entry.
-  bool _anyDayMissingAnchor({required DateTime start, required DateTime end}) {
-    for (
-      var day = start;
-      !day.isAfter(end);
-      day = day.add(const Duration(days: 1))
-    ) {
-      final entry = anchorCache.get(day);
-      if (entry == null || !entry.isFresh) return true;
-    }
-    return false;
-  }
-
   /// Returns true if any day in [start]..[end] has no fresh adjustment cache entry.
   bool _anyDayMissingAdjustment({
     required DateTime start,
@@ -362,7 +348,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
           month: resolved.month,
           day: resolved.day,
           meta: HijriResultMeta(
-            source: resolved.meta.source == 'anchor_provisional'
+            source: resolved.meta.isProvisional
                 ? 'cache_anchor_provisional'
                 : 'cache_anchor',
             isAdjusted: false,
@@ -372,6 +358,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
             nextAnchorDate: resolved.meta.nextAnchorDate,
             authority: resolved.meta.authority,
             revision: resolved.meta.revision,
+            validationStatus: resolved.meta.validationStatus,
           ),
         );
       }
@@ -410,7 +397,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
             month: resolved.month,
             day: resolved.day,
             meta: HijriResultMeta(
-              source: resolved.meta.source == 'anchor_provisional'
+              source: resolved.meta.isProvisional
                   ? 'remote_anchor_provisional'
                   : 'remote_anchor',
               isAdjusted: false,
@@ -420,6 +407,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
               nextAnchorDate: resolved.meta.nextAnchorDate,
               authority: resolved.meta.authority,
               revision: resolved.meta.revision,
+              validationStatus: resolved.meta.validationStatus,
             ),
           );
         }
@@ -454,7 +442,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
               month: historicalResolved.month,
               day: historicalResolved.day,
               meta: HijriResultMeta(
-                source: historicalResolved.meta.source == 'anchor_provisional'
+                source: historicalResolved.meta.isProvisional
                     ? 'remote_anchor_provisional'
                     : 'remote_anchor',
                 isAdjusted: false,
@@ -464,6 +452,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
                 nextAnchorDate: historicalResolved.meta.nextAnchorDate,
                 authority: historicalResolved.meta.authority,
                 revision: historicalResolved.meta.revision,
+                validationStatus: historicalResolved.meta.validationStatus,
               ),
             );
           }
@@ -499,7 +488,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
               month: latestResolved.month,
               day: latestResolved.day,
               meta: HijriResultMeta(
-                source: latestResolved.meta.source == 'anchor_provisional'
+                source: latestResolved.meta.isProvisional
                     ? 'remote_anchor_provisional'
                     : 'remote_anchor',
                 isAdjusted: false,
@@ -509,6 +498,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
                 nextAnchorDate: latestResolved.meta.nextAnchorDate,
                 authority: latestResolved.meta.authority,
                 revision: latestResolved.meta.revision,
+                validationStatus: latestResolved.meta.validationStatus,
               ),
             );
           }
@@ -528,7 +518,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
             month: resolved.month,
             day: resolved.day,
             meta: HijriResultMeta(
-              source: resolved.meta.source == 'anchor_provisional'
+              source: resolved.meta.isProvisional
                   ? 'cache_anchor_provisional'
                   : 'cache_anchor',
               isAdjusted: false,
@@ -538,6 +528,7 @@ class KemenagOfficialHijriProvider implements HijriProvider {
               nextAnchorDate: resolved.meta.nextAnchorDate,
               authority: resolved.meta.authority,
               revision: resolved.meta.revision,
+              validationStatus: resolved.meta.validationStatus,
             ),
           );
         }

@@ -6,8 +6,8 @@ This release candidate improves official Hijri date resolution for anchor-first
 API integrations. It prevents duplicate or skipped Hijri dates at month
 boundaries and adds compatibility with the API's `predecessor` anchor field.
 
-This file describes the planned release. The package version is not changed
-and no publish or tag has been performed yet.
+The package version is `1.5.0`. The package has been verified locally; no
+publish or tag is performed by this change.
 
 ## Official Hijri Anchor Improvements
 

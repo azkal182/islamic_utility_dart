@@ -58,8 +58,16 @@ Common sources:
 - `cache_anchor` / `remote_anchor`: resolved from an official anchor.
 - `cache_anchor_provisional` / `remote_anchor_provisional`: official anchor
   exists but the following month boundary is not known yet.
-- `local_fallback`: calculated locally because an official anchor was not
-  usable; never present this as final official data.
+- `anchor_local_fallback`: calculated from the last official anchor using the
+  local month pattern; it remains provisional until a later anchor validates
+  the gap. Never present this as final official data.
+
+`result.meta.validationStatus` has three important values:
+
+- `official`: resolved inside a directly anchored official segment;
+- `inferred_validated`: an intermediate anchor is missing, but a later official
+  anchor confirms the inferred boundaries;
+- `provisional`: no later anchor has validated the extrapolation yet.
 
 ## Official range usage
 
@@ -70,9 +78,8 @@ try {
     to: DateTime.utc(2026, 9, 7),
   );
 } on StateError {
-  // The official sequence is incomplete or contains a duplicate/skip.
-  // Ask the API owner to publish the preceding anchor or show an incomplete
-  // official-data state. Do not use a partial result.
+  // The anchor sequence is invalid or contains a duplicate/skip.
+  // Do not use a partial result.
 }
 ```
 
@@ -85,8 +92,9 @@ Range behavior:
 - Future anchors are never used for earlier Gregorian dates.
 - Every adjacent Gregorian day is checked for continuous Hijri progression.
 - Only `Hijri day + 1` or a valid `29/30 -> 1` month boundary is accepted.
-- A duplicate or skipped date throws `StateError`; no unsafe partial range is
-  returned.
+- Missing future anchors continue from the last anchor as provisional.
+- A duplicate, skipped date, or conflicting anchor throws `StateError`; no
+  unsafe partial range is returned.
 
 ## API configuration
 
@@ -135,7 +143,8 @@ the cached anchor dataset remains valid and its TTL may be refreshed.
   `records`.
 - Range prefetch looks back up to 35 days for a preceding anchor.
 - Range continuity is validated before results are returned.
-- Duplicate or skipped official ranges throw `StateError`.
+- Missing future anchors use anchored local fallback and remain provisional.
+- Duplicate, skipped, or conflicting official ranges throw `StateError`.
 - Single-date `local_fallback` remains available but is explicitly
   provisional.
 - Existing API responses containing only `records` remain compatible.
@@ -144,15 +153,13 @@ the cached anchor dataset remains valid and its TTL may be refreshed.
 
 If a range throws `StateError`:
 
-1. Check that the API has the active anchor immediately before the requested
-   range.
-2. Check that the API has the next anchor when a final month boundary is
-   required.
+1. Check for duplicate, conflicting, or out-of-order active anchors.
+2. Check the transition around the reported Gregorian date.
 3. Check `meta.source`, `meta.isProvisional`, and `meta.anchorDate` in any
    single-date result.
 4. Do not silently convert the failed official range to final local dates.
-5. Show an incomplete-data state or explicitly let the user choose offline
-   local calculation.
+5. Show an invalid-data state or explicitly let the user choose offline local
+   calculation.
 
 ## Client-facing references
 

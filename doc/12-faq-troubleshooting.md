@@ -139,13 +139,19 @@ ID:
 - Sistem fallback otomatis: remote -> cache -> local.
 - Jika anchor tersedia, source akan `cache_anchor` atau `cache_anchor_provisional`.
 - Jika anchor belum cukup, source akan `local_fallback` dengan `meta.isProvisional == true`.
-- Untuk pemanggilan range, sistem memvalidasi urutan harian. Jika terjadi tanggal duplikat atau lompat, method melempar `StateError`; client harus menangani error tersebut dan tidak menampilkan hasil parsial sebagai data official.
+- Untuk pemanggilan range, sistem melanjutkan bulan masa depan dari anchor
+  terakhir sebagai provisional. Jika terjadi konflik anchor, tanggal duplikat,
+  atau tanggal lompat, method melempar `StateError`; client harus menangani
+  error tersebut dan tidak menampilkan hasil parsial sebagai data official.
 
 EN:
 - Fallback chain is automatic: remote -> cache -> local.
 - If a valid anchor exists, source becomes `cache_anchor` or `cache_anchor_provisional`.
 - If anchors are incomplete, source becomes `local_fallback` with `meta.isProvisional == true`.
-- For range calls, daily continuity is validated. If a duplicate or skipped Hijri date is detected, the method throws `StateError`; the client must handle it and must not present partial output as official data.
+- For range calls, future months continue from the last anchor as provisional.
+  If anchor data conflicts or a duplicate/skipped Hijri date is detected, the
+  method throws `StateError`; the client must handle it and must not present
+  partial output as official data.
 
 ## 13) Kenapa hasil Hijriyah bisa berbeda antar metode?
 
