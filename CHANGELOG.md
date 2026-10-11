@@ -1,3 +1,32 @@
+## 1.6.0 (draft)
+
+- Official Hijri lookups now return cached anchors immediately, including stale
+  entries, and refresh them in the background. When no usable cache exists,
+  lookups return a local provisional result while refresh proceeds.
+- Added explicit refresh APIs for a Gregorian date and date range so clients can
+  request refreshed official data and update their UI with the returned value.
+- Official range lookups use a complete cached range when available. When the
+  range is incomplete, they return one consistent local provisional range
+  instead of mixing cached official and local dates.
+- Batched single-date refreshes now cache a window of neighboring anchors for
+  reuse by nearby lookups. Anchor records merge by authority and region, keeping
+  the newest revision and publication timestamp.
+- ETags are scoped to the authority, region, and exact query range. HTTP timeout
+  handling now aborts the timed-out request before retrying.
+- Added `PrayerTimes.nextPrayerDetails(...)`, which returns the upcoming event,
+  UTC time, and whether it falls on the next local calendar day. Existing
+  `currentPrayer` and `nextPrayer` calls advance after the following Fajr.
+- Next-event candidates now include Imsak by default and Dhuha. Added skip
+  options plus `ImsakPolicy` (`always`, `ramadanOnly`, `never`) with a
+  caller-supplied Ramadan-date callback. Existing integrations that relied on
+  the former candidate sequence can configure skipped events.
+- Corrected high-latitude fallback durations so Fajr and Isha boundary values
+  use the night interval they belong to.
+- Use `nextPrayerDetails` for the actual occurrence time and local-day marker;
+  the legacy enum plus `timeForPrayer` cannot represent a next-day occurrence.
+- Added regression coverage and updated API, integration, and example
+  documentation for cache-first and offline behavior.
+
 ## 1.5.1
 
 - Official Hijri ranges now continue several future months from the last

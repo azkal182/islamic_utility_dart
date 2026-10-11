@@ -24,10 +24,13 @@ void main() {
       expect(times.timeForPrayer(Prayer.fajrAfter), times.fajrAfter);
     });
 
-    test('imsak is 10 minutes before fajr and dhuha is 20 minutes after sunrise', () {
-      expect(times.fajr.difference(times.imsak).inMinutes, 10);
-      expect(times.dhuha.difference(times.sunrise).inMinutes, 20);
-    });
+    test(
+      'imsak is 10 minutes before fajr and dhuha is 20 minutes after sunrise',
+      () {
+        expect(times.fajr.difference(times.imsak).inMinutes, 10);
+        expect(times.dhuha.difference(times.sunrise).inMinutes, 20);
+      },
+    );
 
     test('dhuha offset can be configured from parameters', () {
       final customParams = CalculationMethod.singapore.parameters.copyWith(
@@ -68,8 +71,10 @@ void main() {
     test('sunnah times are inside night window', () {
       final sunnah = SunnahTimes(times);
       expect(sunnah.middleOfTheNight.isAfter(times.maghrib), isTrue);
-      expect(sunnah.lastThirdOfTheNight.isAfter(sunnah.middleOfTheNight),
-          isTrue);
+      expect(
+        sunnah.lastThirdOfTheNight.isAfter(sunnah.middleOfTheNight),
+        isTrue,
+      );
       expect(sunnah.lastThirdOfTheNight.isBefore(times.fajrAfter), isTrue);
     });
 

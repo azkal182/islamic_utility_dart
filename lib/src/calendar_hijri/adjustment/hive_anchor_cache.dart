@@ -52,6 +52,7 @@ class HiveHijriAnchorCache implements HijriAnchorCache {
       return AnchorCacheEntry(
         records: records,
         etag: map['etag'] as String?,
+        etagKey: map['etag_key'] as String?,
         cachedAt: cachedAt,
         ttl: Duration(milliseconds: ttlMs),
       );
@@ -64,6 +65,7 @@ class HiveHijriAnchorCache implements HijriAnchorCache {
   void put(DateTime date, AnchorCacheEntry entry) {
     box.put(_key(date), {
       'etag': entry.etag,
+      'etag_key': entry.etagKey,
       'cached_at': entry.cachedAt.toUtc().toIso8601String(),
       'ttl_ms': entry.ttl.inMilliseconds,
       'records': entry.records

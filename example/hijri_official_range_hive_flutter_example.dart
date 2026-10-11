@@ -20,5 +20,5 @@ Future<List<HijriDate>> convertRangeWithFlutterHive({
     anchorCache: HiveHijriAnchorCache(anchorBox),
   );
 
-  return calendar.fromGregorianOfficialRange(from: from, to: to);
+  return calendar.refreshGregorianOfficialRange(from: from, to: to);
 }

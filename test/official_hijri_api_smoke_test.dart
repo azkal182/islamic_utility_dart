@@ -45,10 +45,15 @@ void main() {
     }
 
     final calendar = HijriCalendar.withOfficial(adjustmentClient: client);
-    final results = await calendar.fromGregorianOfficialRange(
+    final results = await calendar.refreshGregorianOfficialRange(
       from: from,
       to: to,
     );
+
+    final singleDate = await calendar.refreshGregorianOfficial(from);
+    expect(singleDate.year, 1447);
+    expect(singleDate.month, 12);
+    expect(singleDate.day, 15);
 
     expect(results.length, 61);
     expect(results.first.meta.source, contains('anchor'));
@@ -79,23 +84,29 @@ void main() {
       final to = DateTime.utc(2026, 9, 7);
       final results = await HijriCalendar.withOfficial(
         adjustmentClient: client,
-      ).fromGregorianOfficialRange(from: from, to: to);
+      ).refreshGregorianOfficialRange(from: from, to: to);
 
       expect(results.length, 219);
       for (var i = 1; i < results.length; i++) {
         final previous = results[i - 1];
         final current = results[i];
-        final sameMonth = previous.year == current.year &&
+        final sameMonth =
+            previous.year == current.year &&
             previous.month == current.month &&
             current.day == previous.day + 1;
-        final monthBoundary = previous.day >= 29 &&
+        final monthBoundary =
+            previous.day >= 29 &&
             current.day == 1 &&
             (current.month == previous.month + 1 ||
                 (previous.month == 12 && current.month == 1));
-        expect(sameMonth || monthBoundary, isTrue,
-            reason: 'Invalid transition at ${from.add(Duration(days: i - 1))}: '
-                '${previous.year}-${previous.month}-${previous.day} -> '
-                '${current.year}-${current.month}-${current.day}');
+        expect(
+          sameMonth || monthBoundary,
+          isTrue,
+          reason:
+              'Invalid transition at ${from.add(Duration(days: i - 1))}: '
+              '${previous.year}-${previous.month}-${previous.day} -> '
+              '${current.year}-${current.month}-${current.day}',
+        );
       }
 
       expect(results[17].year, 1447);

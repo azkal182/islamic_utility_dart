@@ -4,12 +4,17 @@ class AnchorCacheEntry {
   const AnchorCacheEntry({
     required this.records,
     this.etag,
+    this.etagKey,
     required this.cachedAt,
     required this.ttl,
   });
 
   final List<HijriAnchorRecord> records;
   final String? etag;
+
+  /// Identifies the exact endpoint/query represented by [etag]. ETags are
+  /// resource-specific and must not be reused across date ranges.
+  final String? etagKey;
   final DateTime cachedAt;
   final Duration ttl;
 

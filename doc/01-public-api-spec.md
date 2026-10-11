@@ -104,8 +104,19 @@ Properti hasil:
 Fungsi:
 
 - `Prayer currentPrayer({required DateTime date})`
-- `Prayer nextPrayer({DateTime? date})`
+- `Prayer nextPrayer({DateTime? date, NextPrayerOptions options})`
+- `NextPrayerDetails nextPrayerDetails({required DateTime at, required DateTime locationDate, NextPrayerOptions options})`
 - `DateTime timeForPrayer(Prayer prayer)`
+
+Kandidat next event default mencakup Imsak, Fajr, sunrise, Dhuha, Dhuhr, Asr,
+Maghrib, dan Isha. `NextPrayerOptions.skip` melewati event pilihan. Imsak
+default aktif setiap hari; `ImsakPolicy.ramadanOnly` memerlukan callback
+`isRamadanOn` dari aplikasi. Gunakan `nextPrayerDetails` untuk waktu occurrence
+yang tepat dan metadata `isNextDay`; enum hasil `nextPrayer` saja tidak membawa
+tanggal occurrence.
+Karena itu, pasangan `nextPrayer()` dan `timeForPrayer()` tidak dapat
+menentukan waktu occurrence hari berikutnya (misalnya Imsak besok); gunakan
+`nextPrayerDetails()` untuk menampilkan waktu event tersebut.
 
 ## `SunnahTimes`
 
@@ -135,7 +146,8 @@ Output derajat dari utara (0-360).
 - Semua waktu pada `PrayerTimes` disimpan sebagai `DateTime` UTC.
 - `timeForPrayer` harus selalu mengembalikan field yang sesuai enum.
 - `currentPrayer` untuk waktu sebelum `fajr` harus mengembalikan `ishaBefore`.
-- `nextPrayer` untuk waktu setelah `isha` harus mengembalikan `fajrAfter`.
+- `nextPrayer` untuk waktu setelah `isha` mengembalikan Imsak secara default;
+  callback/kebijakan Imsak dapat mengubah event berikutnya.
 
 ## Kontrak API Hijri
 

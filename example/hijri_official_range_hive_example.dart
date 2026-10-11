@@ -27,7 +27,7 @@ Future<void> main() async {
     anchorCache: HiveHijriAnchorCache(anchorBox),
   );
 
-  final results = await calendar.fromGregorianOfficialRange(
+  final results = await calendar.refreshGregorianOfficialRange(
     from: DateTime.utc(2026, 3, 15),
     to: DateTime.utc(2026, 3, 20),
   );

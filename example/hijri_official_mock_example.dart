@@ -64,7 +64,7 @@ void main() async {
   );
 
   final date = DateTime.utc(2024, 3, 11);
-  final result = await calendar.fromGregorianOfficial(date);
+  final result = await calendar.refreshGregorianOfficial(date);
 
   print('Gregorian: ${date.toIso8601String()}');
   print(

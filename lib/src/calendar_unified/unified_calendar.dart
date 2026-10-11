@@ -50,6 +50,48 @@ class UnifiedCalendar {
     );
   }
 
+  /// Awaits an official Hijri refresh for one Gregorian date, then resolves
+  /// the combined calendar value from the refreshed cache.
+  Future<UnifiedCalendarDate> refreshOfficial(
+    DateTime date, {
+    bool includeJavanese = false,
+  }) async {
+    final day = DateTime.utc(date.year, date.month, date.day);
+    final hijri = await _hijri.refreshGregorianOfficial(day);
+    return UnifiedCalendarDate(
+      gregorian: day,
+      hijri: hijri,
+      javanese: includeJavanese ? _javanese.fromGregorian(day) : null,
+    );
+  }
+
+  /// Awaits an official Hijri range refresh, then returns combined calendar
+  /// values for the inclusive range.
+  Future<List<UnifiedCalendarDate>> refreshOfficialRange({
+    required DateTime from,
+    required DateTime to,
+    bool includeJavanese = false,
+  }) async {
+    final start = DateTime.utc(from.year, from.month, from.day);
+    final end = DateTime.utc(to.year, to.month, to.day);
+    final hijri = await _hijri.refreshGregorianOfficialRange(
+      from: start,
+      to: end,
+    );
+    final results = <UnifiedCalendarDate>[];
+    for (var i = 0; i < hijri.length; i++) {
+      final day = start.add(Duration(days: i));
+      results.add(
+        UnifiedCalendarDate(
+          gregorian: day,
+          hijri: hijri[i],
+          javanese: includeJavanese ? _javanese.fromGregorian(day) : null,
+        ),
+      );
+    }
+    return results;
+  }
+
   Future<List<UnifiedCalendarDate>> resolveRange({
     required DateTime from,
     required DateTime to,

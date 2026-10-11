@@ -131,10 +131,7 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
     var delay = retryPolicy.initialDelay;
     while (true) {
       try {
-        final result = await _fetchOnce(
-          uri,
-          etag: etag,
-        ).timeout(retryPolicy.timeoutPerAttempt);
+        final result = await _fetchOnce(uri, etag: etag);
         final shouldRetryStatus =
             result.statusCode == HttpStatus.tooManyRequests ||
             (result.statusCode >= 500 && result.statusCode <= 599);
@@ -181,10 +178,7 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
     var delay = retryPolicy.initialDelay;
     while (true) {
       try {
-        final result = await _fetchAnchorOnce(
-          uri,
-          etag: etag,
-        ).timeout(retryPolicy.timeoutPerAttempt);
+        final result = await _fetchAnchorOnce(uri, etag: etag);
         final shouldRetryStatus =
             result.statusCode == HttpStatus.tooManyRequests ||
             (result.statusCode >= 500 && result.statusCode <= 599);
@@ -231,7 +225,11 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
       request.headers.set(HttpHeaders.ifNoneMatchHeader, etag);
     }
 
-    final response = await request.close();
+    final attemptTimer = Stopwatch()..start();
+    final response = await _closeWithTimeout(
+      request,
+      timeout: _remainingTimeout(attemptTimer),
+    );
     final responseEtag = response.headers.value(HttpHeaders.etagHeader);
 
     if (response.statusCode == HttpStatus.notModified) {
@@ -242,7 +240,11 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
       );
     }
 
-    final body = await utf8.decoder.bind(response).join();
+    final body = await _readBodyWithTimeout(
+      response,
+      request,
+      timeout: _remainingTimeout(attemptTimer),
+    );
     if (response.statusCode != HttpStatus.ok) {
       return AdjustmentFetchResult(
         statusCode: response.statusCode,
@@ -310,7 +312,11 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
       request.headers.set(HttpHeaders.ifNoneMatchHeader, etag);
     }
 
-    final response = await request.close();
+    final attemptTimer = Stopwatch()..start();
+    final response = await _closeWithTimeout(
+      request,
+      timeout: _remainingTimeout(attemptTimer),
+    );
     final responseEtag = response.headers.value(HttpHeaders.etagHeader);
 
     if (response.statusCode == HttpStatus.notModified) {
@@ -321,7 +327,11 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
       );
     }
 
-    final body = await utf8.decoder.bind(response).join();
+    final body = await _readBodyWithTimeout(
+      response,
+      request,
+      timeout: _remainingTimeout(attemptTimer),
+    );
     if (response.statusCode != HttpStatus.ok) {
       return AnchorFetchResult(
         statusCode: response.statusCode,
@@ -408,6 +418,47 @@ class HttpHijriAdjustmentClient implements HijriAdjustmentClient {
     final diff = dt.toUtc().difference(DateTime.now().toUtc());
     if (diff.isNegative) return Duration.zero;
     return diff;
+  }
+
+  Future<HttpClientResponse> _closeWithTimeout(
+    HttpClientRequest request, {
+    required Duration timeout,
+  }) {
+    return request.close().timeout(
+      timeout,
+      onTimeout: () {
+        request.abort();
+        throw TimeoutException(
+          'HTTP request timed out after $timeout',
+          timeout,
+        );
+      },
+    );
+  }
+
+  Future<String> _readBodyWithTimeout(
+    HttpClientResponse response,
+    HttpClientRequest request, {
+    required Duration timeout,
+  }) {
+    return utf8.decoder
+        .bind(response)
+        .join()
+        .timeout(
+          timeout,
+          onTimeout: () {
+            request.abort();
+            throw TimeoutException(
+              'HTTP response body timed out after $timeout',
+              timeout,
+            );
+          },
+        );
+  }
+
+  Duration _remainingTimeout(Stopwatch timer) {
+    final remaining = retryPolicy.timeoutPerAttempt - timer.elapsed;
+    return remaining.isNegative ? Duration.zero : remaining;
   }
 
   Duration? _clampRetryAfter(Duration? value) {

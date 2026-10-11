@@ -153,14 +153,14 @@ Future<void> main() async {
   );
 
   client.resetCount();
-  final r1 = await calSingle.fromGregorianOfficial(today);
+  final r1 = await calSingle.refreshGregorianOfficial(today);
   _result(r1, 'today');
   _log('  HTTP calls: $_httpCallCount  (expected: 1–2 for cold start)');
   final callsT1cold = _httpCallCount;
 
   // ── Test 1B: Single-date — warm (same month) ─────────────────────────────
   _header('TEST 1B — Single date (warm, tomorrow = ${tomorrow.toIso8601String().split("T").first})');
-  _log('  [EXPECT] source=cache_anchor_adjusted, HTTP calls=0');
+  _log('  [EXPECT] source=cache_anchor or cache_anchor_provisional, HTTP calls=0');
   client.resetCount();
   final r1b = await calSingle.fromGregorianOfficial(tomorrow);
   _result(r1b, 'tomorrow');
@@ -189,7 +189,7 @@ Future<void> main() async {
   );
 
   client.resetCount();
-  final results2a = await calRange.fromGregorianOfficialRange(
+  final results2a = await calRange.refreshGregorianOfficialRange(
     from: rangeStart,
     to: rangeEnd,
   );
@@ -203,7 +203,7 @@ Future<void> main() async {
 
   // ── Test 2B: Range (Hive) — warm (second call, same range) ───────────────
   _header('TEST 2B — Range with Hive (warm, same range)');
-  _log('  [EXPECT] source=cache_anchor_adjusted for all days, HTTP calls=0');
+  _log('  [EXPECT] source=cache_anchor or cache_anchor_provisional for all days, HTTP calls=0');
   client.resetCount();
   final results2b = await calRange.fromGregorianOfficialRange(
     from: rangeStart,

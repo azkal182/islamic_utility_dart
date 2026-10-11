@@ -25,7 +25,7 @@ void main() {
     test('window C: sunrise to dhuhr', () {
       final at = times.sunrise.add(const Duration(minutes: 1));
       expect(times.currentPrayer(date: at), Prayer.sunrise);
-      expect(times.nextPrayer(date: at), Prayer.dhuhr);
+      expect(times.nextPrayer(date: at), Prayer.dhuha);
     });
 
     test('window D: dhuhr to asr', () {
@@ -49,7 +49,7 @@ void main() {
     test('window G: after isha', () {
       final at = times.isha.add(const Duration(minutes: 1));
       expect(times.currentPrayer(date: at), Prayer.isha);
-      expect(times.nextPrayer(date: at), Prayer.fajrAfter);
+      expect(times.nextPrayer(date: at), Prayer.imsak);
     });
   });
 }

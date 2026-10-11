@@ -63,6 +63,18 @@ class HijriCalendar {
     return _official.fromGregorianAsync(date);
   }
 
+  /// Forces an official-data refresh and returns the best result afterward.
+  /// A cache-first lookup already refreshes stale/missing data in background;
+  /// use this method when the caller wants to await that refresh explicitly.
+  Future<HijriDate> refreshGregorianOfficial(DateTime date) async {
+    if (_official == null) {
+      throw StateError(
+        'HijriCalendar.withOfficial(...) is required for official method',
+      );
+    }
+    return _official.refreshOfficialAsync(date);
+  }
+
   Future<List<HijriDate>> fromGregorianOfficialRange({
     required DateTime from,
     required DateTime to,
@@ -73,5 +85,20 @@ class HijriCalendar {
       );
     }
     return _official.fromGregorianRangeAsync(from: from, to: to);
+  }
+
+  /// Forces an official range refresh and returns the best coherent range
+  /// afterward. Normal range lookups remain cache-first and do not wait for
+  /// the network.
+  Future<List<HijriDate>> refreshGregorianOfficialRange({
+    required DateTime from,
+    required DateTime to,
+  }) async {
+    if (_official == null) {
+      throw StateError(
+        'HijriCalendar.withOfficial(...) is required for official method',
+      );
+    }
+    return _official.refreshOfficialRangeAsync(from: from, to: to);
   }
 }

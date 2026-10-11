@@ -43,7 +43,7 @@ Future<void> main() async {
   );
 
   print('[DEBUG] Resolving official Hijri (anchor/delta fallback)...');
-  final result = await calendar.fromGregorianOfficial(targetDate);
+  final result = await calendar.refreshGregorianOfficial(targetDate);
 
   print('[DEBUG] Resolved Hijri: ${result.year}-${result.month}-${result.day}');
   print('[DEBUG] Source: ${result.meta.source}');

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -297,6 +298,37 @@ void main() {
       expect(calls, 2);
       expect(loggedStatus, 429);
       expect(loggedDelay, const Duration(seconds: 1));
+    });
+
+    test('aborts a timed-out request before retrying', () async {
+      final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      addTearDown(() => server.close(force: true));
+      var calls = 0;
+      server.listen((request) {
+        calls += 1;
+        // Leave the response open so the client request reaches its timeout.
+      });
+
+      final client = HttpHijriAdjustmentClient(
+        baseUrl: 'http://127.0.0.1:${server.port}',
+        apiKey: 'x',
+        retryPolicy: const RetryPolicy(
+          maxRetries: 1,
+          initialDelay: Duration.zero,
+          maxDelay: Duration.zero,
+          jitter: Duration.zero,
+          timeoutPerAttempt: Duration(milliseconds: 30),
+        ),
+      );
+
+      await expectLater(
+        client.fetchAnchorsRange(
+          from: DateTime.utc(2026, 1, 1),
+          to: DateTime.utc(2026, 1, 31),
+        ),
+        throwsA(isA<TimeoutException>()),
+      );
+      expect(calls, 2);
     });
   });
 }

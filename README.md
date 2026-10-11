@@ -19,7 +19,7 @@ ID: Semua output `PrayerTimes` disimpan dalam UTC `DateTime`.
 
 ```yaml
 dependencies:
-  islamic_utility: ^1.4.0
+  islamic_utility: ^1.6.0
 ```
 
 ```bash
@@ -41,12 +41,21 @@ final prayerTimes = PrayerTimes(
   precision: true,
 );
 
-final now = DateTime.now().toUtc();
+final now = prayerTimes.isha.add(const Duration(minutes: 1));
 final current = prayerTimes.currentPrayer(date: now);
-final next = prayerTimes.nextPrayer(date: now);
+final next = prayerTimes.nextPrayerDetails(
+  at: now,
+  // Use the target location's calendar date for this instant. A live app can
+  // get it from its timezone package (for example, as a TZDateTime).
+  locationDate: DateTime.utc(2026, 5, 1),
+  options: const NextPrayerOptions(
+    skip: {Prayer.sunrise, Prayer.dhuha},
+  ),
+);
 
 print('Current: $current');
-print('Next: $next at ${prayerTimes.timeForPrayer(next)}');
+print('Next: ${next.prayer} at ${next.time}');
+print('Next prayer is on another local day: ${next.isNextDay}');
 print('Qibla: ${Qibla.qibla(const Coordinates(-6.2, 106.8))}');
 ```
 
@@ -56,6 +65,7 @@ print('Qibla: ${Qibla.qibla(const Coordinates(-6.2, 106.8))}');
 - `CalculationMethod` + `CalculationMethod.xxx.parameters`
 - `CalculationParameters.copyWith(...)`
 - `PrayerTimes(...)`
+- `NextPrayerOptions` / `ImsakPolicy`
 - `SunnahTimes(prayerTimes)`
 - `Qibla.qibla(coordinates)`
 - `HijriCalendar()`
@@ -87,6 +97,10 @@ params.adjustments[Prayer.isha] = 2;
 - Use UTC consistently in domain logic.
 - Always pass explicit `date` for `currentPrayer` and `nextPrayer`.
 - Convert UTC output to local timezone in presentation/UI layer.
+- Use `nextPrayerDetails` when displaying the actual next event time or its
+  local day. `nextPrayer` returns only an enum, so `timeForPrayer` cannot
+  distinguish a future-day occurrence (such as tomorrow's Imsak) from today's
+  occurrence.
 
 ```dart
 final nowUtc = DateTime.now().toUtc();
@@ -128,7 +142,7 @@ final calendar = HijriCalendar.withOfficial(
   adjustmentClient: client,
 );
 
-final hijri = await calendar.fromGregorianOfficial(DateTime.utc(2026, 3, 21));
+final hijri = await calendar.refreshGregorianOfficial(DateTime.utc(2026, 3, 21));
 print('${hijri.year}-${hijri.month}-${hijri.day} (${hijri.meta.source})');
 ```
 
@@ -138,9 +152,9 @@ dates. If the following anchor is missing, the provider continues from the
 last anchor using an anchored local fallback. Inspect
 `result.meta.isProvisional` before presenting it as official. If a later anchor
 confirms the inferred boundaries, `result.meta.validationStatus` is
-`inferred_validated`. A range lookup does not fail merely because future
-anchors are missing; it rejects only an inconsistent sequence with
-`StateError` instead of returning a duplicate or skipped Hijri date.
+`inferred_validated`. Normal range lookups return complete cached ranges or a
+whole-range local provisional result. Explicit refresh methods report an
+inconsistent server anchor sequence with `StateError`.
 
 The old adjustment flow is disabled by default. It can be enabled temporarily
 for migration with `allowLegacyAdjustments: true`, but new integrations should
@@ -149,7 +163,7 @@ publish and consume anchors instead.
 ### Official (Range, Optimized Fetch)
 
 ```dart
-final results = await calendar.fromGregorianOfficialRange(
+final results = await calendar.refreshGregorianOfficialRange(
   from: DateTime.utc(2026, 3, 15),
   to: DateTime.utc(2026, 3, 30),
 );
@@ -159,7 +173,7 @@ Handle invalid official data explicitly:
 
 ```dart
 try {
-  final results = await calendar.fromGregorianOfficialRange(from: from, to: to);
+  final results = await calendar.refreshGregorianOfficialRange(from: from, to: to);
 } on StateError {
   // The anchor sequence is invalid or contains a duplicate/skip.
   // Do not present a partial result as final official data.
@@ -167,10 +181,14 @@ try {
 ```
 
 Range behavior:
-- Prefetch `anchors` by range, including up to 35 days before the requested
-  start date to find the preceding month boundary.
-- Resolve per-day values from cache/local flow.
-- Avoid per-day remote loop in range mode.
+- Return a complete, continuous cached range immediately, even after its refresh
+  TTL expires; refresh expired data in the background.
+- If the cache does not cover the whole range, return one coherent local
+  provisional range rather than mixing local and official dates.
+- Fetch anchors in one range request (including up to 35 days before the start)
+  during background refresh; there is no per-day remote loop.
+- Use `refreshGregorianOfficialRange(from: ..., to: ...)` when the caller needs
+  to wait for the refresh and update the current view.
 - Never use an anchor dated after the requested Gregorian date.
 - Continue several future months from the last anchor using an anchored local
   fallback and mark them provisional.

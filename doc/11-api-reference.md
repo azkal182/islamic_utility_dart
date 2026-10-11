@@ -93,9 +93,33 @@ Functions:
 
 ```dart
 Prayer currentPrayer({required DateTime date})
-Prayer nextPrayer({DateTime? date})
+Prayer nextPrayer({DateTime? date, NextPrayerOptions options})
+NextPrayerDetails nextPrayerDetails({
+  required DateTime at,
+  required DateTime locationDate,
+  NextPrayerOptions options,
+})
 DateTime timeForPrayer(Prayer prayer)
 ```
+
+By default, next-event candidates are Imsak, Fajr, sunrise, Dhuha, Dhuhr, Asr,
+Maghrib, and Isha. Use `NextPrayerOptions.skip` to omit one or more candidates.
+Imsak is included on every date by default; `ImsakPolicy.ramadanOnly` includes
+it only when `isRamadanOn(localDate)` returns true, and `ImsakPolicy.never`
+omits it.
+
+The `isRamadanOn` callback is required for `ramadanOnly`. It receives the
+target location's calendar date at UTC midnight. It is called for today and
+tomorrow, since the next event may cross midnight. The application should
+resolve Ramadan using its selected Hijri method.
+
+`nextPrayerDetails` returns the next event's `prayer`, UTC `time`, and
+`isNextDay`. Pass `locationDate` with the target location's calendar date for
+the instant in `at` (for example, a date from the app's timezone package). Use
+this API when the actual next occurrence time matters; `nextPrayer` returns
+only the prayer enum. Pairing that enum with `timeForPrayer` cannot distinguish
+a next-day occurrence from the same event on the schedule object's date (for
+example, tomorrow's Imsak); use `nextPrayerDetails` to display its actual time.
 
 ### SunnahTimes
 
@@ -212,12 +236,25 @@ Future<List<HijriDate>> fromGregorianOfficialRange({
 })
 ```
 
+```dart
+Future<HijriDate> refreshGregorianOfficial(DateTime date)
+Future<List<HijriDate>> refreshGregorianOfficialRange({
+  required DateTime from,
+  required DateTime to,
+})
+```
+
 Notes:
-- `fromGregorianOfficial` is a single-date lookup. If no usable anchor is
-  available, it may return `local_fallback` with `meta.isProvisional == true`;
-  callers must not present that result as final official data.
-- `fromGregorianOfficialRange` melakukan prefetch anchor lalu resolve lokal per tanggal.
-- Untuk mode range, request harian remote dihindari selama cache range masih berlaku.
+- `fromGregorianOfficial` is cache-first and returns a stored anchor even after
+  its refresh TTL expires. It refreshes stale or missing data in the background.
+- If no usable anchor exists, `fromGregorianOfficial` immediately returns
+  `local_fallback` with `meta.isProvisional == true` and starts a background fetch.
+- `refreshGregorianOfficial` and `refreshGregorianOfficialRange` let callers
+  await the refresh and replace the currently displayed value.
+- `fromGregorianOfficialRange` returns a complete continuous cached range
+  immediately. If cache coverage is incomplete or inconsistent, it returns
+  one whole-range local provisional result rather than mixing sources.
+- Range refresh uses a batch anchor request; per-day remote loops are avoided.
 - Anchor masa depan tidak pernah digunakan untuk tanggal target.
 - Jika anchor berikutnya belum tersedia, sistem tetap menghitung beberapa bulan
   ke depan dari anchor terakhir menggunakan fallback lokal yang di-anchor dan
@@ -225,9 +262,9 @@ Notes:
 - Jika hasil fallback di antara dua anchor cocok dengan anchor berikutnya,
   `meta.validationStatus` bernilai `inferred_validated`. Ini tervalidasi secara
   kontinuitas, tetapi bukan pengganti anchor resmi langsung.
-- Range melakukan prefetch hingga 35 hari sebelum tanggal `from` untuk mencari anchor pendahulu.
-- Jika hasil range memiliki tanggal Hijriyah lompat, duplikat, atau data anchor
-  konflik, method melempar `StateError` dan tidak mengembalikan hasil parsial.
+- Refresh range mencari anchor pendahulu hingga 35 hari sebelum tanggal `from`.
+- Refresh eksplisit melempar `StateError` bila respons official tidak mencakup
+  seluruh rentang atau memiliki kontinuitas tanggal yang invalid.
 - Ketiadaan anchor masa depan saja bukan `StateError`; client harus memeriksa
   `meta.isProvisional` dan `meta.validationStatus`.
 - Mode adjustment lama hanya aktif jika `allowLegacyAdjustments: true`.
@@ -467,7 +504,23 @@ Future<List<UnifiedCalendarDate>> resolveRange({
 })
 ```
 
+```dart
+Future<UnifiedCalendarDate> refreshOfficial(
+  DateTime date, {
+  bool includeJavanese = false,
+})
+
+Future<List<UnifiedCalendarDate>> refreshOfficialRange({
+  required DateTime from,
+  required DateTime to,
+  bool includeJavanese = false,
+})
+```
+
 Notes:
-- Existing API remains valid and unchanged.
+- Existing method signatures remain valid; official lookup is now cache-first.
+- Use `refreshOfficial` / `refreshOfficialRange` when the caller must await a
+  network refresh and repaint the current view with the updated values.
 - Unified facade is additive for transition.
-- Range + official Hijri uses batched range fetch flow.
+- Range + official Hijri uses a coherent cache/local result and batched
+  background refresh flow.
