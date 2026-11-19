@@ -103,10 +103,21 @@ Properti hasil:
 
 Fungsi:
 
-- `Prayer currentPrayer({required DateTime date})`
-- `Prayer nextPrayer({DateTime? date, NextPrayerOptions options})`
+- `Prayer currentPrayer({required DateTime date, DateTime? locationDate})`
+- `Prayer nextPrayer({DateTime? date, DateTime? locationDate, NextPrayerOptions options})`
 - `NextPrayerDetails nextPrayerDetails({required DateTime at, required DateTime locationDate, NextPrayerOptions options})`
 - `DateTime timeForPrayer(Prayer prayer)`
+- `PrayerEventResult eventForPrayer(Prayer prayer)`
+
+`PrayerEventResult` carries a nullable time and `PrayerEventSource`:
+`astronomical`, `calculationInterval`, `highLatitudeFallback`, or
+`unavailable`. A non-null convenience getter or `timeForPrayer` throws
+`StateError` when that event is unavailable. `nextPrayerDetails` omits
+unavailable solar events. Use `eventForPrayer` when a caller must distinguish
+a geometric solar event from a high-latitude fallback.
+`fajrAfter` uses the next day's Fajr calculation and adjustments; `ishaBefore`
+uses the previous day's Isha calculation and adjustments. Imsak and Dhuha
+apply their own adjustments after their base event and offset.
 
 Kandidat next event default mencakup Imsak, Fajr, sunrise, Dhuha, Dhuhr, Asr,
 Maghrib, dan Isha. `NextPrayerOptions.skip` melewati event pilihan. Imsak
@@ -114,6 +125,8 @@ default aktif setiap hari; `ImsakPolicy.ramadanOnly` memerlukan callback
 `isRamadanOn` dari aplikasi. Gunakan `nextPrayerDetails` untuk waktu occurrence
 yang tepat dan metadata `isNextDay`; enum hasil `nextPrayer` saja tidak membawa
 tanggal occurrence.
+Untuk `currentPrayer` atau enum-only `nextPrayer`, isi `locationDate` ketika
+tanggal kalender lokasi berbeda dari tanggal pada instant yang diberikan.
 Karena itu, pasangan `nextPrayer()` dan `timeForPrayer()` tidak dapat
 menentukan waktu occurrence hari berikutnya (misalnya Imsak besok); gunakan
 `nextPrayerDetails()` untuk menampilkan waktu event tersebut.

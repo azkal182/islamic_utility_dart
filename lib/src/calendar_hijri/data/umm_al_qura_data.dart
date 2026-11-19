@@ -1740,5 +1740,5 @@ const List<int> ummAlquraDateArray = [
   79900,
   79930,
   79960,
-  79990
+  79990,
 ];

@@ -51,5 +51,33 @@ void main() {
       expect(times.currentPrayer(date: at), Prayer.isha);
       expect(times.nextPrayer(date: at), Prayer.imsak);
     });
+
+    test('exact event instants enter the new current-prayer window', () {
+      final boundaries = <({DateTime at, Prayer current, Prayer next})>[
+        (at: times.fajr, current: Prayer.fajr, next: Prayer.sunrise),
+        (at: times.sunrise, current: Prayer.sunrise, next: Prayer.dhuha),
+        (at: times.dhuhr, current: Prayer.dhuhr, next: Prayer.asr),
+        (at: times.asr, current: Prayer.asr, next: Prayer.maghrib),
+        (at: times.maghrib, current: Prayer.maghrib, next: Prayer.isha),
+        (at: times.isha, current: Prayer.isha, next: Prayer.imsak),
+      ];
+
+      for (final boundary in boundaries) {
+        expect(
+          times.currentPrayer(date: boundary.at),
+          boundary.current,
+          reason: 'current prayer at ${boundary.at}',
+        );
+        expect(
+          times.nextPrayer(date: boundary.at),
+          boundary.next,
+          reason: 'next prayer at ${boundary.at}',
+        );
+      }
+    });
+
+    test('at Imsak, the next event is Fajr', () {
+      expect(times.nextPrayer(date: times.imsak), Prayer.fajr);
+    });
   });
 }

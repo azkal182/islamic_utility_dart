@@ -1,0 +1,97 @@
+{
+  "dataset": "test/data/reference/kemenag/national-2026.jsonl.gz",
+  "location_month_records": 6204,
+  "location_days": 188705,
+  "method": "CalculationMethod.indonesian, precision=true",
+  "delta_sign": "package result minus Kemenag, in minutes",
+  "metrics": {
+    "imsak": {
+      "samples": 188705,
+      "mean_minutes": -2.4453744380560156,
+      "median_minutes": -2.4833333333333485,
+      "mae_minutes": 2.4860186534553383,
+      "p95_abs_minutes": 2.9500000000000455,
+      "within_1_minute": 103,
+      "over_5_minutes": 89,
+      "max_abs_minutes": -6.633333333333439,
+      "max_case": "2026-12-22, PEKAJANG KAB. LINGGA, KEPULAUAN RIAU"
+    },
+    "fajr": {
+      "samples": 188705,
+      "mean_minutes": -2.4453744380560156,
+      "median_minutes": -2.4833333333333485,
+      "mae_minutes": 2.4860186534553383,
+      "p95_abs_minutes": 2.9500000000000455,
+      "within_1_minute": 103,
+      "over_5_minutes": 89,
+      "max_abs_minutes": -6.633333333333439,
+      "max_case": "2026-12-22, PEKAJANG KAB. LINGGA, KEPULAUAN RIAU"
+    },
+    "sunrise": {
+      "samples": 188705,
+      "mean_minutes": 3.658767211608015,
+      "median_minutes": 3.2666666666666515,
+      "mae_minutes": 3.658869311004781,
+      "p95_abs_minutes": 7.433333333333394,
+      "within_1_minute": 95,
+      "over_5_minutes": 20558,
+      "max_abs_minutes": 8.183333333333394,
+      "max_case": "2026-12-22, KAB. TIMOR TENGAH SELATAN, NUSA TENGGARA TIMUR"
+    },
+    "dhuha": {
+      "samples": 188705,
+      "mean_minutes": -4.850970209233433,
+      "median_minutes": -4.8333333333332575,
+      "mae_minutes": 4.85097020923367,
+      "p95_abs_minutes": 6.0833333333332575,
+      "within_1_minute": 0,
+      "over_5_minutes": 82932,
+      "max_abs_minutes": -9.516666666666652,
+      "max_case": "2026-12-30, PEKAJANG KAB. LINGGA, KEPULAUAN RIAU"
+    },
+    "dhuhr": {
+      "samples": 188705,
+      "mean_minutes": -2.4956941610804804,
+      "median_minutes": -2.5,
+      "mae_minutes": 2.4956941610818983,
+      "p95_abs_minutes": 2.9500000000000455,
+      "within_1_minute": 0,
+      "over_5_minutes": 0,
+      "max_abs_minutes": -3.283333333333303,
+      "max_case": "2026-03-21, KAB. PEMALANG, JAWA TENGAH"
+    },
+    "asr": {
+      "samples": 188705,
+      "mean_minutes": -2.498960546885587,
+      "median_minutes": -2.5,
+      "mae_minutes": 2.4991424887184346,
+      "p95_abs_minutes": 2.9500000000000455,
+      "within_1_minute": 54,
+      "over_5_minutes": 28,
+      "max_abs_minutes": -6.633333333333326,
+      "max_case": "2026-09-26, PEKAJANG KAB. LINGGA, KEPULAUAN RIAU"
+    },
+    "maghrib": {
+      "samples": 188705,
+      "mean_minutes": -3.6479775310666507,
+      "median_minutes": -3.25,
+      "mae_minutes": 3.6481105429102176,
+      "p95_abs_minutes": 7.416666666666515,
+      "within_1_minute": 96,
+      "over_5_minutes": 20554,
+      "max_abs_minutes": -8.166666666666515,
+      "max_case": "2026-12-15, KAB. TIMOR TENGAH SELATAN, NUSA TENGGARA TIMUR"
+    },
+    "isha": {
+      "samples": 188705,
+      "mean_minutes": -2.5457759465832037,
+      "median_minutes": -2.5,
+      "mae_minutes": 2.5465425752734445,
+      "p95_abs_minutes": 2.9500000000000455,
+      "within_1_minute": 95,
+      "over_5_minutes": 2281,
+      "max_abs_minutes": -7.4500000000000455,
+      "max_case": "2026-12-13, KAB. INTAN JAYA, PAPUA"
+    }
+  }
+}

@@ -44,7 +44,10 @@ double meanLunarLongitude(double t) {
 
 double ascendingLunarNodeLongitude(double t) {
   final omega =
-      125.04452 - (1934.136261 * t) + (0.0020708 * t * t) + ((t * t * t) / 450000);
+      125.04452 -
+      (1934.136261 * t) +
+      (0.0020708 * t * t) +
+      ((t * t * t) / 450000);
   return unwindAngle(omega);
 }
 
@@ -54,7 +57,8 @@ double meanSolarAnomaly(double t) {
 
 double solarEquationOfTheCenter(double t, double m) {
   final mRad = degreesToRadians(m);
-  final term1 = (1.914602 - (0.004817 * t) - (0.000014 * t * t)) * math.sin(mRad);
+  final term1 =
+      (1.914602 - (0.004817 * t) - (0.000014 * t * t)) * math.sin(mRad);
   final term2 = (0.019993 - (0.000101 * t)) * math.sin(2 * mRad);
   final term3 = 0.000289 * math.sin(3 * mRad);
   return term1 + term2 + term3;
@@ -63,7 +67,8 @@ double solarEquationOfTheCenter(double t, double m) {
 double apparentSolarLongitude(double t, double l0) {
   final longitude = l0 + solarEquationOfTheCenter(t, meanSolarAnomaly(t));
   final omega = 125.04 - (1934.136 * t);
-  final lambda = longitude - 0.00569 - (0.00478 * math.sin(degreesToRadians(omega)));
+  final lambda =
+      longitude - 0.00569 - (0.00478 * math.sin(degreesToRadians(omega)));
   return unwindAngle(lambda);
 }
 
@@ -81,7 +86,8 @@ double apparentObliquityOfTheEcliptic(double t, double epsilon0) {
 
 double meanSiderealTime(double t) {
   final jd = (t * 36525) + 2451545.0;
-  final theta = 280.46061837 +
+  final theta =
+      280.46061837 +
       (360.98564736629 * (jd - 2451545)) +
       (0.000387933 * t * t) -
       ((t * t * t) / 38710000);
@@ -118,10 +124,15 @@ double? interpolateAngles(double y2, double? y1, double y3, double n) {
   return y2 + ((n / 2.0) * (a + b + (n * c)));
 }
 
-double altitudeOfCelestialBody(double latitude, double declination, double localHourAngle) {
+double altitudeOfCelestialBody(
+  double latitude,
+  double declination,
+  double localHourAngle,
+) {
   return radiansToDegrees(
     math.asin(
-      (math.sin(degreesToRadians(latitude)) * math.sin(degreesToRadians(declination))) +
+      (math.sin(degreesToRadians(latitude)) *
+              math.sin(degreesToRadians(declination))) +
           (math.cos(degreesToRadians(latitude)) *
               math.cos(degreesToRadians(declination)) *
               math.cos(degreesToRadians(localHourAngle))),
@@ -129,7 +140,11 @@ double altitudeOfCelestialBody(double latitude, double declination, double local
   );
 }
 
-double approximateTransit(double longitude, double siderealTime, double rightAscension) {
+double approximateTransit(
+  double longitude,
+  double siderealTime,
+  double rightAscension,
+) {
   final lw = longitude * -1;
   return normalizeToScale((rightAscension + lw - siderealTime) / 360.0, 1.0);
 }
@@ -145,7 +160,12 @@ double correctedTransit(
   final lw = longitude * -1;
   final theta = unwindAngle(siderealTime + (360.985647 * m0));
   final a = unwindAngle(
-    interpolateAngles(rightAscension, previousRightAscension, nextRightAscension, m0)!,
+    interpolateAngles(
+      rightAscension,
+      previousRightAscension,
+      nextRightAscension,
+      m0,
+    )!,
   );
   final h = quadrantShiftAngle(theta - lw - a);
   final dm = h / -360.0;
@@ -166,27 +186,55 @@ double correctedHourAngle(
   double nextDeclination,
 ) {
   final lw = coordinates.longitude * -1;
-  final term1 = math.sin(degreesToRadians(h0)) -
-      (math.sin(degreesToRadians(coordinates.latitude)) *
-          math.sin(degreesToRadians(declination)));
-  final term2 =
-      math.cos(degreesToRadians(coordinates.latitude)) * math.cos(degreesToRadians(declination));
-  final ratio = term1 / term2;
-  final h0Angle = ratio.abs() > 1 ? 1.0 : radiansToDegrees(math.acos(ratio));
+  double altitudeDifference(double fractionOfDay) {
+    final theta = unwindAngle(siderealTime + (360.985647 * fractionOfDay));
+    final rightAscensionAtTime = unwindAngle(
+      interpolateAngles(
+        rightAscension,
+        previousRightAscension,
+        nextRightAscension,
+        fractionOfDay,
+      )!,
+    );
+    final declinationAtTime = interpolate(
+      declination,
+      previousDeclination,
+      nextDeclination,
+      fractionOfDay,
+    )!;
+    final hourAngle = theta - lw - rightAscensionAtTime;
+    return altitudeOfCelestialBody(
+          coordinates.latitude,
+          declinationAtTime,
+          hourAngle,
+        ) -
+        h0;
+  }
 
-  final m = afterTransit ? m0 + (h0Angle / 360.0) : m0 - (h0Angle / 360.0);
-  final theta = unwindAngle(siderealTime + (360.985647 * m));
-  final a = unwindAngle(
-    interpolateAngles(rightAscension, previousRightAscension, nextRightAscension, m)!,
-  );
-  final delta = interpolate(declination, previousDeclination, nextDeclination, m)!;
-  final h = theta - lw - a;
-  final altitude = altitudeOfCelestialBody(coordinates.latitude, delta, h);
-  final term3 = altitude - h0;
-  final term4 =
-      360.0 * math.cos(degreesToRadians(delta)) * math.cos(degreesToRadians(coordinates.latitude)) * math.sin(degreesToRadians(h));
-  final dm = term3 / term4;
-  return (m + dm) * 24.0;
+  var low = afterTransit ? m0 : m0 - 0.5;
+  var high = afterTransit ? m0 + 0.5 : m0;
+  var lowValue = altitudeDifference(low);
+  var highValue = altitudeDifference(high);
+  if (lowValue == 0) return low * 24.0;
+  if (highValue == 0) return high * 24.0;
+  if ((lowValue < 0) == (highValue < 0)) return double.nan;
+
+  // Solve the actual altitude crossing over the requested half-day. A single
+  // Newton correction is unstable when the Sun barely reaches the target
+  // altitude (for example, sunrise near the polar circle).
+  for (var iteration = 0; iteration < 48; iteration++) {
+    final middle = (low + high) / 2;
+    final middleValue = altitudeDifference(middle);
+    if (middleValue == 0) return middle * 24.0;
+    if ((lowValue < 0) == (middleValue < 0)) {
+      low = middle;
+      lowValue = middleValue;
+    } else {
+      high = middle;
+      highValue = middleValue;
+    }
+  }
+  return ((low + high) / 2) * 24.0;
 }
 
 class SolarCoordinates {
@@ -200,16 +248,26 @@ class SolarCoordinates {
     final dPsi = nutationInLongitude(t, l0, lp, omega);
     final dEpsilon = nutationInObliquity(t, l0, lp, omega);
     final epsilon0 = meanObliquityOfTheEcliptic(t);
-    final epsilonApparent =
-        degreesToRadians(apparentObliquityOfTheEcliptic(t, epsilon0));
+    final epsilonApparent = degreesToRadians(
+      apparentObliquityOfTheEcliptic(t, epsilon0),
+    );
 
-    declination =
-        radiansToDegrees(math.asin(math.sin(epsilonApparent) * math.sin(lambda)));
+    declination = radiansToDegrees(
+      math.asin(math.sin(epsilonApparent) * math.sin(lambda)),
+    );
     rightAscension = unwindAngle(
-      radiansToDegrees(math.atan2(math.cos(epsilonApparent) * math.sin(lambda), math.cos(lambda))),
+      radiansToDegrees(
+        math.atan2(
+          math.cos(epsilonApparent) * math.sin(lambda),
+          math.cos(lambda),
+        ),
+      ),
     );
     apparentSiderealTime =
-        theta0 + ((dPsi * 3600) * math.cos(degreesToRadians(epsilon0 + dEpsilon)) / 3600);
+        theta0 +
+        ((dPsi * 3600) *
+            math.cos(degreesToRadians(epsilon0 + dEpsilon)) /
+            3600);
   }
 
   late double declination;
@@ -233,9 +291,11 @@ class TimeComponents {
   }
 }
 
-DateTime dateByAddingSeconds(DateTime date, int seconds) => date.add(Duration(seconds: seconds));
+DateTime dateByAddingSeconds(DateTime date, int seconds) =>
+    date.add(Duration(seconds: seconds));
 
-DateTime dateByAddingMinutes(DateTime date, int minutes) => dateByAddingSeconds(date, minutes * 60);
+DateTime dateByAddingMinutes(DateTime date, int minutes) =>
+    dateByAddingSeconds(date, minutes * 60);
 
 int dayOfYear(DateTime date) {
   final diff = date.difference(DateTime.utc(date.year, 1, 1));

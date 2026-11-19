@@ -7,7 +7,10 @@ import 'package:islamic_utility/src/models/madhab.dart';
 import 'package:islamic_utility/src/models/prayer.dart';
 import 'package:islamic_utility/src/models/shafaq.dart';
 import 'package:islamic_utility/src/prayer/next_prayer_details.dart';
+import 'package:islamic_utility/src/prayer/prayer_event_result.dart';
 import 'package:islamic_utility/src/prayer/next_prayer_options.dart';
+
+bool _neverRamadan(DateTime _) => false;
 
 class PrayerTimes {
   PrayerTimes({
@@ -15,10 +18,12 @@ class PrayerTimes {
     required Coordinates coordinates,
     required CalculationParameters calculationParameters,
     bool precision = false,
+    bool Function(DateTime date)? isRamadanOn,
   }) : _date = DateTime.utc(date.year, date.month, date.day),
        _coordinates = coordinates,
        _parameters = calculationParameters,
-       _precision = precision {
+       _precision = precision,
+       _isRamadanOn = isRamadanOn ?? _neverRamadan {
     final dateBefore = _date.subtract(const Duration(days: 1));
     final dateAfter = _date.add(const Duration(days: 1));
 
@@ -26,45 +31,123 @@ class PrayerTimes {
     final solarTimeBefore = SolarTime(dateBefore, _coordinates);
     final solarTimeAfter = SolarTime(dateAfter, _coordinates);
 
+    final sunriseAvailable = solarTime.canReachAltitude(
+      solarTime.horizonAltitude,
+      afterTransit: false,
+    );
+    final sunsetAvailable = solarTime.canReachAltitude(
+      solarTime.horizonAltitude,
+      afterTransit: true,
+    );
+    final sunriseAfterAvailable = solarTimeAfter.canReachAltitude(
+      solarTimeAfter.horizonAltitude,
+      afterTransit: false,
+    );
+    final sunsetBeforeAvailable = solarTimeBefore.canReachAltitude(
+      solarTimeBefore.horizonAltitude,
+      afterTransit: true,
+    );
+    final fajrAngleAvailable = solarTime.canReachAltitude(
+      -_parameters.fajrAngle,
+      afterTransit: false,
+    );
+    final fajrAfterAngleAvailable = solarTimeAfter.canReachAltitude(
+      -_parameters.fajrAngle,
+      afterTransit: false,
+    );
+    final ishaAngleAvailable = solarTime.canReachAltitude(
+      -_parameters.ishaAngle,
+      afterTransit: true,
+    );
+    final ishaBeforeAngleAvailable = solarTimeBefore.canReachAltitude(
+      -_parameters.ishaAngle,
+      afterTransit: true,
+    );
+
     final dhuhrTime = TimeComponents(
       solarTime.transit,
     ).utcDate(_date.year, _date.month, _date.day);
-    final sunriseTime = TimeComponents(
-      solarTime.sunrise,
-    ).utcDate(_date.year, _date.month, _date.day);
-    final sunsetTime = TimeComponents(
-      solarTime.sunset,
-    ).utcDate(_date.year, _date.month, _date.day);
-    final sunriseAfterTime = TimeComponents(
-      solarTimeAfter.sunrise,
-    ).utcDate(dateAfter.year, dateAfter.month, dateAfter.day);
-    final sunsetBeforeTime = TimeComponents(
-      solarTimeBefore.sunset,
-    ).utcDate(dateBefore.year, dateBefore.month, dateBefore.day);
+    final sunriseTime = _solarAnchor(
+      solarTime,
+      beforeTransit: true,
+      isAvailable: sunriseAvailable,
+      date: _date,
+    );
+    final sunsetTime = _solarAnchor(
+      solarTime,
+      beforeTransit: false,
+      isAvailable: sunsetAvailable,
+      date: _date,
+    );
+    final sunriseAfterTime = _solarAnchor(
+      solarTimeAfter,
+      beforeTransit: true,
+      isAvailable: sunriseAfterAvailable,
+      date: dateAfter,
+    );
+    final sunsetBeforeTime = _solarAnchor(
+      solarTimeBefore,
+      beforeTransit: false,
+      isAvailable: sunsetBeforeAvailable,
+      date: dateBefore,
+    );
 
     final madhab = _parameters.madhab ?? Madhab.shafi;
-    final asrTime = TimeComponents(
-      solarTime.afternoon(madhab.shadowLength.toDouble()),
-    ).utcDate(_date.year, _date.month, _date.day);
+    final asrAltitude = solarTime.afternoonAltitude(
+      madhab.shadowLength.toDouble(),
+    );
+    final asrAvailable = solarTime.canReachAltitude(
+      asrAltitude,
+      afterTransit: true,
+    );
+    final asrFallbackTime = dhuhrTime.add(
+      Duration(
+        microseconds: sunsetTime.difference(dhuhrTime).inMicroseconds ~/ 2,
+      ),
+    );
+    final dhuhaAngle = _parameters.dhuhaAngle;
+    final dhuhaAngleAvailable =
+        dhuhaAngle != null &&
+        solarTime.canReachAltitude(dhuhaAngle, afterTransit: false);
+    final dhuhaTime = dhuhaAngleAvailable
+        ? TimeComponents(
+            solarTime.hourAngle(dhuhaAngle, false),
+          ).utcDate(_date.year, _date.month, _date.day)
+        : null;
+    final asrTime = asrAvailable
+        ? TimeComponents(
+            solarTime.afternoon(madhab.shadowLength.toDouble()),
+          ).utcDate(_date.year, _date.month, _date.day)
+        : asrFallbackTime;
 
     final tomorrowSolarTime = SolarTime(
       _date.add(const Duration(days: 1)),
       _coordinates,
     );
-    final tomorrowSunrise = TimeComponents(tomorrowSolarTime.sunrise).utcDate(
-      _date.add(const Duration(days: 1)).year,
-      _date.add(const Duration(days: 1)).month,
-      _date.add(const Duration(days: 1)).day,
+    final tomorrowSunrise = _solarAnchor(
+      tomorrowSolarTime,
+      beforeTransit: true,
+      isAvailable: tomorrowSolarTime.canReachAltitude(
+        tomorrowSolarTime.horizonAltitude,
+        afterTransit: false,
+      ),
+      date: _date.add(const Duration(days: 1)),
     );
     final previousNightDuration = sunriseTime.difference(sunsetBeforeTime);
     final currentNightDuration = tomorrowSunrise.difference(sunsetTime);
 
-    var fajrTime = TimeComponents(
-      solarTime.hourAngle(-1 * _parameters.fajrAngle, false),
-    ).utcDate(_date.year, _date.month, _date.day);
-    var fajrAfterTime = TimeComponents(
-      solarTimeAfter.hourAngle(-1 * _parameters.fajrAngle, false),
-    ).utcDate(dateAfter.year, dateAfter.month, dateAfter.day);
+    DateTime? fajrCandidate;
+    if (fajrAngleAvailable) {
+      fajrCandidate = TimeComponents(
+        solarTime.hourAngle(-_parameters.fajrAngle, false),
+      ).utcDate(_date.year, _date.month, _date.day);
+    }
+    DateTime? fajrAfterCandidate;
+    if (fajrAfterAngleAvailable) {
+      fajrAfterCandidate = TimeComponents(
+        solarTimeAfter.hourAngle(-_parameters.fajrAngle, false),
+      ).utcDate(dateAfter.year, dateAfter.month, dateAfter.day);
+    }
 
     if (_parameters.method == CalculationMethod.moonsightingCommittee &&
         _coordinates.latitude >= 55) {
@@ -74,11 +157,14 @@ class PrayerTimes {
       final currentNightFraction = Duration(
         seconds: (currentNightDuration.inSeconds / 7).round(),
       );
-      fajrTime = sunriseTime.subtract(previousNightFraction);
-      fajrAfterTime = sunriseAfterTime.subtract(currentNightFraction);
+      fajrCandidate = sunriseTime.subtract(previousNightFraction);
+      fajrAfterCandidate = sunriseAfterTime.subtract(currentNightFraction);
     }
 
     final safeFajrTime = _safeFajr(sunriseTime, previousNightDuration);
+    final fajrFallbackApplied =
+        fajrCandidate == null || safeFajrTime.isAfter(fajrCandidate);
+    var fajrTime = fajrCandidate ?? safeFajrTime;
     if (safeFajrTime.isAfter(fajrTime)) {
       fajrTime = safeFajrTime;
     }
@@ -88,23 +174,31 @@ class PrayerTimes {
       year: dateAfter.year,
       dayOfYearValue: dayOfYear(dateAfter),
     );
+    final fajrAfterFallbackApplied =
+        fajrAfterCandidate == null ||
+        safeFajrAfterTime.isAfter(fajrAfterCandidate);
+    var fajrAfterTime = fajrAfterCandidate ?? safeFajrAfterTime;
     if (safeFajrAfterTime.isAfter(fajrAfterTime)) {
       fajrAfterTime = safeFajrAfterTime;
     }
 
-    late DateTime ishaTime;
-    late DateTime ishaBeforeTime;
+    DateTime? ishaCandidate;
+    DateTime? ishaBeforeCandidate;
     final ishaInterval = _parameters.ishaInterval ?? 0;
     if (ishaInterval > 0) {
-      ishaTime = dateByAddingMinutes(sunsetTime, ishaInterval);
-      ishaBeforeTime = dateByAddingMinutes(sunsetBeforeTime, ishaInterval);
+      ishaCandidate = dateByAddingMinutes(sunsetTime, ishaInterval);
+      ishaBeforeCandidate = dateByAddingMinutes(sunsetBeforeTime, ishaInterval);
     } else {
-      ishaTime = TimeComponents(
-        solarTime.hourAngle(-1 * _parameters.ishaAngle, true),
-      ).utcDate(_date.year, _date.month, _date.day);
-      ishaBeforeTime = TimeComponents(
-        solarTimeBefore.hourAngle(-1 * _parameters.ishaAngle, true),
-      ).utcDate(dateBefore.year, dateBefore.month, dateBefore.day);
+      if (ishaAngleAvailable) {
+        ishaCandidate = TimeComponents(
+          solarTime.hourAngle(-_parameters.ishaAngle, true),
+        ).utcDate(_date.year, _date.month, _date.day);
+      }
+      if (ishaBeforeAngleAvailable) {
+        ishaBeforeCandidate = TimeComponents(
+          solarTimeBefore.hourAngle(-_parameters.ishaAngle, true),
+        ).utcDate(dateBefore.year, dateBefore.month, dateBefore.day);
+      }
     }
 
     if (_parameters.method == CalculationMethod.moonsightingCommittee &&
@@ -115,11 +209,14 @@ class PrayerTimes {
       final currentNightFraction = Duration(
         seconds: (currentNightDuration.inSeconds / 7).round(),
       );
-      ishaTime = sunsetTime.add(currentNightFraction);
-      ishaBeforeTime = sunsetBeforeTime.add(previousNightFraction);
+      ishaCandidate = sunsetTime.add(currentNightFraction);
+      ishaBeforeCandidate = sunsetBeforeTime.add(previousNightFraction);
     }
 
     final safeIshaTime = _safeIsha(sunsetTime, currentNightDuration);
+    final ishaFallbackApplied =
+        ishaCandidate == null || safeIshaTime.isBefore(ishaCandidate);
+    var ishaTime = ishaCandidate ?? safeIshaTime;
     if (safeIshaTime.isBefore(ishaTime)) {
       ishaTime = safeIshaTime;
     }
@@ -129,12 +226,20 @@ class PrayerTimes {
       year: dateBefore.year,
       dayOfYearValue: dayOfYear(dateBefore),
     );
+    final ishaBeforeFallbackApplied =
+        ishaBeforeCandidate == null ||
+        safeIshaBeforeTime.isBefore(ishaBeforeCandidate);
+    var ishaBeforeTime = ishaBeforeCandidate ?? safeIshaBeforeTime;
     if (safeIshaBeforeTime.isBefore(ishaBeforeTime)) {
       ishaBeforeTime = safeIshaBeforeTime;
     }
 
     var maghribTime = sunsetTime;
-    if (_parameters.maghribAngle != null) {
+    if (_parameters.maghribAngle != null &&
+        solarTime.canReachAltitude(
+          -_parameters.maghribAngle!,
+          afterTransit: true,
+        )) {
       final angleBased = TimeComponents(
         solarTime.hourAngle(-1 * _parameters.maghribAngle!, true),
       ).utcDate(_date.year, _date.month, _date.day);
@@ -143,53 +248,179 @@ class PrayerTimes {
       }
     }
 
-    fajr = _apply(Prayer.fajr, fajrTime);
-    imsak = fajr.subtract(const Duration(minutes: 10));
-    sunrise = _apply(Prayer.sunrise, sunriseTime);
-    dhuha = sunrise.add(Duration(minutes: _parameters.dhuhaOffsetMinutes));
-    dhuhr = _apply(Prayer.dhuhr, dhuhrTime);
-    asr = _apply(Prayer.asr, asrTime);
-    maghrib = _apply(Prayer.maghrib, maghribTime);
-    isha = _apply(Prayer.isha, ishaTime);
-    fajrAfter = _apply(Prayer.fajrAfter, fajrAfterTime);
-    ishaBefore = _apply(Prayer.ishaBefore, ishaBeforeTime);
+    final fajrValue = _apply(Prayer.fajr, fajrTime);
+    final sunriseValue = _apply(Prayer.sunrise, sunriseTime);
+    final maghribValue = _apply(
+      Prayer.maghrib,
+      maghribTime,
+      extraMinutes: _isRamadanOn(_date)
+          ? _parameters.ramadanMaghribAdjustmentMinutes
+          : 0,
+    );
+
+    final usesMoonsightingHighLatitudeRule =
+        _parameters.method == CalculationMethod.moonsightingCommittee &&
+        _coordinates.latitude >= 55;
+    _eventSources = {
+      Prayer.imsak: (fajrFallbackApplied || usesMoonsightingHighLatitudeRule)
+          ? PrayerEventSource.highLatitudeFallback
+          : PrayerEventSource.astronomical,
+      Prayer.fajr: (fajrFallbackApplied || usesMoonsightingHighLatitudeRule)
+          ? PrayerEventSource.highLatitudeFallback
+          : PrayerEventSource.astronomical,
+      Prayer.sunrise: sunriseAvailable
+          ? PrayerEventSource.astronomical
+          : PrayerEventSource.highLatitudeFallback,
+      Prayer.dhuha:
+          sunriseAvailable &&
+              (_parameters.dhuhaAngle == null || dhuhaAngleAvailable)
+          ? PrayerEventSource.astronomical
+          : PrayerEventSource.highLatitudeFallback,
+      Prayer.dhuhr: PrayerEventSource.astronomical,
+      Prayer.asr: asrAvailable
+          ? PrayerEventSource.astronomical
+          : PrayerEventSource.highLatitudeFallback,
+      Prayer.maghrib: sunsetAvailable
+          ? PrayerEventSource.astronomical
+          : PrayerEventSource.highLatitudeFallback,
+      Prayer.isha: ishaInterval > 0
+          ? (!sunsetAvailable
+                ? PrayerEventSource.highLatitudeFallback
+                : (ishaFallbackApplied
+                      ? PrayerEventSource.highLatitudeFallback
+                      : PrayerEventSource.calculationInterval))
+          : ((ishaFallbackApplied || usesMoonsightingHighLatitudeRule)
+                ? PrayerEventSource.highLatitudeFallback
+                : PrayerEventSource.astronomical),
+      Prayer.ishaBefore: ishaInterval > 0
+          ? (!sunsetBeforeAvailable
+                ? PrayerEventSource.highLatitudeFallback
+                : (ishaBeforeFallbackApplied
+                      ? PrayerEventSource.highLatitudeFallback
+                      : PrayerEventSource.calculationInterval))
+          : ((ishaBeforeFallbackApplied || usesMoonsightingHighLatitudeRule)
+                ? PrayerEventSource.highLatitudeFallback
+                : PrayerEventSource.astronomical),
+      Prayer.fajrAfter:
+          (fajrAfterFallbackApplied || usesMoonsightingHighLatitudeRule)
+          ? PrayerEventSource.highLatitudeFallback
+          : PrayerEventSource.astronomical,
+    };
+    _times = {
+      Prayer.imsak: _apply(
+        Prayer.imsak,
+        fajrValue.subtract(const Duration(minutes: 10)),
+      ),
+      Prayer.fajr: fajrValue,
+      Prayer.sunrise: sunriseValue,
+      Prayer.dhuha: _apply(
+        Prayer.dhuha,
+        dhuhaTime ??
+            sunriseValue.add(Duration(minutes: _parameters.dhuhaOffsetMinutes)),
+      ),
+      Prayer.dhuhr: _apply(Prayer.dhuhr, dhuhrTime),
+      Prayer.asr: _apply(Prayer.asr, asrTime),
+      Prayer.maghrib: maghribValue,
+      Prayer.isha: _apply(Prayer.isha, ishaTime),
+      Prayer.ishaBefore: _apply(Prayer.isha, ishaBeforeTime),
+      Prayer.fajrAfter: _apply(Prayer.fajr, fajrAfterTime),
+    };
   }
 
   final DateTime _date;
   final Coordinates _coordinates;
   final CalculationParameters _parameters;
   final bool _precision;
+  final bool Function(DateTime date) _isRamadanOn;
+  late final Map<Prayer, PrayerEventSource> _eventSources;
+  late final Map<Prayer, DateTime> _times;
 
-  late DateTime imsak;
-  late DateTime fajr;
-  late DateTime dhuha;
-  late DateTime sunrise;
-  late DateTime dhuhr;
-  late DateTime asr;
-  late DateTime maghrib;
-  late DateTime isha;
-  late DateTime ishaBefore;
-  late DateTime fajrAfter;
+  DateTime get imsak => _requiredTime(Prayer.imsak);
+  DateTime get fajr => _requiredTime(Prayer.fajr);
+  DateTime get dhuha => _requiredTime(Prayer.dhuha);
+  DateTime get sunrise => _requiredTime(Prayer.sunrise);
+  DateTime get dhuhr => _requiredTime(Prayer.dhuhr);
+  DateTime get asr => _requiredTime(Prayer.asr);
+  DateTime get maghrib => _requiredTime(Prayer.maghrib);
+  DateTime get isha => _requiredTime(Prayer.isha);
+  DateTime get ishaBefore => _requiredTime(Prayer.ishaBefore);
+  DateTime get fajrAfter => _requiredTime(Prayer.fajrAfter);
 
-  Prayer currentPrayer({required DateTime date}) {
+  DateTime _requiredTime(Prayer prayer) {
+    final source = _eventSources[prayer];
+    if (source == PrayerEventSource.unavailable) {
+      throw StateError(
+        'The ${prayer.name} event is unavailable for this date and location. '
+        'Use eventForPrayer() to inspect event availability.',
+      );
+    }
+    return _times[prayer]!;
+  }
+
+  /// Returns the computed value and its provenance for [prayer].
+  ///
+  /// A null time with [PrayerEventSource.unavailable] means the requested
+  /// solar event does not occur on this date. Use this method where a caller
+  /// must not treat a legacy placeholder as an observed solar event.
+  PrayerEventResult eventForPrayer(Prayer prayer) {
+    final source = _eventSources[prayer] ?? PrayerEventSource.unavailable;
+    final time = source == PrayerEventSource.unavailable
+        ? null
+        : _times[prayer];
+    return PrayerEventResult(prayer: prayer, time: time, source: source);
+  }
+
+  /// Returns the prayer window containing [date].
+  ///
+  /// Pass [locationDate] when [date] is an instant in UTC or another timezone
+  /// and its civil date at the target location differs. Its year, month, and
+  /// day select the location's prayer schedule.
+  Prayer currentPrayer({required DateTime date, DateTime? locationDate}) {
     final at = date.toUtc();
-    final schedule = _scheduleForInstant(at);
-    if (at.isBefore(schedule.fajr)) return Prayer.ishaBefore;
-    if (at.isBefore(schedule.sunrise)) return Prayer.fajr;
-    if (at.isBefore(schedule.dhuhr)) return Prayer.sunrise;
-    if (at.isBefore(schedule.asr)) return Prayer.dhuhr;
-    if (at.isBefore(schedule.maghrib)) return Prayer.asr;
-    if (at.isBefore(schedule.isha)) return Prayer.maghrib;
+    final schedule = locationDate == null
+        ? _scheduleForInstant(at)
+        : _scheduleForLocationDate(_calendarDate(locationDate));
+    if (at.isBefore(schedule.fajr)) {
+      return schedule.eventForPrayer(Prayer.ishaBefore).isAvailable
+          ? Prayer.ishaBefore
+          : Prayer.isha;
+    }
+    final sunriseAvailable = schedule
+        .eventForPrayer(Prayer.sunrise)
+        .isAvailable;
+    if (sunriseAvailable && at.isBefore(schedule.sunrise)) return Prayer.fajr;
+    if (at.isBefore(schedule.dhuhr)) {
+      return sunriseAvailable ? Prayer.sunrise : Prayer.fajr;
+    }
+    final asrAvailable = schedule.eventForPrayer(Prayer.asr).isAvailable;
+    if (asrAvailable && at.isBefore(schedule.asr)) return Prayer.dhuhr;
+    final maghribAvailable = schedule
+        .eventForPrayer(Prayer.maghrib)
+        .isAvailable;
+    if (maghribAvailable && at.isBefore(schedule.maghrib)) return Prayer.asr;
+    final ishaAvailable = schedule.eventForPrayer(Prayer.isha).isAvailable;
+    if (!ishaAvailable || at.isBefore(schedule.isha)) {
+      return maghribAvailable ? Prayer.maghrib : Prayer.asr;
+    }
     return Prayer.isha;
   }
 
+  /// Returns the next prayer event by name.
+  ///
+  /// Pass [locationDate] when [date] is an instant in UTC or another timezone
+  /// and its civil date at the target location differs. Use
+  /// [nextPrayerDetails] when the event time or whether it falls on another
+  /// local day is also needed.
   Prayer nextPrayer({
     DateTime? date,
+    DateTime? locationDate,
     NextPrayerOptions options = const NextPrayerOptions(),
   }) {
     final at = date ?? DateTime.now();
     final instant = at.toUtc();
-    final schedule = _scheduleForInstant(instant);
+    final schedule = locationDate == null
+        ? _scheduleForInstant(instant)
+        : _scheduleForLocationDate(_calendarDate(locationDate));
     final details = schedule.nextPrayerDetails(
       at: at,
       locationDate: schedule._date,
@@ -247,15 +478,19 @@ class PrayerTimes {
           isNextDay: isNextDay,
         ));
       }
-      events.addAll([
-        (prayer: Prayer.fajr, time: schedule.fajr, isNextDay: isNextDay),
-        (prayer: Prayer.sunrise, time: schedule.sunrise, isNextDay: isNextDay),
-        (prayer: Prayer.dhuha, time: schedule.dhuha, isNextDay: isNextDay),
-        (prayer: Prayer.dhuhr, time: schedule.dhuhr, isNextDay: isNextDay),
-        (prayer: Prayer.asr, time: schedule.asr, isNextDay: isNextDay),
-        (prayer: Prayer.maghrib, time: schedule.maghrib, isNextDay: isNextDay),
-        (prayer: Prayer.isha, time: schedule.isha, isNextDay: isNextDay),
-      ]);
+      for (final prayer in [
+        Prayer.fajr,
+        Prayer.sunrise,
+        Prayer.dhuha,
+        Prayer.dhuhr,
+        Prayer.asr,
+        Prayer.maghrib,
+        Prayer.isha,
+      ]) {
+        final result = schedule.eventForPrayer(prayer);
+        if (result.time == null) continue;
+        events.add((prayer: prayer, time: result.time!, isNextDay: isNextDay));
+      }
     }
 
     addDayEvents(today, todayDate, false);
@@ -295,7 +530,28 @@ class PrayerTimes {
       coordinates: _coordinates,
       calculationParameters: _parameters,
       precision: _precision,
+      isRamadanOn: _isRamadanOn,
     );
+  }
+
+  DateTime _calendarDate(DateTime date) =>
+      DateTime.utc(date.year, date.month, date.day);
+
+  /// Supplies a usable anchor when a horizon crossing does not occur.
+  /// The fallback convention places sunrise and sunset six hours around
+  /// transit; callers can identify these estimates through event provenance.
+  DateTime _solarAnchor(
+    SolarTime solarTime, {
+    required bool beforeTransit,
+    required bool isAvailable,
+    required DateTime date,
+  }) {
+    final fractionalHour = isAvailable
+        ? (beforeTransit ? solarTime.sunrise : solarTime.sunset)
+        : solarTime.transit + (beforeTransit ? -6 : 6);
+    return TimeComponents(
+      fractionalHour,
+    ).utcDate(date.year, date.month, date.day);
   }
 
   PrayerTimes _scheduleForInstant(DateTime instant) {
@@ -311,25 +567,16 @@ class PrayerTimes {
   DateTime timeForPrayer(Prayer prayer) {
     switch (prayer) {
       case Prayer.imsak:
-        return imsak;
       case Prayer.fajr:
-        return fajr;
       case Prayer.dhuha:
-        return dhuha;
       case Prayer.sunrise:
-        return sunrise;
       case Prayer.dhuhr:
-        return dhuhr;
       case Prayer.asr:
-        return asr;
       case Prayer.maghrib:
-        return maghrib;
       case Prayer.isha:
-        return isha;
       case Prayer.ishaBefore:
-        return ishaBefore;
       case Prayer.fajrAfter:
-        return fajrAfter;
+        return _requiredTime(prayer);
     }
   }
 
@@ -372,10 +619,10 @@ class PrayerTimes {
     return sunset.add(nf);
   }
 
-  DateTime _apply(Prayer prayer, DateTime value) {
+  DateTime _apply(Prayer prayer, DateTime value, {int extraMinutes = 0}) {
     final user = _parameters.adjustments[prayer] ?? 0;
     final method = _parameters.methodAdjustments[prayer] ?? 0;
-    final adjusted = dateByAddingMinutes(value, user + method);
+    final adjusted = dateByAddingMinutes(value, user + method + extraMinutes);
     return roundedMinute(adjusted.toUtc(), precision: _precision);
   }
 }

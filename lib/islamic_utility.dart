@@ -28,5 +28,6 @@ export 'src/models/shafaq.dart';
 export 'src/prayer/prayer_times.dart';
 export 'src/prayer/next_prayer_details.dart';
 export 'src/prayer/next_prayer_options.dart';
+export 'src/prayer/prayer_event_result.dart';
 export 'src/qibla/qibla.dart';
 export 'src/sunnah/sunnah_times.dart';

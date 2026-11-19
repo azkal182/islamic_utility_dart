@@ -1,5 +1,1 @@
-enum HighLatitudeRule {
-  middleOfTheNight,
-  seventhOfTheNight,
-  twilightAngle,
-}
+enum HighLatitudeRule { middleOfTheNight, seventhOfTheNight, twilightAngle }

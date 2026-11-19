@@ -15,7 +15,9 @@ class Qibla {
     final deltaLon = makkahLon - lon;
 
     final y = math.sin(deltaLon);
-    final x = math.cos(lat) * math.tan(makkahLat) - math.sin(lat) * math.cos(deltaLon);
+    final x =
+        math.cos(lat) * math.tan(makkahLat) -
+        math.sin(lat) * math.cos(deltaLon);
     final bearing = radiansToDegrees(math.atan2(y, x));
     return unwindAngle(bearing);
   }

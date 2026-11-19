@@ -1,0 +1,107 @@
+{
+  "dataset": "test/data/reference/lfnu/bangsri-2026.json",
+  "location": {
+    "name": "Bangsri",
+    "district": "Bangsri",
+    "regency": "Kabupaten Jepara",
+    "province": "Jawa Tengah",
+    "latitude": -6.522777777777778,
+    "longitude": 110.76,
+    "elevation_m": 64,
+    "timezone": "Asia/Jakarta",
+    "utc_offset": "+07:00"
+  },
+  "method": "CalculationMethod.lfnu, precision=true",
+  "sample_days": 365,
+  "delta_sign": "engine minus NU Online LFNU schedule, minutes",
+  "metrics": {
+    "imsak": {
+      "samples": 365,
+      "mean_minutes": -0.4792694063926899,
+      "median_minutes": -0.466666666666697,
+      "mae_minutes": 0.4792694063926899,
+      "p95_abs_minutes": 0.9166666666667425,
+      "within_1_minute": 365,
+      "over_5_minutes": 0,
+      "max_abs_minutes": -0.9833333333333485,
+      "max_case": "2026-01-16"
+    },
+    "fajr": {
+      "samples": 365,
+      "mean_minutes": -0.4792694063926899,
+      "median_minutes": -0.466666666666697,
+      "mae_minutes": 0.4792694063926899,
+      "p95_abs_minutes": 0.9166666666667425,
+      "within_1_minute": 365,
+      "over_5_minutes": 0,
+      "max_abs_minutes": -0.9833333333333485,
+      "max_case": "2026-01-16"
+    },
+    "sunrise": {
+      "samples": 365,
+      "mean_minutes": -0.00949771689497289,
+      "median_minutes": 0.0,
+      "mae_minutes": 0.2580821917808208,
+      "p95_abs_minutes": 0.4833333333333485,
+      "within_1_minute": 365,
+      "over_5_minutes": 0,
+      "max_abs_minutes": -0.5,
+      "max_case": "2026-01-05"
+    },
+    "dhuha": {
+      "samples": 365,
+      "mean_minutes": -0.48054794520548155,
+      "median_minutes": -0.4500000000000455,
+      "mae_minutes": 0.48063926940639473,
+      "p95_abs_minutes": 0.933333333333394,
+      "within_1_minute": 365,
+      "over_5_minutes": 0,
+      "max_abs_minutes": -0.9833333333333485,
+      "max_case": "2026-09-13"
+    },
+    "dhuhr": {
+      "samples": 365,
+      "mean_minutes": -0.4975799086757997,
+      "median_minutes": -0.5,
+      "mae_minutes": 0.4975799086757997,
+      "p95_abs_minutes": 0.9500000000000455,
+      "within_1_minute": 365,
+      "over_5_minutes": 0,
+      "max_abs_minutes": -0.9833333333333485,
+      "max_case": "2026-02-25"
+    },
+    "asr": {
+      "samples": 365,
+      "mean_minutes": -0.5069406392694088,
+      "median_minutes": -0.4833333333333485,
+      "mae_minutes": 0.514794520547946,
+      "p95_abs_minutes": 0.9833333333333485,
+      "within_1_minute": 351,
+      "over_5_minutes": 0,
+      "max_abs_minutes": -1.1166666666666742,
+      "max_case": "2026-02-08"
+    },
+    "maghrib": {
+      "samples": 365,
+      "mean_minutes": -0.49744292237443904,
+      "median_minutes": -0.5,
+      "mae_minutes": 0.49744292237443904,
+      "p95_abs_minutes": 0.9500000000000455,
+      "within_1_minute": 365,
+      "over_5_minutes": 0,
+      "max_abs_minutes": -0.9833333333333485,
+      "max_case": "2026-01-29"
+    },
+    "isha": {
+      "samples": 365,
+      "mean_minutes": -0.46776255707762127,
+      "median_minutes": -0.466666666666697,
+      "mae_minutes": 0.4678538812785344,
+      "p95_abs_minutes": 0.9166666666665151,
+      "within_1_minute": 365,
+      "over_5_minutes": 0,
+      "max_abs_minutes": -1.0,
+      "max_case": "2026-07-13"
+    }
+  }
+}

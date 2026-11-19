@@ -24,6 +24,13 @@ Deliverable:
 
 - Tidak ada next prayer invalid pada boundary harian.
 
+Status: **Selesai**. API lintas hari menerima tanggal sipil lokasi melalui
+`locationDate`; `nextPrayerDetails(at, locationDate)` juga menyertakan waktu
+occurrence dan penanda `isNextDay`. API lama tetap kompatibel. Tes regresi
+mengunci event tepat pada boundary, Imsak, setelah Isya, sebelum Fajr, jadwal
+stale, dan pergantian tengah malam ketika tanggal UTC berbeda dari tanggal
+lokal.
+
 ## Phase 3 - Full Parity Coverage
 
 - Port seluruh matrix test method+lokasi+musim.
@@ -34,6 +41,13 @@ Deliverable:
 
 - Laporan parity lengkap dan reproducible.
 
+Status: **Selesai untuk matrix regresi engine**. Matrix mencakup 15 preset,
+7 koordinat, dan 4 tanggal musiman (420 kombinasi), toleransi pembulatan, serta
+fallback sudut twilight yang tidak tercapai. Pembandingan jadwal resmi yang
+tersedia mencakup preset Indonesia terhadap dataset Kemenag 2026. Referensi
+otoritatif untuk setiap preset di semua negara belum tersedia; batas cakupan ini
+dicatat pada laporan [matrix parity](15-prayer-parity-matrix.md).
+
 ## Phase 4 - Modular Expansion
 
 - Tambah `calendar_hijri`.
@@ -43,6 +57,11 @@ Deliverable:
 Deliverable:
 
 - Fitur tambahan aktif tanpa mengubah output core prayer.
+
+Status: **Selesai**. Modul Hijri, kalender Jawa, dan `UnifiedCalendar` sudah
+tersedia melalui public API, disertai tes provider lokal/resmi, rentang tanggal,
+kalender Jawa, dan facade gabungan. Implementasi ini terpisah dari engine
+`PrayerTimes`.
 
 ## Quality Gates
 

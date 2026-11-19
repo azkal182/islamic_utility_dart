@@ -7,19 +7,52 @@ ID: `islamic_utility` adalah package Dart untuk kalkulasi waktu sholat, sunnah t
 ## Features
 
 - Prayer schedule: `imsak`, `fajr`, `dhuha`, `sunrise`, `dhuhr`, `asr`, `maghrib`, `isha`
+- Calculation presets include `CalculationMethod.lfnu` with elevation-aware horizon, altitude-based Dhuha, and optional Ramadan Maghrib ihtiyath
 - Cross-day boundaries: `ishaBefore`, `fajrAfter`
 - Utilities: `currentPrayer`, `nextPrayer`, `timeForPrayer`
+- Solar-event provenance and availability: `PrayerTimes.eventForPrayer(...)`
 - `SunnahTimes`: `middleOfTheNight`, `lastThirdOfTheNight`
 - `Qibla`: direction in degrees `0..360`
 - `JavaneseCalendar`: pasaran Jawa (`Legi`, `Pahing`, `Pon`, `Wage`, `Kliwon`)
 
+## Validasi jadwal sholat
+
+Dataset pembanding tidak menjadi input kalkulasi engine. Referensi Kemenag
+2026 membandingkan preset Indonesia di 517 titik kota/kabupaten dan 188.705
+jadwal harian. Referensi LFNU 2026 mencakup satu tahun untuk Bangsri, Jepara,
+dengan koordinat dan elevasi 64 m. Sumber, parameter, batas presisi, laporan,
+dan cara regenerasi tercatat di:
+
+- [Rencana fase dan hasil akurasi](doc/16-prayer-engine-accuracy-plan.md)
+- [Dataset pembanding Kemenag](test/data/reference/kemenag/README.md)
+- [Dataset LFNU Bangsri 2026](test/data/reference/lfnu/README.md)
+- [Kontrak parameter kalkulasi](doc/04-calculation-parameters.md)
+- [Referensi API dan presisi output](doc/11-api-reference.md)
+
+### Tampilan menit untuk client LFNU
+
+Jika client ingin mencocokkan PDF LFNU Bangsri 2026, jangan menerapkan satu
+aturan pembulatan untuk semua event: tampilkan Terbit ke menit terdekat dan
+bulatkan event lain ke atas. Dalam uji 365 hari, kebijakan ini menghasilkan 35
+perbedaan event-harian; membulatkan semua event ke atas menghasilkan 216,
+sedangkan membulatkan semua ke menit terdekat menghasilkan 1.191. Angka ini
+khusus parity terhadap PDF satu lokasi/tahun, bukan ukuran galat astronomi
+universal. Jika targetnya mengikuti keterangan FAQ aplikasi NU Online, gunakan
+round-up untuk seluruh event, termasuk Terbit; hasilnya dapat berbeda dari PDF
+yang diberikan.
+
 ID: Semua output `PrayerTimes` disimpan dalam UTC `DateTime`.
+ID: `eventForPrayer` membedakan waktu astronomi, fallback lintang tinggi, dan
+event yang tidak tersedia. Untuk menjaga jadwal tetap lengkap, sunrise/sunset
+yang tidak terjadi memakai estimasi enam jam dari transit; Asar memakai
+estimasi di antara transit dan sunset. Nilai estimasi tetap ditandai sebagai
+`highLatitudeFallback`.
 
 ## Installation
 
 ```yaml
 dependencies:
-  islamic_utility: ^1.6.0
+  islamic_utility: ^2.0.0
 ```
 
 ```bash
@@ -96,6 +129,14 @@ params.adjustments[Prayer.isha] = 2;
 
 - Use UTC consistently in domain logic.
 - Always pass explicit `date` for `currentPrayer` and `nextPrayer`.
+- If the instant's UTC date differs from the target location's civil date,
+  also pass `locationDate` to `currentPrayer` and `nextPrayer`.
+
+## Prayer Engine Accuracy
+
+Data pembanding, baseline, toleransi, hasil validasi JPL DE421, dan status
+fase pembaruan terdokumentasi di
+[`doc/16-prayer-engine-accuracy-plan.md`](doc/16-prayer-engine-accuracy-plan.md).
 - Convert UTC output to local timezone in presentation/UI layer.
 - Use `nextPrayerDetails` when displaying the actual next event time or its
   local day. `nextPrayer` returns only an enum, so `timeForPrayer` cannot

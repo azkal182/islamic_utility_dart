@@ -1,0 +1,497 @@
+{
+  "source": "NOAA Global Monitoring Laboratory, General Solar Position Calculations",
+  "source_url": "https://www.gml.noaa.gov/grad/solcalc/solareqns.PDF",
+  "generated_at_utc": "2026-11-19T13:20:12Z",
+  "method": "Independent Python implementation of NOAA fractional-year equation-of-time and declination equations; UTC event crossings found by bisection.",
+  "coordinate_source": "Representative city coordinates maintained in the package's parity test matrix; these are calculation points, not surveyed observer locations.",
+  "assumptions": {
+    "sunrise_sunset_center_altitude_degrees": -0.833,
+    "fajr_solar_center_altitude_degrees": -18,
+    "isha_solar_center_altitude_degrees": -17,
+    "asr_shadow_factor": 1,
+    "elevation_meters": 0,
+    "rounding": "UTC ISO-8601 timestamps to nearest millisecond; no civil timezone or minute rounding"
+  },
+  "records": [
+    {
+      "location": "Jakarta",
+      "latitude": -6.2088,
+      "longitude": 106.8456,
+      "civil_timezone": "Asia/Jakarta",
+      "date": "2026-01-15",
+      "events_utc": {
+        "transit": "2026-01-15T05:01:08.556513Z",
+        "sunrise": "2026-01-14T22:47:42Z",
+        "sunset": "2026-01-15T11:14:33Z",
+        "asr_shafii": "2026-01-15T08:26:15Z",
+        "fajr_18": "2026-01-14T21:32:36Z",
+        "isha_17": "2026-01-15T12:25:09Z"
+      }
+    },
+    {
+      "location": "Jakarta",
+      "latitude": -6.2088,
+      "longitude": 106.8456,
+      "civil_timezone": "Asia/Jakarta",
+      "date": "2026-03-20",
+      "events_utc": {
+        "transit": "2026-03-20T05:00:52.208188Z",
+        "sunrise": "2026-03-19T22:57:19Z",
+        "sunset": "2026-03-20T11:04:22Z",
+        "asr_shafii": "2026-03-20T08:10:53Z",
+        "fajr_18": "2026-03-19T21:48:12Z",
+        "isha_17": "2026-03-20T12:09:25Z"
+      }
+    },
+    {
+      "location": "Jakarta",
+      "latitude": -6.2088,
+      "longitude": 106.8456,
+      "civil_timezone": "Asia/Jakarta",
+      "date": "2026-06-21",
+      "events_utc": {
+        "transit": "2026-06-21T04:53:52.858050Z",
+        "sunrise": "2026-06-20T23:01:00Z",
+        "sunset": "2026-06-21T10:46:47Z",
+        "asr_shafii": "2026-06-21T08:15:50Z",
+        "fajr_18": "2026-06-20T21:46:00Z",
+        "isha_17": "2026-06-21T11:57:25Z"
+      }
+    },
+    {
+      "location": "Jakarta",
+      "latitude": -6.2088,
+      "longitude": 106.8456,
+      "civil_timezone": "Asia/Jakarta",
+      "date": "2026-09-22",
+      "events_utc": {
+        "transit": "2026-09-22T04:45:27.426943Z",
+        "sunrise": "2026-09-21T22:42:35Z",
+        "sunset": "2026-09-22T10:48:26Z",
+        "asr_shafii": "2026-09-22T07:56:45Z",
+        "fajr_18": "2026-09-21T21:33:32Z",
+        "isha_17": "2026-09-22T11:53:29Z"
+      }
+    },
+    {
+      "location": "Singapore",
+      "latitude": 1.3521,
+      "longitude": 103.8198,
+      "civil_timezone": "Asia/Singapore",
+      "date": "2026-01-15",
+      "events_utc": {
+        "transit": "2026-01-15T05:13:14.929695Z",
+        "sunrise": "2026-01-14T23:11:42Z",
+        "sunset": "2026-01-15T11:14:49Z",
+        "asr_shafii": "2026-01-15T08:37:37Z",
+        "fajr_18": "2026-01-14T21:57:51Z",
+        "isha_17": "2026-01-15T12:24:19Z"
+      }
+    },
+    {
+      "location": "Singapore",
+      "latitude": 1.3521,
+      "longitude": 103.8198,
+      "civil_timezone": "Asia/Singapore",
+      "date": "2026-03-20",
+      "events_utc": {
+        "transit": "2026-03-20T05:12:58.247243Z",
+        "sunrise": "2026-03-19T23:09:47Z",
+        "sunset": "2026-03-20T11:16:11Z",
+        "asr_shafii": "2026-03-20T08:16:22Z",
+        "fajr_18": "2026-03-19T22:01:07Z",
+        "isha_17": "2026-03-20T12:20:52Z"
+      }
+    },
+    {
+      "location": "Singapore",
+      "latitude": 1.3521,
+      "longitude": 103.8198,
+      "civil_timezone": "Asia/Singapore",
+      "date": "2026-06-21",
+      "events_utc": {
+        "transit": "2026-06-21T05:05:59.160710Z",
+        "sunrise": "2026-06-20T22:59:58Z",
+        "sunset": "2026-06-21T11:12:02Z",
+        "asr_shafii": "2026-06-21T08:32:16Z",
+        "fajr_18": "2026-06-20T21:44:40Z",
+        "isha_17": "2026-06-21T12:22:54Z"
+      }
+    },
+    {
+      "location": "Singapore",
+      "latitude": 1.3521,
+      "longitude": 103.8198,
+      "civil_timezone": "Asia/Singapore",
+      "date": "2026-09-22",
+      "events_utc": {
+        "transit": "2026-09-22T04:57:33.431717Z",
+        "sunrise": "2026-09-21T22:54:15Z",
+        "sunset": "2026-09-22T11:00:52Z",
+        "asr_shafii": "2026-09-22T07:58:57Z",
+        "fajr_18": "2026-09-21T21:45:34Z",
+        "isha_17": "2026-09-22T12:05:33Z"
+      }
+    },
+    {
+      "location": "Makkah",
+      "latitude": 21.4225,
+      "longitude": 39.8262,
+      "civil_timezone": "Asia/Riyadh",
+      "date": "2026-01-15",
+      "events_utc": {
+        "transit": "2026-01-15T09:29:17.218791Z",
+        "sunrise": "2026-01-15T04:00:35Z",
+        "sunset": "2026-01-15T14:58:09Z",
+        "asr_shafii": "2026-01-15T12:36:31Z",
+        "fajr_18": "2026-01-15T02:42:19Z",
+        "isha_17": "2026-01-15T16:11:55Z"
+      }
+    },
+    {
+      "location": "Makkah",
+      "latitude": 21.4225,
+      "longitude": 39.8262,
+      "civil_timezone": "Asia/Riyadh",
+      "date": "2026-03-20",
+      "events_utc": {
+        "transit": "2026-03-20T09:28:53.472956Z",
+        "sunrise": "2026-03-20T03:26:20Z",
+        "sunset": "2026-03-20T15:31:46Z",
+        "asr_shafii": "2026-03-20T12:53:33Z",
+        "fajr_18": "2026-03-20T02:12:28Z",
+        "isha_17": "2026-03-20T16:41:24Z"
+      }
+    },
+    {
+      "location": "Makkah",
+      "latitude": 21.4225,
+      "longitude": 39.8262,
+      "civil_timezone": "Asia/Riyadh",
+      "date": "2026-06-21",
+      "events_utc": {
+        "transit": "2026-06-21T09:21:59.962868Z",
+        "sunrise": "2026-06-21T02:38:47Z",
+        "sunset": "2026-06-21T16:05:14Z",
+        "asr_shafii": "2026-06-21T12:41:54Z",
+        "fajr_18": "2026-06-21T01:13:22Z",
+        "isha_17": "2026-06-21T17:25:25Z"
+      }
+    },
+    {
+      "location": "Makkah",
+      "latitude": 21.4225,
+      "longitude": 39.8262,
+      "civil_timezone": "Asia/Riyadh",
+      "date": "2026-09-22",
+      "events_utc": {
+        "transit": "2026-09-22T09:13:27.938231Z",
+        "sunrise": "2026-09-22T03:08:46Z",
+        "sunset": "2026-09-22T15:17:53Z",
+        "asr_shafii": "2026-09-22T12:38:20Z",
+        "fajr_18": "2026-09-22T01:54:42Z",
+        "isha_17": "2026-09-22T16:27:31Z"
+      }
+    },
+    {
+      "location": "London",
+      "latitude": 51.5072,
+      "longitude": -0.1276,
+      "civil_timezone": "Europe/London",
+      "date": "2026-01-15",
+      "events_utc": {
+        "transit": "2026-01-15T12:09:08.510093Z",
+        "sunrise": "2026-01-15T08:00:00Z",
+        "sunset": "2026-01-15T16:18:42Z",
+        "asr_shafii": "2026-01-15T13:59:36Z",
+        "fajr_18": "2026-01-15T05:59:23Z",
+        "isha_17": "2026-01-15T18:12:48Z"
+      }
+    },
+    {
+      "location": "London",
+      "latitude": 51.5072,
+      "longitude": -0.1276,
+      "civil_timezone": "Europe/London",
+      "date": "2026-03-20",
+      "events_utc": {
+        "transit": "2026-03-20T12:08:40.359777Z",
+        "sunrise": "2026-03-20T06:06:13Z",
+        "sunset": "2026-03-20T18:12:09Z",
+        "asr_shafii": "2026-03-20T15:25:05Z",
+        "fajr_18": "2026-03-20T04:13:06Z",
+        "isha_17": "2026-03-20T19:58:47Z"
+      }
+    },
+    {
+      "location": "London",
+      "latitude": 51.5072,
+      "longitude": -0.1276,
+      "civil_timezone": "Europe/London",
+      "date": "2026-06-21",
+      "events_utc": {
+        "transit": "2026-06-21T12:01:50.334954Z",
+        "sunrise": "2026-06-21T03:42:31Z",
+        "sunset": "2026-06-21T20:21:13Z",
+        "asr_shafii": "2026-06-21T16:24:44Z",
+        "fajr_18": null,
+        "isha_17": null
+      }
+    },
+    {
+      "location": "London",
+      "latitude": 51.5072,
+      "longitude": -0.1276,
+      "civil_timezone": "Europe/London",
+      "date": "2026-09-22",
+      "events_utc": {
+        "transit": "2026-09-22T11:53:14.381265Z",
+        "sunrise": "2026-09-22T05:44:16Z",
+        "sunset": "2026-09-22T18:01:14Z",
+        "asr_shafii": "2026-09-22T15:12:36Z",
+        "fajr_18": "2026-09-22T03:49:48Z",
+        "isha_17": "2026-09-22T19:48:07Z"
+      }
+    },
+    {
+      "location": "Reykjavik",
+      "latitude": 64.1466,
+      "longitude": -21.9426,
+      "civil_timezone": "Atlantic/Reykjavik",
+      "date": "2026-01-15",
+      "events_utc": {
+        "transit": "2026-01-15T13:36:25.406444Z",
+        "sunrise": "2026-01-15T10:57:06Z",
+        "sunset": "2026-01-15T16:16:21Z",
+        "asr_shafii": "2026-01-15T14:16:28Z",
+        "fajr_18": "2026-01-15T07:46:28Z",
+        "isha_17": "2026-01-15T19:17:42Z"
+      }
+    },
+    {
+      "location": "Reykjavik",
+      "latitude": 64.1466,
+      "longitude": -21.9426,
+      "civil_timezone": "Atlantic/Reykjavik",
+      "date": "2026-03-20",
+      "events_utc": {
+        "transit": "2026-03-20T13:35:54.853069Z",
+        "sunrise": "2026-03-20T07:32:46Z",
+        "sunset": "2026-03-20T19:40:43Z",
+        "asr_shafii": "2026-03-20T16:32:48Z",
+        "fajr_18": "2026-03-20T04:42:14Z",
+        "isha_17": "2026-03-20T22:21:01Z"
+      }
+    },
+    {
+      "location": "Reykjavik",
+      "latitude": 64.1466,
+      "longitude": -21.9426,
+      "civil_timezone": "Atlantic/Reykjavik",
+      "date": "2026-06-21",
+      "events_utc": {
+        "transit": "2026-06-21T13:29:06.732079Z",
+        "sunrise": "2026-06-21T02:54:22Z",
+        "sunset": "2026-06-22T00:04:02Z",
+        "asr_shafii": "2026-06-21T18:22:07Z",
+        "fajr_18": null,
+        "isha_17": null
+      }
+    },
+    {
+      "location": "Reykjavik",
+      "latitude": 64.1466,
+      "longitude": -21.9426,
+      "civil_timezone": "Atlantic/Reykjavik",
+      "date": "2026-09-22",
+      "events_utc": {
+        "transit": "2026-09-22T13:20:28.634028Z",
+        "sunrise": "2026-09-22T07:07:01Z",
+        "sunset": "2026-09-22T19:32:18Z",
+        "asr_shafii": "2026-09-22T16:21:39Z",
+        "fajr_18": "2026-09-22T04:10:59Z",
+        "isha_17": "2026-09-22T22:14:04Z"
+      }
+    },
+    {
+      "location": "Tromso",
+      "latitude": 69.6492,
+      "longitude": 18.9553,
+      "civil_timezone": "Europe/Oslo",
+      "date": "2026-01-15",
+      "events_utc": {
+        "transit": "2026-01-15T10:52:47.478488Z",
+        "sunrise": null,
+        "sunset": null,
+        "asr_shafii": "2026-01-15T10:59:21Z",
+        "fajr_18": "2026-01-15T05:15:19Z",
+        "isha_17": "2026-01-15T16:19:19Z"
+      }
+    },
+    {
+      "location": "Tromso",
+      "latitude": 69.6492,
+      "longitude": 18.9553,
+      "civil_timezone": "Europe/Oslo",
+      "date": "2026-03-20",
+      "events_utc": {
+        "transit": "2026-03-20T10:52:21.431372Z",
+        "sunrise": "2026-03-20T04:49:06Z",
+        "sunset": "2026-03-20T16:57:47Z",
+        "asr_shafii": "2026-03-20T13:34:53Z",
+        "fajr_18": "2026-03-20T00:55:58Z",
+        "isha_17": "2026-03-20T20:34:52Z"
+      }
+    },
+    {
+      "location": "Tromso",
+      "latitude": 69.6492,
+      "longitude": 18.9553,
+      "civil_timezone": "Europe/Oslo",
+      "date": "2026-06-21",
+      "events_utc": {
+        "transit": "2026-06-21T10:45:29.741558Z",
+        "sunrise": null,
+        "sunset": null,
+        "asr_shafii": "2026-06-21T15:57:24Z",
+        "fajr_18": null,
+        "isha_17": null
+      }
+    },
+    {
+      "location": "Tromso",
+      "latitude": 69.6492,
+      "longitude": 18.9553,
+      "civil_timezone": "Europe/Oslo",
+      "date": "2026-09-22",
+      "events_utc": {
+        "transit": "2026-09-22T10:36:55.664305Z",
+        "sunrise": "2026-09-22T04:19:13Z",
+        "sunset": "2026-09-22T16:52:27Z",
+        "asr_shafii": "2026-09-22T13:26:10Z",
+        "fajr_18": "2026-09-22T00:04:45Z",
+        "isha_17": "2026-09-22T20:35:57Z"
+      }
+    },
+    {
+      "location": "Sydney",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "civil_timezone": "Australia/Sydney",
+      "date": "2026-01-15",
+      "events_utc": {
+        "transit": "2026-01-15T02:03:38.606316Z",
+        "sunrise": "2026-01-14T18:58:04Z",
+        "sunset": "2026-01-15T09:08:54Z",
+        "asr_shafii": "2026-01-15T05:48:31Z",
+        "fajr_18": "2026-01-14T17:17:26Z",
+        "isha_17": "2026-01-15T10:42:45Z"
+      }
+    },
+    {
+      "location": "Sydney",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "civil_timezone": "Australia/Sydney",
+      "date": "2026-03-20",
+      "events_utc": {
+        "transit": "2026-03-20T02:03:27.161025Z",
+        "sunrise": "2026-03-19T19:57:35Z",
+        "sunset": "2026-03-20T08:08:48Z",
+        "asr_shafii": "2026-03-20T05:31:37Z",
+        "fajr_18": "2026-03-19T18:33:59Z",
+        "isha_17": "2026-03-20T09:27:17Z"
+      }
+    },
+    {
+      "location": "Sydney",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "civil_timezone": "Australia/Sydney",
+      "date": "2026-06-21",
+      "events_utc": {
+        "transit": "2026-06-21T01:56:23.949212Z",
+        "sunrise": "2026-06-20T20:59:30Z",
+        "sunset": "2026-06-21T06:53:18Z",
+        "asr_shafii": "2026-06-21T04:35:23Z",
+        "fajr_18": "2026-06-20T19:30:02Z",
+        "isha_17": "2026-06-21T08:17:44Z"
+      }
+    },
+    {
+      "location": "Sydney",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "civil_timezone": "Australia/Sydney",
+      "date": "2026-09-22",
+      "events_utc": {
+        "transit": "2026-09-22T01:48:02.885158Z",
+        "sunrise": "2026-09-21T19:46:33Z",
+        "sunset": "2026-09-22T07:50:05Z",
+        "asr_shafii": "2026-09-22T05:13:55Z",
+        "fajr_18": "2026-09-21T18:23:25Z",
+        "isha_17": "2026-09-22T09:08:28Z"
+      }
+    },
+    {
+      "location": "Ushuaia",
+      "latitude": -54.8019,
+      "longitude": -68.303,
+      "civil_timezone": "America/Argentina/Ushuaia",
+      "date": "2026-01-15",
+      "events_utc": {
+        "transit": "2026-01-15T16:41:54.650632Z",
+        "sunrise": "2026-01-15T08:20:03Z",
+        "sunset": "2026-01-16T01:02:47Z",
+        "asr_shafii": "2026-01-15T21:05:23Z",
+        "fajr_18": null,
+        "isha_17": null
+      }
+    },
+    {
+      "location": "Ushuaia",
+      "latitude": -54.8019,
+      "longitude": -68.303,
+      "civil_timezone": "America/Argentina/Ushuaia",
+      "date": "2026-03-20",
+      "events_utc": {
+        "transit": "2026-03-20T16:41:18.994470Z",
+        "sunrise": "2026-03-20T10:32:52Z",
+        "sunset": "2026-03-20T22:48:38Z",
+        "asr_shafii": "2026-03-20T19:55:54Z",
+        "fajr_18": "2026-03-20T08:28:14Z",
+        "isha_17": "2026-03-21T00:44:48Z"
+      }
+    },
+    {
+      "location": "Ushuaia",
+      "latitude": -54.8019,
+      "longitude": -68.303,
+      "civil_timezone": "America/Argentina/Ushuaia",
+      "date": "2026-06-21",
+      "events_utc": {
+        "transit": "2026-06-21T16:34:34.922221Z",
+        "sunrise": "2026-06-21T12:58:29Z",
+        "sunset": "2026-06-21T20:10:41Z",
+        "asr_shafii": "2026-06-21T17:57:07Z",
+        "fajr_18": "2026-06-21T10:41:33Z",
+        "isha_17": "2026-06-21T22:20:23Z"
+      }
+    },
+    {
+      "location": "Ushuaia",
+      "latitude": -54.8019,
+      "longitude": -68.303,
+      "civil_timezone": "America/Argentina/Ushuaia",
+      "date": "2026-09-22",
+      "events_utc": {
+        "transit": "2026-09-22T16:25:52.268346Z",
+        "sunrise": "2026-09-22T10:23:57Z",
+        "sunset": "2026-09-22T22:28:55Z",
+        "asr_shafii": "2026-09-22T19:38:11Z",
+        "fajr_18": "2026-09-22T08:20:58Z",
+        "isha_17": "2026-09-23T00:24:49Z"
+      }
+    }
+  ]
+}

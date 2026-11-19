@@ -13,9 +13,10 @@ void main() {
 
       final utcInstant = times.dhuhr.add(const Duration(minutes: 5));
       final plus7Like = utcInstant.toLocal().toUtc();
-      final minus4Like = utcInstant.add(const Duration(hours: -4)).toUtc().add(
-            const Duration(hours: 4),
-          );
+      final minus4Like = utcInstant
+          .add(const Duration(hours: -4))
+          .toUtc()
+          .add(const Duration(hours: 4));
 
       final a = times.currentPrayer(date: utcInstant);
       final b = times.currentPrayer(date: plus7Like);
@@ -45,5 +46,32 @@ void main() {
       expect(times.nextPrayer(date: eq1), Prayer.isha);
       expect(times.nextPrayer(date: eq2), Prayer.isha);
     });
+
+    test(
+      'explicit location date fixes classification across local midnight',
+      () {
+        const newYork = Coordinates(40.7128, -74.0060);
+        final stale = PrayerTimes(
+          date: DateTime.utc(2026, 5, 1),
+          coordinates: newYork,
+          calculationParameters: CalculationMethod.northAmerica.parameters,
+          precision: true,
+        );
+        // 04:01 UTC is 00:01 on May 2 in New York (UTC-4). It is before
+        // May 2 Fajr, even though the instant is later than May 1's Isha.
+        final instant = DateTime.utc(2026, 5, 2, 4, 1);
+        final localDate = DateTime.utc(2026, 5, 2);
+
+        expect(stale.currentPrayer(date: instant), Prayer.isha);
+        expect(
+          stale.currentPrayer(date: instant, locationDate: localDate),
+          Prayer.ishaBefore,
+        );
+        expect(
+          stale.nextPrayer(date: instant, locationDate: localDate),
+          Prayer.imsak,
+        );
+      },
+    );
   });
 }

@@ -1,5 +1,1 @@
-enum HijriMethod {
-  calculatedLocal,
-  ummAlQura,
-  kemenagRiOfficial,
-}
+enum HijriMethod { calculatedLocal, ummAlQura, kemenagRiOfficial }

@@ -10,22 +10,26 @@ class CalculationParameters {
     this.fajrAngle,
     this.ishaAngle, {
     this.dhuhaOffsetMinutes = 20,
+    this.dhuhaAngle,
     this.ishaInterval,
     this.maghribAngle,
+    this.ramadanMaghribAdjustmentMinutes = 0,
     this.madhab,
     this.shafaq,
     this.highLatitudeRule,
     Map<Prayer, int>? adjustments,
     Map<Prayer, int>? methodAdjustments,
-  })  : adjustments = adjustments ?? _emptyAdjustments(),
-        methodAdjustments = methodAdjustments ?? _emptyAdjustments();
+  }) : adjustments = adjustments ?? _emptyAdjustments(),
+       methodAdjustments = methodAdjustments ?? _emptyAdjustments();
 
   final CalculationMethod method;
   final double fajrAngle;
   final double ishaAngle;
   final int dhuhaOffsetMinutes;
+  final double? dhuhaAngle;
   final int? ishaInterval;
   final double? maghribAngle;
+  final int ramadanMaghribAdjustmentMinutes;
   final Madhab? madhab;
   final Shafaq? shafaq;
   final HighLatitudeRule? highLatitudeRule;
@@ -38,7 +42,9 @@ class CalculationParameters {
     double? ishaAngle,
     int? ishaInterval,
     int? dhuhaOffsetMinutes,
+    double? dhuhaAngle,
     double? maghribAngle,
+    int? ramadanMaghribAdjustmentMinutes,
     Madhab? madhab,
     Shafaq? shafaq,
     HighLatitudeRule? highLatitudeRule,
@@ -50,8 +56,12 @@ class CalculationParameters {
       fajrAngle ?? this.fajrAngle,
       ishaAngle ?? this.ishaAngle,
       dhuhaOffsetMinutes: dhuhaOffsetMinutes ?? this.dhuhaOffsetMinutes,
+      dhuhaAngle: dhuhaAngle ?? this.dhuhaAngle,
       ishaInterval: ishaInterval ?? this.ishaInterval,
       maghribAngle: maghribAngle ?? this.maghribAngle,
+      ramadanMaghribAdjustmentMinutes:
+          ramadanMaghribAdjustmentMinutes ??
+          this.ramadanMaghribAdjustmentMinutes,
       madhab: madhab ?? this.madhab,
       shafaq: shafaq ?? this.shafaq,
       highLatitudeRule: highLatitudeRule ?? this.highLatitudeRule,
@@ -69,10 +79,7 @@ class CalculationParameters {
       case HighLatitudeRule.seventhOfTheNight:
         return {Prayer.fajr: 1 / 7, Prayer.isha: 1 / 7};
       case HighLatitudeRule.twilightAngle:
-        return {
-          Prayer.fajr: fajrAngle / 60,
-          Prayer.isha: ishaAngle / 60,
-        };
+        return {Prayer.fajr: fajrAngle / 60, Prayer.isha: ishaAngle / 60};
     }
   }
 

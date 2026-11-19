@@ -1,0 +1,1568 @@
+{
+  "source": "NASA/JPL DE421 planetary ephemeris, evaluated with Skyfield",
+  "source_url": "https://ssd.jpl.nasa.gov/planets/eph_export.html",
+  "skyfield_source": "https://rhodesmill.org/skyfield/",
+  "skyfield_version": "1.55",
+  "generated_at_utc": "2026-11-19T13:52:13Z",
+  "method": "Topocentric apparent solar altitude from Skyfield/JPL DE421; crossings refined by bisection; upper meridian transit from Skyfield almanac.",
+  "coordinate_source": "Representative city coordinates maintained in the package parity test matrix; calculation points, not surveyed observer locations.",
+  "assumptions": {
+    "sunrise_sunset_center_altitude_degrees": -0.833,
+    "fajr_solar_center_altitude_degrees": -18,
+    "isha_solar_center_altitude_degrees": -17,
+    "asr_shadow_factor": 1,
+    "elevation_meters": 0,
+    "atmospheric_refraction": "Standard combined sunrise/sunset threshold only; zero-pressure topocentric apparent altitude otherwise.",
+    "rounding": "UTC ISO-8601 timestamps rounded to nearest second; no event-minute rounding."
+  },
+  "calculation_profiles": [
+    {
+      "id": "mwl_18_17_shafii",
+      "label": "Muslim World League",
+      "fajr_angle_degrees": 18.0,
+      "isha_angle_degrees": 17.0,
+      "asr_shadow_factor": 1.0
+    },
+    {
+      "id": "egyptian_19_5_17_5_shafii",
+      "label": "Egyptian General Authority",
+      "fajr_angle_degrees": 19.5,
+      "isha_angle_degrees": 17.5,
+      "asr_shadow_factor": 1.0
+    },
+    {
+      "id": "indonesian_20_18_shafii",
+      "label": "Indonesian preset",
+      "fajr_angle_degrees": 20.0,
+      "isha_angle_degrees": 18.0,
+      "asr_shadow_factor": 1.0
+    },
+    {
+      "id": "karachi_18_18_shafii",
+      "label": "Karachi preset",
+      "fajr_angle_degrees": 18.0,
+      "isha_angle_degrees": 18.0,
+      "asr_shadow_factor": 1.0
+    },
+    {
+      "id": "north_america_15_15_shafii",
+      "label": "North America preset",
+      "fajr_angle_degrees": 15.0,
+      "isha_angle_degrees": 15.0,
+      "asr_shadow_factor": 1.0
+    },
+    {
+      "id": "mwl_18_17_hanafi",
+      "label": "Muslim World League, Hanafi Asr",
+      "fajr_angle_degrees": 18.0,
+      "isha_angle_degrees": 17.0,
+      "asr_shadow_factor": 2.0
+    }
+  ],
+  "records": [
+    {
+      "location": "Jakarta",
+      "latitude": -6.2088,
+      "longitude": 106.8456,
+      "civil_timezone": "Asia/Jakarta",
+      "date": "2026-01-15",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-01-15T08:26:52Z",
+          "fajr": "2026-01-14T21:33:35Z",
+          "isha": "2026-01-15T12:25:41Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-01-15T08:26:52Z",
+          "fajr": "2026-01-14T21:26:56Z",
+          "isha": "2026-01-15T12:27:54Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-01-15T08:26:52Z",
+          "fajr": "2026-01-14T21:24:42Z",
+          "isha": "2026-01-15T12:30:06Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-01-15T08:26:52Z",
+          "fajr": "2026-01-14T21:33:35Z",
+          "isha": "2026-01-15T12:30:06Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-01-15T08:26:52Z",
+          "fajr": "2026-01-14T21:46:50Z",
+          "isha": "2026-01-15T12:16:52Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-01-15T09:29:20Z",
+          "fajr": "2026-01-14T21:33:35Z",
+          "isha": "2026-01-15T12:25:41Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-01-15T05:01:54Z",
+        "sunrise": "2026-01-14T22:48:34Z",
+        "sunset": "2026-01-15T11:15:12Z",
+        "asr_shafii": "2026-01-15T08:26:52Z",
+        "fajr_18": "2026-01-14T21:33:35Z",
+        "isha_17": "2026-01-15T12:25:41Z"
+      }
+    },
+    {
+      "location": "Jakarta",
+      "latitude": -6.2088,
+      "longitude": 106.8456,
+      "civil_timezone": "Asia/Jakarta",
+      "date": "2026-03-20",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-03-20T08:10:27Z",
+          "fajr": "2026-03-19T21:47:40Z",
+          "isha": "2026-03-20T12:08:29Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-03-20T08:10:27Z",
+          "fajr": "2026-03-19T21:41:38Z",
+          "isha": "2026-03-20T12:10:29Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-03-20T08:10:27Z",
+          "fajr": "2026-03-19T21:39:37Z",
+          "isha": "2026-03-20T12:12:30Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-03-20T08:10:27Z",
+          "fajr": "2026-03-19T21:47:40Z",
+          "isha": "2026-03-20T12:12:30Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-03-20T08:10:27Z",
+          "fajr": "2026-03-19T21:59:45Z",
+          "isha": "2026-03-20T12:00:26Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-03-20T09:17:53Z",
+          "fajr": "2026-03-19T21:47:40Z",
+          "isha": "2026-03-20T12:08:29Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-03-20T05:00:08Z",
+        "sunrise": "2026-03-19T22:56:45Z",
+        "sunset": "2026-03-20T11:03:26Z",
+        "asr_shafii": "2026-03-20T08:10:27Z",
+        "fajr_18": "2026-03-19T21:47:40Z",
+        "isha_17": "2026-03-20T12:08:29Z"
+      }
+    },
+    {
+      "location": "Jakarta",
+      "latitude": -6.2088,
+      "longitude": 106.8456,
+      "civil_timezone": "Asia/Jakarta",
+      "date": "2026-06-21",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-06-21T08:16:18Z",
+          "fajr": "2026-06-20T21:46:30Z",
+          "isha": "2026-06-21T11:57:53Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-06-21T08:16:18Z",
+          "fajr": "2026-06-20T21:39:57Z",
+          "isha": "2026-06-21T12:00:04Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-06-21T08:16:18Z",
+          "fajr": "2026-06-20T21:37:46Z",
+          "isha": "2026-06-21T12:02:15Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-06-21T08:16:18Z",
+          "fajr": "2026-06-20T21:46:30Z",
+          "isha": "2026-06-21T12:02:15Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-06-21T08:16:18Z",
+          "fajr": "2026-06-20T21:59:34Z",
+          "isha": "2026-06-21T11:49:10Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-06-21T09:08:45Z",
+          "fajr": "2026-06-20T21:46:30Z",
+          "isha": "2026-06-21T11:57:53Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-06-21T04:54:22Z",
+        "sunrise": "2026-06-20T23:01:29Z",
+        "sunset": "2026-06-21T10:47:15Z",
+        "asr_shafii": "2026-06-21T08:16:18Z",
+        "fajr_18": "2026-06-20T21:46:30Z",
+        "isha_17": "2026-06-21T11:57:53Z"
+      }
+    },
+    {
+      "location": "Jakarta",
+      "latitude": -6.2088,
+      "longitude": 106.8456,
+      "civil_timezone": "Asia/Jakarta",
+      "date": "2026-09-22",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-09-22T07:56:24Z",
+          "fajr": "2026-09-21T21:33:19Z",
+          "isha": "2026-09-22T11:53:39Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-09-22T07:56:24Z",
+          "fajr": "2026-09-21T21:27:17Z",
+          "isha": "2026-09-22T11:55:40Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-09-22T07:56:24Z",
+          "fajr": "2026-09-21T21:25:16Z",
+          "isha": "2026-09-22T11:57:41Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-09-22T07:56:24Z",
+          "fajr": "2026-09-21T21:33:19Z",
+          "isha": "2026-09-22T11:57:41Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-09-22T07:56:24Z",
+          "fajr": "2026-09-21T21:45:23Z",
+          "isha": "2026-09-22T11:45:36Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-09-22T09:03:22Z",
+          "fajr": "2026-09-21T21:33:19Z",
+          "isha": "2026-09-22T11:53:39Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-09-22T04:45:27Z",
+        "sunrise": "2026-09-21T22:42:22Z",
+        "sunset": "2026-09-22T10:48:36Z",
+        "asr_shafii": "2026-09-22T07:56:24Z",
+        "fajr_18": "2026-09-21T21:33:19Z",
+        "isha_17": "2026-09-22T11:53:39Z"
+      }
+    },
+    {
+      "location": "Singapore",
+      "latitude": 1.3521,
+      "longitude": 103.8198,
+      "civil_timezone": "Asia/Singapore",
+      "date": "2026-01-15",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-01-15T08:38:22Z",
+          "fajr": "2026-01-14T21:58:42Z",
+          "isha": "2026-01-15T12:24:58Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-01-15T08:38:22Z",
+          "fajr": "2026-01-14T21:52:13Z",
+          "isha": "2026-01-15T12:27:08Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-01-15T08:38:22Z",
+          "fajr": "2026-01-14T21:50:04Z",
+          "isha": "2026-01-15T12:29:17Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-01-15T08:38:22Z",
+          "fajr": "2026-01-14T21:58:42Z",
+          "isha": "2026-01-15T12:29:17Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-01-15T08:38:22Z",
+          "fajr": "2026-01-14T22:11:37Z",
+          "isha": "2026-01-15T12:16:22Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-01-15T09:34:52Z",
+          "fajr": "2026-01-14T21:58:42Z",
+          "isha": "2026-01-15T12:24:58Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-01-15T05:14:01Z",
+        "sunrise": "2026-01-14T23:12:27Z",
+        "sunset": "2026-01-15T11:15:35Z",
+        "asr_shafii": "2026-01-15T08:38:22Z",
+        "fajr_18": "2026-01-14T21:58:42Z",
+        "isha_17": "2026-01-15T12:24:58Z"
+      }
+    },
+    {
+      "location": "Singapore",
+      "latitude": 1.3521,
+      "longitude": 103.8198,
+      "civil_timezone": "Asia/Singapore",
+      "date": "2026-03-20",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-03-20T08:15:06Z",
+          "fajr": "2026-03-19T22:00:21Z",
+          "isha": "2026-03-20T12:20:10Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-03-20T08:15:06Z",
+          "fajr": "2026-03-19T21:54:21Z",
+          "isha": "2026-03-20T12:22:10Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-03-20T08:15:06Z",
+          "fajr": "2026-03-19T21:52:21Z",
+          "isha": "2026-03-20T12:24:10Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-03-20T08:15:06Z",
+          "fajr": "2026-03-19T22:00:21Z",
+          "isha": "2026-03-20T12:24:10Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-03-20T08:15:06Z",
+          "fajr": "2026-03-19T22:12:21Z",
+          "isha": "2026-03-20T12:12:09Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-03-20T09:27:04Z",
+          "fajr": "2026-03-19T22:00:21Z",
+          "isha": "2026-03-20T12:20:10Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-03-20T05:12:14Z",
+        "sunrise": "2026-03-19T23:09:01Z",
+        "sunset": "2026-03-20T11:15:29Z",
+        "asr_shafii": "2026-03-20T08:15:06Z",
+        "fajr_18": "2026-03-19T22:00:21Z",
+        "isha_17": "2026-03-20T12:20:10Z"
+      }
+    },
+    {
+      "location": "Singapore",
+      "latitude": 1.3521,
+      "longitude": 103.8198,
+      "civil_timezone": "Asia/Singapore",
+      "date": "2026-06-21",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-06-21T08:32:44Z",
+          "fajr": "2026-06-20T21:45:10Z",
+          "isha": "2026-06-21T12:23:22Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-06-21T08:32:44Z",
+          "fajr": "2026-06-20T21:38:32Z",
+          "isha": "2026-06-21T12:25:34Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-06-21T08:32:44Z",
+          "fajr": "2026-06-20T21:36:19Z",
+          "isha": "2026-06-21T12:27:47Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-06-21T08:32:44Z",
+          "fajr": "2026-06-20T21:45:10Z",
+          "isha": "2026-06-21T12:27:47Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-06-21T08:32:44Z",
+          "fajr": "2026-06-20T21:58:25Z",
+          "isha": "2026-06-21T12:14:32Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-06-21T09:30:08Z",
+          "fajr": "2026-06-20T21:45:10Z",
+          "isha": "2026-06-21T12:23:22Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-06-21T05:06:29Z",
+        "sunrise": "2026-06-20T23:00:27Z",
+        "sunset": "2026-06-21T11:12:30Z",
+        "asr_shafii": "2026-06-21T08:32:44Z",
+        "fajr_18": "2026-06-20T21:45:10Z",
+        "isha_17": "2026-06-21T12:23:22Z"
+      }
+    },
+    {
+      "location": "Singapore",
+      "latitude": 1.3521,
+      "longitude": 103.8198,
+      "civil_timezone": "Asia/Singapore",
+      "date": "2026-09-22",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-09-22T07:59:32Z",
+          "fajr": "2026-09-21T21:45:36Z",
+          "isha": "2026-09-22T12:05:28Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-09-22T07:59:32Z",
+          "fajr": "2026-09-21T21:39:36Z",
+          "isha": "2026-09-22T12:07:28Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-09-22T07:59:32Z",
+          "fajr": "2026-09-21T21:37:36Z",
+          "isha": "2026-09-22T12:09:28Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-09-22T07:59:32Z",
+          "fajr": "2026-09-21T21:45:36Z",
+          "isha": "2026-09-22T12:09:28Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-09-22T07:59:32Z",
+          "fajr": "2026-09-21T21:57:36Z",
+          "isha": "2026-09-22T11:57:28Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-09-22T09:12:02Z",
+          "fajr": "2026-09-21T21:45:36Z",
+          "isha": "2026-09-22T12:05:28Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-09-22T04:57:33Z",
+        "sunrise": "2026-09-21T22:54:17Z",
+        "sunset": "2026-09-22T11:00:48Z",
+        "asr_shafii": "2026-09-22T07:59:32Z",
+        "fajr_18": "2026-09-21T21:45:36Z",
+        "isha_17": "2026-09-22T12:05:28Z"
+      }
+    },
+    {
+      "location": "Makkah",
+      "latitude": 21.4225,
+      "longitude": 39.8262,
+      "civil_timezone": "Asia/Riyadh",
+      "date": "2026-01-15",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-01-15T12:37:35Z",
+          "fajr": "2026-01-15T02:42:50Z",
+          "isha": "2026-01-15T16:12:55Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-01-15T12:37:35Z",
+          "fajr": "2026-01-15T02:36:07Z",
+          "isha": "2026-01-15T16:15:10Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-01-15T12:37:35Z",
+          "fajr": "2026-01-15T02:33:54Z",
+          "isha": "2026-01-15T16:17:24Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-01-15T12:37:35Z",
+          "fajr": "2026-01-15T02:42:50Z",
+          "isha": "2026-01-15T16:17:24Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-01-15T12:37:35Z",
+          "fajr": "2026-01-15T02:56:18Z",
+          "isha": "2026-01-15T16:03:57Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-01-15T13:23:35Z",
+          "fajr": "2026-01-15T02:42:50Z",
+          "isha": "2026-01-15T16:12:55Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-01-15T09:30:03Z",
+        "sunrise": "2026-01-15T04:00:59Z",
+        "sunset": "2026-01-15T14:59:16Z",
+        "asr_shafii": "2026-01-15T12:37:35Z",
+        "fajr_18": "2026-01-15T02:42:50Z",
+        "isha_17": "2026-01-15T16:12:55Z"
+      }
+    },
+    {
+      "location": "Makkah",
+      "latitude": 21.4225,
+      "longitude": 39.8262,
+      "civil_timezone": "Asia/Riyadh",
+      "date": "2026-03-20",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-03-20T12:52:59Z",
+          "fajr": "2026-03-20T02:11:03Z",
+          "isha": "2026-03-20T16:41:20Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-03-20T12:52:59Z",
+          "fajr": "2026-03-20T02:04:34Z",
+          "isha": "2026-03-20T16:43:30Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-03-20T12:52:59Z",
+          "fajr": "2026-03-20T02:02:24Z",
+          "isha": "2026-03-20T16:45:40Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-03-20T12:52:59Z",
+          "fajr": "2026-03-20T02:11:03Z",
+          "isha": "2026-03-20T16:45:40Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-03-20T12:52:59Z",
+          "fajr": "2026-03-20T02:24:01Z",
+          "isha": "2026-03-20T16:32:41Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-03-20T13:50:14Z",
+          "fajr": "2026-03-20T02:11:03Z",
+          "isha": "2026-03-20T16:41:20Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-03-20T09:28:10Z",
+        "sunrise": "2026-03-20T03:24:58Z",
+        "sunset": "2026-03-20T15:31:41Z",
+        "asr_shafii": "2026-03-20T12:52:59Z",
+        "fajr_18": "2026-03-20T02:11:03Z",
+        "isha_17": "2026-03-20T16:41:20Z"
+      }
+    },
+    {
+      "location": "Makkah",
+      "latitude": 21.4225,
+      "longitude": 39.8262,
+      "civil_timezone": "Asia/Riyadh",
+      "date": "2026-06-21",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-06-21T12:42:20Z",
+          "fajr": "2026-06-21T01:13:54Z",
+          "isha": "2026-06-21T17:25:51Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-06-21T12:42:20Z",
+          "fajr": "2026-06-21T01:05:57Z",
+          "isha": "2026-06-21T17:28:27Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-06-21T12:42:20Z",
+          "fajr": "2026-06-21T01:03:16Z",
+          "isha": "2026-06-21T17:31:05Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-06-21T12:42:20Z",
+          "fajr": "2026-06-21T01:13:54Z",
+          "isha": "2026-06-21T17:31:05Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-06-21T12:42:20Z",
+          "fajr": "2026-06-21T01:29:29Z",
+          "isha": "2026-06-21T17:15:30Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-06-21T14:01:30Z",
+          "fajr": "2026-06-21T01:13:54Z",
+          "isha": "2026-06-21T17:25:51Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-06-21T09:22:29Z",
+        "sunrise": "2026-06-21T02:39:18Z",
+        "sunset": "2026-06-21T16:05:40Z",
+        "asr_shafii": "2026-06-21T12:42:20Z",
+        "fajr_18": "2026-06-21T01:13:54Z",
+        "isha_17": "2026-06-21T17:25:51Z"
+      }
+    },
+    {
+      "location": "Makkah",
+      "latitude": 21.4225,
+      "longitude": 39.8262,
+      "civil_timezone": "Asia/Riyadh",
+      "date": "2026-09-22",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-09-22T12:38:08Z",
+          "fajr": "2026-09-22T01:55:26Z",
+          "isha": "2026-09-22T16:26:46Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-09-22T12:38:08Z",
+          "fajr": "2026-09-22T01:48:55Z",
+          "isha": "2026-09-22T16:28:56Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-09-22T12:38:08Z",
+          "fajr": "2026-09-22T01:46:45Z",
+          "isha": "2026-09-22T16:31:06Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-09-22T12:38:08Z",
+          "fajr": "2026-09-22T01:55:26Z",
+          "isha": "2026-09-22T16:31:06Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-09-22T12:38:08Z",
+          "fajr": "2026-09-22T02:08:25Z",
+          "isha": "2026-09-22T16:18:07Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-09-22T13:35:36Z",
+          "fajr": "2026-09-22T01:55:26Z",
+          "isha": "2026-09-22T16:26:46Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-09-22T09:13:28Z",
+        "sunrise": "2026-09-22T03:09:27Z",
+        "sunset": "2026-09-22T15:17:10Z",
+        "asr_shafii": "2026-09-22T12:38:08Z",
+        "fajr_18": "2026-09-22T01:55:26Z",
+        "isha_17": "2026-09-22T16:26:46Z"
+      }
+    },
+    {
+      "location": "London",
+      "latitude": 51.5072,
+      "longitude": -0.1276,
+      "civil_timezone": "Europe/London",
+      "date": "2026-01-15",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-01-15T14:01:22Z",
+          "fajr": "2026-01-15T05:59:09Z",
+          "isha": "2026-01-15T18:14:34Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-01-15T14:01:22Z",
+          "fajr": "2026-01-15T05:49:20Z",
+          "isha": "2026-01-15T18:17:51Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-01-15T14:01:22Z",
+          "fajr": "2026-01-15T05:46:05Z",
+          "isha": "2026-01-15T18:21:08Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-01-15T14:01:22Z",
+          "fajr": "2026-01-15T05:59:09Z",
+          "isha": "2026-01-15T18:21:08Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-01-15T14:01:22Z",
+          "fajr": "2026-01-15T06:18:57Z",
+          "isha": "2026-01-15T18:01:19Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-01-15T14:33:34Z",
+          "fajr": "2026-01-15T05:59:09Z",
+          "isha": "2026-01-15T18:14:34Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-01-15T12:09:54Z",
+        "sunrise": "2026-01-15T07:59:27Z",
+        "sunset": "2026-01-15T16:20:46Z",
+        "asr_shafii": "2026-01-15T14:01:22Z",
+        "fajr_18": "2026-01-15T05:59:09Z",
+        "isha_17": "2026-01-15T18:14:34Z"
+      }
+    },
+    {
+      "location": "London",
+      "latitude": 51.5072,
+      "longitude": -0.1276,
+      "civil_timezone": "Europe/London",
+      "date": "2026-03-20",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-03-20T15:25:43Z",
+          "fajr": "2026-03-20T04:10:00Z",
+          "isha": "2026-03-20T20:00:24Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-03-20T15:25:43Z",
+          "fajr": "2026-03-20T03:59:23Z",
+          "isha": "2026-03-20T20:03:54Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-03-20T15:25:43Z",
+          "fajr": "2026-03-20T03:55:48Z",
+          "isha": "2026-03-20T20:07:25Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-03-20T15:25:43Z",
+          "fajr": "2026-03-20T04:10:00Z",
+          "isha": "2026-03-20T20:07:25Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-03-20T15:25:43Z",
+          "fajr": "2026-03-20T04:30:42Z",
+          "isha": "2026-03-20T19:46:35Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-03-20T16:15:34Z",
+          "fajr": "2026-03-20T04:10:00Z",
+          "isha": "2026-03-20T20:00:24Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-03-20T12:07:57Z",
+        "sunrise": "2026-03-20T06:03:24Z",
+        "sunset": "2026-03-20T18:13:30Z",
+        "asr_shafii": "2026-03-20T15:25:43Z",
+        "fajr_18": "2026-03-20T04:10:00Z",
+        "isha_17": "2026-03-20T20:00:24Z"
+      }
+    },
+    {
+      "location": "London",
+      "latitude": 51.5072,
+      "longitude": -0.1276,
+      "civil_timezone": "Europe/London",
+      "date": "2026-06-21",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-06-21T16:25:10Z",
+          "fajr": null,
+          "isha": null
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-06-21T16:25:10Z",
+          "fajr": null,
+          "isha": null
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-06-21T16:25:10Z",
+          "fajr": null,
+          "isha": null
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-06-21T16:25:10Z",
+          "fajr": null,
+          "isha": null
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-06-21T16:25:10Z",
+          "fajr": "2026-06-21T00:15:35Z",
+          "isha": "2026-06-21T23:48:57Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-06-21T17:39:54Z",
+          "fajr": null,
+          "isha": null
+        }
+      },
+      "events_utc": {
+        "transit": "2026-06-21T12:02:20Z",
+        "sunrise": "2026-06-21T03:43:06Z",
+        "sunset": "2026-06-21T20:21:33Z",
+        "asr_shafii": "2026-06-21T16:25:10Z",
+        "fajr_18": null,
+        "isha_17": null
+      }
+    },
+    {
+      "location": "London",
+      "latitude": 51.5072,
+      "longitude": -0.1276,
+      "civil_timezone": "Europe/London",
+      "date": "2026-09-22",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-09-22T15:11:06Z",
+          "fajr": "2026-09-22T03:52:24Z",
+          "isha": "2026-09-22T19:45:34Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-09-22T15:11:06Z",
+          "fajr": "2026-09-22T03:41:40Z",
+          "isha": "2026-09-22T19:49:04Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-09-22T15:11:06Z",
+          "fajr": "2026-09-22T03:38:02Z",
+          "isha": "2026-09-22T19:52:34Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-09-22T15:11:06Z",
+          "fajr": "2026-09-22T03:52:24Z",
+          "isha": "2026-09-22T19:52:34Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-09-22T15:11:06Z",
+          "fajr": "2026-09-22T04:13:18Z",
+          "isha": "2026-09-22T19:31:48Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-09-22T16:01:04Z",
+          "fajr": "2026-09-22T03:52:24Z",
+          "isha": "2026-09-22T19:45:34Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-09-22T11:53:14Z",
+        "sunrise": "2026-09-22T05:46:30Z",
+        "sunset": "2026-09-22T17:58:59Z",
+        "asr_shafii": "2026-09-22T15:11:06Z",
+        "fajr_18": "2026-09-22T03:52:24Z",
+        "isha_17": "2026-09-22T19:45:34Z"
+      }
+    },
+    {
+      "location": "Reykjavik",
+      "latitude": 64.1466,
+      "longitude": -21.9426,
+      "civil_timezone": "Atlantic/Reykjavik",
+      "date": "2026-01-15",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-01-15T14:18:10Z",
+          "fajr": "2026-01-15T07:45:33Z",
+          "isha": "2026-01-15T19:20:10Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-01-15T14:18:10Z",
+          "fajr": "2026-01-15T07:31:36Z",
+          "isha": "2026-01-15T19:24:53Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-01-15T14:18:10Z",
+          "fajr": "2026-01-15T07:26:58Z",
+          "isha": "2026-01-15T19:29:34Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-01-15T14:18:10Z",
+          "fajr": "2026-01-15T07:45:33Z",
+          "isha": "2026-01-15T19:29:34Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-01-15T14:18:10Z",
+          "fajr": "2026-01-15T08:13:58Z",
+          "isha": "2026-01-15T19:01:07Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-01-15T14:33:05Z",
+          "fajr": "2026-01-15T07:45:33Z",
+          "isha": "2026-01-15T19:20:10Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-01-15T13:37:11Z",
+        "sunrise": "2026-01-15T10:54:54Z",
+        "sunset": "2026-01-15T16:20:04Z",
+        "asr_shafii": "2026-01-15T14:18:10Z",
+        "fajr_18": "2026-01-15T07:45:33Z",
+        "isha_17": "2026-01-15T19:20:10Z"
+      }
+    },
+    {
+      "location": "Reykjavik",
+      "latitude": 64.1466,
+      "longitude": -21.9426,
+      "civil_timezone": "Atlantic/Reykjavik",
+      "date": "2026-03-20",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-03-20T16:34:09Z",
+          "fajr": "2026-03-20T04:36:46Z",
+          "isha": "2026-03-20T22:24:52Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-03-20T16:34:09Z",
+          "fajr": "2026-03-20T04:17:44Z",
+          "isha": "2026-03-20T22:30:54Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-03-20T16:34:09Z",
+          "fajr": "2026-03-20T04:11:00Z",
+          "isha": "2026-03-20T22:37:04Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-03-20T16:34:09Z",
+          "fajr": "2026-03-20T04:36:46Z",
+          "isha": "2026-03-20T22:37:04Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-03-20T16:34:09Z",
+          "fajr": "2026-03-20T05:11:18Z",
+          "isha": "2026-03-20T22:01:55Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-03-20T17:22:41Z",
+          "fajr": "2026-03-20T04:36:46Z",
+          "isha": "2026-03-20T22:24:52Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-03-20T13:35:11Z",
+        "sunrise": "2026-03-20T07:28:38Z",
+        "sunset": "2026-03-20T19:43:24Z",
+        "asr_shafii": "2026-03-20T16:34:09Z",
+        "fajr_18": "2026-03-20T04:36:46Z",
+        "isha_17": "2026-03-20T22:24:52Z"
+      }
+    },
+    {
+      "location": "Reykjavik",
+      "latitude": 64.1466,
+      "longitude": -21.9426,
+      "civil_timezone": "Atlantic/Reykjavik",
+      "date": "2026-06-21",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-06-21T18:22:30Z",
+          "fajr": null,
+          "isha": null
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-06-21T18:22:30Z",
+          "fajr": null,
+          "isha": null
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-06-21T18:22:30Z",
+          "fajr": null,
+          "isha": null
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-06-21T18:22:30Z",
+          "fajr": null,
+          "isha": null
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-06-21T18:22:30Z",
+          "fajr": null,
+          "isha": null
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-06-21T19:45:39Z",
+          "fajr": null,
+          "isha": null
+        }
+      },
+      "events_utc": {
+        "transit": "2026-06-21T13:29:36Z",
+        "sunrise": "2026-06-21T02:55:13Z",
+        "sunset": "2026-06-22T00:03:57Z",
+        "asr_shafii": "2026-06-21T18:22:30Z",
+        "fajr_18": null,
+        "isha_17": null
+      }
+    },
+    {
+      "location": "Reykjavik",
+      "latitude": 64.1466,
+      "longitude": -21.9426,
+      "civil_timezone": "Atlantic/Reykjavik",
+      "date": "2026-09-22",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-09-22T16:19:20Z",
+          "fajr": "2026-09-22T04:16:21Z",
+          "isha": "2026-09-22T22:09:05Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-09-22T16:19:20Z",
+          "fajr": "2026-09-22T03:56:36Z",
+          "isha": "2026-09-22T22:15:03Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-09-22T16:19:20Z",
+          "fajr": "2026-09-22T03:49:35Z",
+          "isha": "2026-09-22T22:21:08Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-09-22T16:19:20Z",
+          "fajr": "2026-09-22T04:16:21Z",
+          "isha": "2026-09-22T22:21:08Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-09-22T16:19:20Z",
+          "fajr": "2026-09-22T04:51:47Z",
+          "isha": "2026-09-22T21:46:20Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-09-22T17:08:02Z",
+          "fajr": "2026-09-22T04:16:21Z",
+          "isha": "2026-09-22T22:09:05Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-09-22T13:20:28Z",
+        "sunrise": "2026-09-22T07:10:41Z",
+        "sunset": "2026-09-22T19:28:37Z",
+        "asr_shafii": "2026-09-22T16:19:20Z",
+        "fajr_18": "2026-09-22T04:16:21Z",
+        "isha_17": "2026-09-22T22:09:05Z"
+      }
+    },
+    {
+      "location": "Tromso",
+      "latitude": 69.6492,
+      "longitude": 18.9553,
+      "civil_timezone": "Europe/Oslo",
+      "date": "2026-01-15",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-01-15T11:00:09Z",
+          "fajr": "2026-01-15T05:13:53Z",
+          "isha": "2026-01-15T16:22:20Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-01-15T11:00:09Z",
+          "fajr": "2026-01-15T04:56:22Z",
+          "isha": "2026-01-15T16:28:16Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-01-15T11:00:09Z",
+          "fajr": "2026-01-15T04:50:34Z",
+          "isha": "2026-01-15T16:34:11Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-01-15T11:00:09Z",
+          "fajr": "2026-01-15T05:13:53Z",
+          "isha": "2026-01-15T16:34:11Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-01-15T11:00:09Z",
+          "fajr": "2026-01-15T05:49:51Z",
+          "isha": "2026-01-15T15:58:10Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-01-15T11:03:33Z",
+          "fajr": "2026-01-15T05:13:53Z",
+          "isha": "2026-01-15T16:22:20Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-01-15T10:53:33Z",
+        "sunrise": "2026-01-15T10:29:38Z",
+        "sunset": "2026-01-15T11:18:13Z",
+        "asr_shafii": "2026-01-15T11:00:09Z",
+        "fajr_18": "2026-01-15T05:13:53Z",
+        "isha_17": "2026-01-15T16:22:20Z"
+      }
+    },
+    {
+      "location": "Tromso",
+      "latitude": 69.6492,
+      "longitude": 18.9553,
+      "civil_timezone": "Europe/Oslo",
+      "date": "2026-03-20",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-03-20T13:37:09Z",
+          "fajr": "2026-03-20T00:46:19Z",
+          "isha": "2026-03-20T20:42:17Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-03-20T13:37:09Z",
+          "fajr": "2026-03-20T00:05:43Z",
+          "isha": "2026-03-20T20:53:01Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-03-20T13:37:09Z",
+          "fajr": "2026-03-19T23:46:22Z",
+          "isha": "2026-03-20T21:04:42Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-03-20T13:37:09Z",
+          "fajr": "2026-03-20T00:46:19Z",
+          "isha": "2026-03-20T21:04:42Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-03-20T13:37:09Z",
+          "fajr": "2026-03-20T01:42:51Z",
+          "isha": "2026-03-20T20:05:16Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-03-20T14:24:38Z",
+          "fajr": "2026-03-20T00:46:19Z",
+          "isha": "2026-03-20T20:42:17Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-03-20T10:51:38Z",
+        "sunrise": "2026-03-20T04:43:56Z",
+        "sunset": "2026-03-20T17:01:31Z",
+        "asr_shafii": "2026-03-20T13:37:09Z",
+        "fajr_18": "2026-03-20T00:46:19Z",
+        "isha_17": "2026-03-20T20:42:17Z"
+      }
+    },
+    {
+      "location": "Tromso",
+      "latitude": 69.6492,
+      "longitude": 18.9553,
+      "civil_timezone": "Europe/Oslo",
+      "date": "2026-06-21",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-06-21T15:57:45Z",
+          "fajr": null,
+          "isha": null
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-06-21T15:57:45Z",
+          "fajr": null,
+          "isha": null
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-06-21T15:57:45Z",
+          "fajr": null,
+          "isha": null
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-06-21T15:57:45Z",
+          "fajr": null,
+          "isha": null
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-06-21T15:57:45Z",
+          "fajr": null,
+          "isha": null
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-06-21T17:29:55Z",
+          "fajr": null,
+          "isha": null
+        }
+      },
+      "events_utc": {
+        "transit": "2026-06-21T10:45:59Z",
+        "sunrise": null,
+        "sunset": null,
+        "asr_shafii": "2026-06-21T15:57:45Z",
+        "fajr_18": null,
+        "isha_17": null
+      }
+    },
+    {
+      "location": "Tromso",
+      "latitude": 69.6492,
+      "longitude": 18.9553,
+      "civil_timezone": "Europe/Oslo",
+      "date": "2026-09-22",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-09-22T13:22:54Z",
+          "fajr": "2026-09-22T00:16:54Z",
+          "isha": "2026-09-22T20:26:46Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-09-22T13:22:54Z",
+          "fajr": "2026-09-21T23:24:36Z",
+          "isha": "2026-09-22T20:37:19Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-09-22T13:22:54Z",
+          "fajr": null,
+          "isha": "2026-09-22T20:48:45Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-09-22T13:22:54Z",
+          "fajr": "2026-09-22T00:16:54Z",
+          "isha": "2026-09-22T20:48:45Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-09-22T13:22:54Z",
+          "fajr": "2026-09-22T01:18:40Z",
+          "isha": "2026-09-22T19:50:14Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-09-22T14:10:44Z",
+          "fajr": "2026-09-22T00:16:54Z",
+          "isha": "2026-09-22T20:26:46Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-09-22T10:36:55Z",
+        "sunrise": "2026-09-22T04:24:01Z",
+        "sunset": "2026-09-22T16:47:40Z",
+        "asr_shafii": "2026-09-22T13:22:54Z",
+        "fajr_18": "2026-09-22T00:16:54Z",
+        "isha_17": "2026-09-22T20:26:46Z"
+      }
+    },
+    {
+      "location": "Sydney",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "civil_timezone": "Australia/Sydney",
+      "date": "2026-01-15",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-01-15T05:49:05Z",
+          "fajr": "2026-01-14T17:19:11Z",
+          "isha": "2026-01-15T10:42:31Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-01-15T05:49:05Z",
+          "fajr": "2026-01-14T17:09:13Z",
+          "isha": "2026-01-15T10:45:44Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-01-15T05:49:05Z",
+          "fajr": "2026-01-14T17:05:49Z",
+          "isha": "2026-01-15T10:48:58Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-01-15T05:49:05Z",
+          "fajr": "2026-01-14T17:19:11Z",
+          "isha": "2026-01-15T10:48:58Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-01-15T05:49:05Z",
+          "fajr": "2026-01-14T17:38:18Z",
+          "isha": "2026-01-15T10:29:56Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-01-15T07:01:49Z",
+          "fajr": "2026-01-14T17:19:11Z",
+          "isha": "2026-01-15T10:42:31Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-01-15T02:04:25Z",
+        "sunrise": "2026-01-14T18:59:29Z",
+        "sunset": "2026-01-15T09:08:58Z",
+        "asr_shafii": "2026-01-15T05:49:05Z",
+        "fajr_18": "2026-01-14T17:19:11Z",
+        "isha_17": "2026-01-15T10:42:31Z"
+      }
+    },
+    {
+      "location": "Sydney",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "civil_timezone": "Australia/Sydney",
+      "date": "2026-03-20",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-03-20T05:29:58Z",
+          "fajr": "2026-03-19T18:34:28Z",
+          "isha": "2026-03-20T09:25:20Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-03-20T05:29:58Z",
+          "fajr": "2026-03-19T18:27:01Z",
+          "isha": "2026-03-20T09:27:48Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-03-20T05:29:58Z",
+          "fajr": "2026-03-19T18:24:32Z",
+          "isha": "2026-03-20T09:30:16Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-03-20T05:29:58Z",
+          "fajr": "2026-03-19T18:34:28Z",
+          "isha": "2026-03-20T09:30:16Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-03-20T05:29:58Z",
+          "fajr": "2026-03-19T18:49:14Z",
+          "isha": "2026-03-20T09:15:32Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-03-20T06:22:58Z",
+          "fajr": "2026-03-19T18:34:28Z",
+          "isha": "2026-03-20T09:25:20Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-03-20T02:02:43Z",
+        "sunrise": "2026-03-19T19:57:58Z",
+        "sunset": "2026-03-20T08:06:56Z",
+        "asr_shafii": "2026-03-20T05:29:58Z",
+        "fajr_18": "2026-03-19T18:34:28Z",
+        "isha_17": "2026-03-20T09:25:20Z"
+      }
+    },
+    {
+      "location": "Sydney",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "civil_timezone": "Australia/Sydney",
+      "date": "2026-06-21",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-06-21T04:35:52Z",
+          "fajr": "2026-06-20T19:30:30Z",
+          "isha": "2026-06-21T08:18:14Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-06-21T04:35:52Z",
+          "fajr": "2026-06-20T19:22:59Z",
+          "isha": "2026-06-21T08:20:45Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-06-21T04:35:52Z",
+          "fajr": "2026-06-20T19:20:29Z",
+          "isha": "2026-06-21T08:23:16Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-06-21T04:35:52Z",
+          "fajr": "2026-06-20T19:30:30Z",
+          "isha": "2026-06-21T08:23:16Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-06-21T04:35:52Z",
+          "fajr": "2026-06-20T19:45:40Z",
+          "isha": "2026-06-21T08:08:07Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-06-21T05:15:54Z",
+          "fajr": "2026-06-20T19:30:30Z",
+          "isha": "2026-06-21T08:18:14Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-06-21T01:56:53Z",
+        "sunrise": "2026-06-20T20:59:58Z",
+        "sunset": "2026-06-21T06:53:49Z",
+        "asr_shafii": "2026-06-21T04:35:52Z",
+        "fajr_18": "2026-06-20T19:30:30Z",
+        "isha_17": "2026-06-21T08:18:14Z"
+      }
+    },
+    {
+      "location": "Sydney",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "civil_timezone": "Australia/Sydney",
+      "date": "2026-09-22",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-09-22T05:14:51Z",
+          "fajr": "2026-09-21T18:22:09Z",
+          "isha": "2026-09-22T09:09:42Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-09-22T05:14:51Z",
+          "fajr": "2026-09-21T18:14:45Z",
+          "isha": "2026-09-22T09:12:09Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-09-22T05:14:51Z",
+          "fajr": "2026-09-21T18:12:17Z",
+          "isha": "2026-09-22T09:14:37Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-09-22T05:14:51Z",
+          "fajr": "2026-09-21T18:22:09Z",
+          "isha": "2026-09-22T09:14:37Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-09-22T05:14:51Z",
+          "fajr": "2026-09-21T18:36:51Z",
+          "isha": "2026-09-22T08:59:53Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-09-22T06:07:31Z",
+          "fajr": "2026-09-21T18:22:09Z",
+          "isha": "2026-09-22T09:09:42Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-09-22T01:48:02Z",
+        "sunrise": "2026-09-21T19:45:21Z",
+        "sunset": "2026-09-22T07:51:15Z",
+        "asr_shafii": "2026-09-22T05:14:51Z",
+        "fajr_18": "2026-09-21T18:22:09Z",
+        "isha_17": "2026-09-22T09:09:42Z"
+      }
+    },
+    {
+      "location": "Ushuaia",
+      "latitude": -54.8019,
+      "longitude": -68.303,
+      "civil_timezone": "America/Argentina/Ushuaia",
+      "date": "2026-01-15",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-01-15T21:05:38Z",
+          "fajr": null,
+          "isha": null
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-01-15T21:05:38Z",
+          "fajr": null,
+          "isha": null
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-01-15T21:05:38Z",
+          "fajr": null,
+          "isha": null
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-01-15T21:05:38Z",
+          "fajr": null,
+          "isha": null
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-01-15T21:05:38Z",
+          "fajr": null,
+          "isha": null
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-01-15T22:17:54Z",
+          "fajr": null,
+          "isha": null
+        }
+      },
+      "events_utc": {
+        "transit": "2026-01-15T16:42:40Z",
+        "sunrise": "2026-01-15T08:22:28Z",
+        "sunset": "2026-01-16T01:01:51Z",
+        "asr_shafii": "2026-01-15T21:05:38Z",
+        "fajr_18": null,
+        "isha_17": null
+      }
+    },
+    {
+      "location": "Ushuaia",
+      "latitude": -54.8019,
+      "longitude": -68.303,
+      "civil_timezone": "America/Argentina/Ushuaia",
+      "date": "2026-03-20",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-03-20T19:53:52Z",
+          "fajr": "2026-03-20T08:30:20Z",
+          "isha": "2026-03-21T00:41:19Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-03-20T19:53:52Z",
+          "fajr": "2026-03-20T08:18:25Z",
+          "isha": "2026-03-21T00:45:10Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-03-20T19:53:52Z",
+          "fajr": "2026-03-20T08:14:22Z",
+          "isha": "2026-03-21T00:49:02Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-03-20T19:53:52Z",
+          "fajr": "2026-03-20T08:30:20Z",
+          "isha": "2026-03-21T00:49:02Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-03-20T19:53:52Z",
+          "fajr": "2026-03-20T08:53:22Z",
+          "isha": "2026-03-21T00:26:11Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-03-20T20:43:19Z",
+          "fajr": "2026-03-20T08:30:20Z",
+          "isha": "2026-03-21T00:41:19Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-03-20T16:40:35Z",
+        "sunrise": "2026-03-20T10:34:31Z",
+        "sunset": "2026-03-20T22:45:32Z",
+        "asr_shafii": "2026-03-20T19:53:52Z",
+        "fajr_18": "2026-03-20T08:30:20Z",
+        "isha_17": "2026-03-21T00:41:19Z"
+      }
+    },
+    {
+      "location": "Ushuaia",
+      "latitude": -54.8019,
+      "longitude": -68.303,
+      "civil_timezone": "America/Argentina/Ushuaia",
+      "date": "2026-06-21",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-06-21T17:57:40Z",
+          "fajr": "2026-06-21T10:41:58Z",
+          "isha": "2026-06-21T22:20:57Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-06-21T17:57:40Z",
+          "fajr": "2026-06-21T10:31:14Z",
+          "isha": "2026-06-21T22:24:34Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-06-21T17:57:40Z",
+          "fajr": "2026-06-21T10:27:40Z",
+          "isha": "2026-06-21T22:28:10Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-06-21T17:57:40Z",
+          "fajr": "2026-06-21T10:41:58Z",
+          "isha": "2026-06-21T22:28:10Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-06-21T17:57:40Z",
+          "fajr": "2026-06-21T11:03:48Z",
+          "isha": "2026-06-21T22:06:20Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-06-21T18:23:46Z",
+          "fajr": "2026-06-21T10:41:58Z",
+          "isha": "2026-06-21T22:20:57Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-06-21T16:35:04Z",
+        "sunrise": "2026-06-21T12:58:52Z",
+        "sunset": "2026-06-21T20:11:17Z",
+        "asr_shafii": "2026-06-21T17:57:40Z",
+        "fajr_18": "2026-06-21T10:41:58Z",
+        "isha_17": "2026-06-21T22:20:57Z"
+      }
+    },
+    {
+      "location": "Ushuaia",
+      "latitude": -54.8019,
+      "longitude": -68.303,
+      "civil_timezone": "America/Argentina/Ushuaia",
+      "date": "2026-09-22",
+      "method_events_utc": {
+        "mwl_18_17_shafii": {
+          "asr": "2026-09-22T19:39:35Z",
+          "fajr": "2026-09-22T08:18:03Z",
+          "isha": "2026-09-23T00:27:42Z"
+        },
+        "egyptian_19_5_17_5_shafii": {
+          "asr": "2026-09-22T19:39:35Z",
+          "fajr": "2026-09-22T08:06:15Z",
+          "isha": "2026-09-23T00:31:34Z"
+        },
+        "indonesian_20_18_shafii": {
+          "asr": "2026-09-22T19:39:35Z",
+          "fajr": "2026-09-22T08:02:15Z",
+          "isha": "2026-09-23T00:35:28Z"
+        },
+        "karachi_18_18_shafii": {
+          "asr": "2026-09-22T19:39:35Z",
+          "fajr": "2026-09-22T08:18:03Z",
+          "isha": "2026-09-23T00:35:28Z"
+        },
+        "north_america_15_15_shafii": {
+          "asr": "2026-09-22T19:39:35Z",
+          "fajr": "2026-09-22T08:40:52Z",
+          "isha": "2026-09-23T00:12:28Z"
+        },
+        "mwl_18_17_hanafi": {
+          "asr": "2026-09-22T20:29:01Z",
+          "fajr": "2026-09-22T08:18:03Z",
+          "isha": "2026-09-23T00:27:42Z"
+        }
+      },
+      "events_utc": {
+        "transit": "2026-09-22T16:25:52Z",
+        "sunrise": "2026-09-22T10:21:27Z",
+        "sunset": "2026-09-22T22:31:24Z",
+        "asr_shafii": "2026-09-22T19:39:35Z",
+        "fajr_18": "2026-09-22T08:18:03Z",
+        "isha_17": "2026-09-23T00:27:42Z"
+      }
+    }
+  ]
+}

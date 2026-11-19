@@ -24,6 +24,22 @@ void main() {
       expect(p.methodAdjustments[Prayer.maghrib], 3);
     });
 
+    test('LFNU preset carries the listed calculation parameters', () {
+      final p = CalculationMethod.lfnu.parameters;
+      expect(p.fajrAngle, 20);
+      expect(p.ishaAngle, 18);
+      expect(p.dhuhaAngle, 4.5);
+      expect(p.madhab, Madhab.shafi);
+      expect(p.methodAdjustments[Prayer.dhuhr], 1);
+      expect(p.ramadanMaghribAdjustmentMinutes, 1);
+      expect(p.methodAdjustments[Prayer.fajr], 0);
+      expect(p.methodAdjustments[Prayer.sunrise], 0);
+      expect(p.methodAdjustments[Prayer.dhuha], 0);
+      expect(p.methodAdjustments[Prayer.asr], 0);
+      expect(p.methodAdjustments[Prayer.maghrib], 0);
+      expect(p.methodAdjustments[Prayer.isha], 0);
+    });
+
     test('night portions obey high latitude rules', () {
       final middle = CalculationMethod.other.parameters
           .copyWith(highLatitudeRule: HighLatitudeRule.middleOfTheNight)

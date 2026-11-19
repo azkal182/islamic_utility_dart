@@ -1,5 +1,21 @@
-## 1.6.0 (draft)
+## 2.0.0 (draft)
 
+This release includes the changes accumulated since the `v1.6.0` tag. It has
+source compatibility changes; see `RELEASE_NOTES_v2.0.0.md` before upgrading.
+
+- Added a NOAA-derived, separate astronomical reference dataset and recorded
+  the current engine baseline, coverage, assumptions, and event tolerances.
+- Added `PrayerTimes.eventForPrayer(...)` and `PrayerEventResult` so callers can
+  distinguish astronomical events, method intervals, high-latitude fallbacks,
+  and unavailable events. Unavailable events are excluded from
+  `nextPrayerDetails`; reading their non-null convenience getter throws
+  `StateError`.
+- Added a midpoint transit-to-sunset fallback when Asr's solar altitude is
+  unreachable but sunset is available.
+- Aligned `fajrAfter`/`ishaBefore` with the adjacent day's Fajr/Isha values and
+  applied configured Imsak and Dhuha adjustments.
+- Replaced the single-step solar-altitude correction with a bracketed solver;
+  transit declination now drives event-availability and Asr-altitude checks.
 - Official Hijri lookups now return cached anchors immediately, including stale
   entries, and refresh them in the background. When no usable cache exists,
   lookups return a local provisional result while refresh proceeds.
@@ -16,6 +32,14 @@
 - Added `PrayerTimes.nextPrayerDetails(...)`, which returns the upcoming event,
   UTC time, and whether it falls on the next local calendar day. Existing
   `currentPrayer` and `nextPrayer` calls advance after the following Fajr.
+- Added an optional `locationDate` to `currentPrayer` and `nextPrayer` so an
+  instant can be classified against the target location's civil date when it
+  differs from its UTC date. Added exact-boundary and local-midnight regression
+  tests.
+- High-latitude schedules now use the configured fallback when the selected
+  Fajr or Isha twilight angle is unreachable, instead of generating a false
+  event near solar transit. Added a 15-method × 7-location × 4-season
+  regression matrix and documented its reference-data limits.
 - Next-event candidates now include Imsak by default and Dhuha. Added skip
   options plus `ImsakPolicy` (`always`, `ramadanOnly`, `never`) with a
   caller-supplied Ramadan-date callback. Existing integrations that relied on
@@ -26,6 +50,14 @@
   the legacy enum plus `timeForPrayer` cannot represent a next-day occurrence.
 - Added regression coverage and updated API, integration, and example
   documentation for cache-first and offline behavior.
+- Completed the official Kemenag comparison-only validation and documented
+  that its schedules never feed prayer-time calculations or corrections.
+- Added the 365-day LFNU Bangsri 2026 reference test, including the documented
+  Terbit-nearest/other-events-round-up comparison, with dataset source and
+  rounding limitations documented.
+- Completed the prayer-engine accuracy plan's regression and documentation
+  gate for method presets, high-latitude fallbacks, adjacent-day boundaries,
+  adjustments, elevation, and output precision.
 
 ## 1.5.1
 

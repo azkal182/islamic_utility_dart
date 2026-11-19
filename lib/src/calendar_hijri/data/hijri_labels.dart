@@ -10,7 +10,7 @@ const Map<int, String> monthNames = {
   9: 'Ramadan',
   10: 'Shawwal',
   11: 'Dhu Al-Qi\'dah',
-  12: 'Dhu Al-Hijjah'
+  12: 'Dhu Al-Hijjah',
 };
 
 const Map<int, String> monthShortNames = {
@@ -25,7 +25,7 @@ const Map<int, String> monthShortNames = {
   9: 'Ram',
   10: 'Shaw',
   11: 'DhuQ',
-  12: 'DhuH'
+  12: 'DhuH',
 };
 
 const Map<int, String> arMonthNames = {
@@ -40,7 +40,7 @@ const Map<int, String> arMonthNames = {
   9: 'رمضان',
   10: 'شوال',
   11: 'ذو القعدة',
-  12: 'ذو الحجة'
+  12: 'ذو الحجة',
 };
 
 const Map<int, String> trMonthNames = {
@@ -55,7 +55,7 @@ const Map<int, String> trMonthNames = {
   9: 'RAMAZAN',
   10: 'ŞEVVAL',
   11: 'ZİLKADE',
-  12: 'ZİLHİCCE'
+  12: 'ZİLHİCCE',
 };
 
 const Map<int, String> arMonthShortNames = {
@@ -70,7 +70,7 @@ const Map<int, String> arMonthShortNames = {
   9: 'رمض',
   10: 'شوال',
   11: 'القعدة',
-  12: 'الجة'
+  12: 'الجة',
 };
 
 const Map<int, String> trMonthShortNames = {
@@ -85,7 +85,7 @@ const Map<int, String> trMonthShortNames = {
   9: 'RAMZAN',
   10: 'ŞEVVAL',
   11: 'ZİLKD',
-  12: 'ZİLHİC'
+  12: 'ZİLHİC',
 };
 
 const Map<int, String> wdNames = {
@@ -95,7 +95,7 @@ const Map<int, String> wdNames = {
   3: "Wednesday",
   4: "Thursday",
   5: "Friday",
-  6: "Saturday"
+  6: "Saturday",
 };
 
 const Map<int, String> shortWdNames = {
@@ -105,7 +105,7 @@ const Map<int, String> shortWdNames = {
   3: "Wed",
   4: "Thu",
   5: "Fri",
-  6: "Sat"
+  6: "Sat",
 };
 
 const Map<int, String> arWkNames = {
@@ -115,7 +115,7 @@ const Map<int, String> arWkNames = {
   3: "الأربعاء",
   4: "الخميس",
   5: "الجمعة",
-  6: "السبت"
+  6: "السبت",
 };
 
 const Map<int, String> trWkNames = {
@@ -125,7 +125,7 @@ const Map<int, String> trWkNames = {
   3: "Çarşamba",
   4: "Perşembe",
   5: "Cuma",
-  6: "Cumartesi"
+  6: "Cumartesi",
 };
 
 const Map<int, String> arShortWdNames = {
@@ -135,7 +135,7 @@ const Map<int, String> arShortWdNames = {
   3: "أربعاء",
   4: "خميس",
   5: "جمعة",
-  6: "سبت"
+  6: "سبت",
 };
 
 const Map<int, String> trShortWdNames = {
@@ -145,5 +145,5 @@ const Map<int, String> trShortWdNames = {
   3: "Çarşamba",
   4: "Perşembe",
   5: "Cuma",
-  6: "Cumartesi"
+  6: "Cumartesi",
 };

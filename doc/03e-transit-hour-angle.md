@@ -102,46 +102,23 @@ Input:
   δ₁   = declination hari sebelumnya (degrees, nullable)
   δ₃   = declination hari sesudahnya (degrees)
 
-Algoritma:
+Algoritma saat ini:
 
-1. Lw = -coordinates.longitude
+1. Tentukan setengah hari yang diminta: `[m₀ − 0.5, m₀]` sebelum transit,
+   atau `[m₀, m₀ + 0.5]` setelah transit.
+2. Untuk setiap fraksi hari `m`, interpolasikan right ascension dan declination,
+   hitung local hour angle, lalu selisih `altitude(m) − h₀`.
+3. Jika kedua ujung interval tidak mengapit akar, kembalikan `NaN` internal.
+   Pemanggil publik memeriksa keterjangkauan lebih dulu; ia tidak menjadikan
+   akar hasil clamp sebagai event astronomi.
+4. Jika akar diapit, gunakan bisection 48 iterasi pada fraksi hari tersebut.
+5. Kembalikan `(m × 24)` sebagai jam desimal UTC.
 
-2. Hitung cosH₀ untuk approximate hour angle:
-   term1 = sin(deg2rad(h₀)) - sin(deg2rad(lat)) × sin(deg2rad(δ₂))
-   term2 = cos(deg2rad(lat)) × cos(deg2rad(δ₂))
-
-   Jika |term1/term2| > 1:
-     H₀ = 1.0  (clamp — matahari tidak pernah mencapai altitude h₀)
-   Jika tidak:
-     H₀ = radiansToDegrees(acos(term1 / term2))
-
-3. Hitung approximate time:
-   Jika afterTransit:
-     m = m₀ + H₀ / 360
-   Jika tidak:
-     m = m₀ - H₀ / 360
-
-4. Hitung corrected sidereal time:
-   θ = unwindAngle(θ₀ + 360.985647 × m)
-
-5. Interpolasi right ascension:
-   α = unwindAngle(interpolateAngles(α₂, α₁, α₃, m))
-
-6. Interpolasi declination:
-   δ = interpolate(δ₂, δ₁, δ₃, m)
-
-7. Hitung local hour angle:
-   H = θ - Lw - α
-
-8. Hitung actual altitude:
-   h = altitudeOfCelestialBody(latitude, δ, H)
-
-9. Koreksi:
-   term3 = h - h₀
-   term4 = 360 × cos(deg2rad(δ)) × cos(deg2rad(lat)) × sin(deg2rad(H))
-   Δm = term3 / term4
-
-10. return (m + Δm) × 24
+Solver bracketed ini mengganti satu koreksi Newton. Pada event yang nyaris
+menyinggung target altitude, turunan altitude terhadap waktu mendekati nol;
+Newton dapat menghasilkan selisih beberapa menit atau event palsu. Internal
+sunrise/sunset anchor sintetis hanya dipakai sebagai masukan fallback lintang
+tinggi, dan hasil publik diberi status `unavailable`.
 ```
 
 Output: **jam desimal UTC**.

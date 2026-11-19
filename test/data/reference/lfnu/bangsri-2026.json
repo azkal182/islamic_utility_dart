@@ -1,0 +1,6667 @@
+{
+  "schema": "lfnu-prayer-schedule/v1",
+  "source": "NU Online jadwalsholat.nu.or.id monthly PDF exports",
+  "location": {
+    "name": "Bangsri",
+    "district": "Bangsri",
+    "regency": "Kabupaten Jepara",
+    "province": "Jawa Tengah",
+    "latitude": -6.522777777777778,
+    "longitude": 110.76,
+    "elevation_m": 64,
+    "timezone": "Asia/Jakarta",
+    "utc_offset": "+07:00"
+  },
+  "method": {
+    "name": "Lembaga Falakiyah NU, Indonesia",
+    "fajr_angle_degrees": 20,
+    "isha_angle_degrees": 18,
+    "asr_madhab": "Shafi'i",
+    "dhuha_solar_altitude_degrees": 4.5,
+    "imsak_minutes_before_fajr": 10,
+    "dhuhr_minutes_after_transit": 1,
+    "routine_ihtiyath_minutes": 0,
+    "ramadan_maghrib_ihtiyath_minutes": 1,
+    "horizon_altitude_note": "PDF identifies elevation 64 m; the supplied LFNU settings specify 1°4′ below the horizon for sunrise/Maghrib.",
+    "rounding": "Published local schedule is minute precision; exact source rounding rule is not stated in the PDF."
+  },
+  "coverage": {
+    "year": 2026,
+    "months": 12,
+    "days": 365
+  },
+  "source_documents": [
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf",
+      "sha256": "c90efaf799b900bad409f4d58c0769d9590811134825b2c6f61bc92abdc26767",
+      "title": "Jadwal Shalat Bulan Januari 2026 (Rajab – Sya'ban 1447 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf",
+      "sha256": "76163468ef68bf457355a4519d915b0ef03256623ab92d24e51df864d6bc3a06",
+      "title": "Jadwal Shalat Bulan Februari 2026 (Sya'ban – Ramadhan 1447 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf",
+      "sha256": "b6229d5420c1f99a8f526388c9060588ef7dc6726d6a66f71a44996d1eac87b7",
+      "title": "Jadwal Shalat Bulan Maret 2026 (Ramadhan – Syawal 1447 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-april-2026.pdf",
+      "sha256": "be355f5bf7c25dd04b5cea3f3bca94fbd36049d2bfc5c84e6a0aaa5796ae7648",
+      "title": "Jadwal Shalat Bulan April 2026 (Syawal – Dzulqa'dah 1447 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf",
+      "sha256": "3c656ada4d171660afb475a27ba491ac4846e061016fea69bf11cfccfa61f1ed",
+      "title": "Jadwal Shalat Bulan Mei 2026 (Dzulqa'dah – Dzulhijjah 1447 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf",
+      "sha256": "d243f4ee3265f9b8e0e48bf34728071594a647a7c1a55751766bb19eb240e2d8",
+      "title": "Jadwal Shalat Bulan Juni 2026 (Dzulhijjah 1447 H – Muharam 1448 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf",
+      "sha256": "caef5384e9797291572aece52d8885149a10bb4c62bff0269ca3a27b3cbd0a06",
+      "title": "Jadwal Shalat Bulan Juli 2026 (Muharam – Safar 1448 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf",
+      "sha256": "7a679524f44209ede836292c768220f6c6b3f5c3277e5e1978ea1700994d4f74",
+      "title": "Jadwal Shalat Bulan Agustus 2026 (Safar – Rabiul Awal 1448 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-september-2026.pdf",
+      "sha256": "e54f70fb4f1e546f54d93dbfcd1828e72a8645417011357ecd82f3299d889dc7",
+      "title": "Jadwal Shalat Bulan September 2026 (Rabiul Awal – Rabiul Akhir 1448 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf",
+      "sha256": "6f89ffd46df12ea37cce2b3c06057d613f98d5e370579bbb339cfe51f13c96cd",
+      "title": "Jadwal Shalat Bulan Oktober 2026 (Rabiul Akhir – Jumadal Ula 1448 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-november-2026.pdf",
+      "sha256": "98e7704627bba9c88326b9b8fd29caeeba298fed38d44369ee0064596428fc74",
+      "title": "Jadwal Shalat Bulan November 2026 (Jumadal Ula – Jumadal Akhirah 1448 H)"
+    },
+    {
+      "file": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf",
+      "sha256": "309628aee27a23251200fa04c9d51858821a157a5a15b05ddd0cfb0550c14983",
+      "title": "Jadwal Shalat Bulan Desember 2026 (Jumadal Akhirah – Rajab 1448 H)"
+    }
+  ],
+  "records": [
+    {
+      "date": "2026-01-01",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rajab",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:51",
+        "fajr": "04:01",
+        "sunrise": "05:24",
+        "dhuha": "05:49",
+        "dhuhr": "11:42",
+        "asr": "15:08",
+        "maghrib": "17:57",
+        "isha": "19:12"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-02",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rajab",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:51",
+        "fajr": "04:01",
+        "sunrise": "05:25",
+        "dhuha": "05:50",
+        "dhuhr": "11:42",
+        "asr": "15:08",
+        "maghrib": "17:57",
+        "isha": "19:12"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-03",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rajab",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:52",
+        "fajr": "04:02",
+        "sunrise": "05:25",
+        "dhuha": "05:50",
+        "dhuhr": "11:43",
+        "asr": "15:09",
+        "maghrib": "17:58",
+        "isha": "19:13"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-04",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rajab",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:52",
+        "fajr": "04:02",
+        "sunrise": "05:26",
+        "dhuha": "05:51",
+        "dhuhr": "11:43",
+        "asr": "15:09",
+        "maghrib": "17:58",
+        "isha": "19:13"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-05",
+      "weekday_id": "Senin",
+      "hijri_month": "Rajab",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:53",
+        "fajr": "04:03",
+        "sunrise": "05:27",
+        "dhuha": "05:51",
+        "dhuhr": "11:44",
+        "asr": "15:09",
+        "maghrib": "17:58",
+        "isha": "19:13"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-06",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rajab",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:54",
+        "fajr": "04:04",
+        "sunrise": "05:27",
+        "dhuha": "05:52",
+        "dhuhr": "11:44",
+        "asr": "15:10",
+        "maghrib": "17:59",
+        "isha": "19:14"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-07",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rajab",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:54",
+        "fajr": "04:04",
+        "sunrise": "05:28",
+        "dhuha": "05:52",
+        "dhuhr": "11:45",
+        "asr": "15:10",
+        "maghrib": "17:59",
+        "isha": "19:14"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-08",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rajab",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:55",
+        "fajr": "04:05",
+        "sunrise": "05:28",
+        "dhuha": "05:53",
+        "dhuhr": "11:45",
+        "asr": "15:10",
+        "maghrib": "17:59",
+        "isha": "19:14"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-09",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rajab",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:55",
+        "fajr": "04:05",
+        "sunrise": "05:29",
+        "dhuha": "05:53",
+        "dhuhr": "11:45",
+        "asr": "15:11",
+        "maghrib": "18:00",
+        "isha": "19:14"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-10",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rajab",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:56",
+        "fajr": "04:06",
+        "sunrise": "05:29",
+        "dhuha": "05:54",
+        "dhuhr": "11:46",
+        "asr": "15:11",
+        "maghrib": "18:00",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-11",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rajab",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:57",
+        "fajr": "04:07",
+        "sunrise": "05:30",
+        "dhuha": "05:54",
+        "dhuhr": "11:46",
+        "asr": "15:11",
+        "maghrib": "18:00",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-12",
+      "weekday_id": "Senin",
+      "hijri_month": "Rajab",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:57",
+        "fajr": "04:07",
+        "sunrise": "05:30",
+        "dhuha": "05:55",
+        "dhuhr": "11:47",
+        "asr": "15:11",
+        "maghrib": "18:01",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-13",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rajab",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:58",
+        "fajr": "04:08",
+        "sunrise": "05:30",
+        "dhuha": "05:55",
+        "dhuhr": "11:47",
+        "asr": "15:11",
+        "maghrib": "18:01",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-14",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rajab",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:58",
+        "fajr": "04:08",
+        "sunrise": "05:31",
+        "dhuha": "05:55",
+        "dhuhr": "11:47",
+        "asr": "15:12",
+        "maghrib": "18:01",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-15",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rajab",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:59",
+        "fajr": "04:09",
+        "sunrise": "05:31",
+        "dhuha": "05:56",
+        "dhuhr": "11:48",
+        "asr": "15:12",
+        "maghrib": "18:02",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-16",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rajab",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:00",
+        "fajr": "04:10",
+        "sunrise": "05:32",
+        "dhuha": "05:56",
+        "dhuhr": "11:48",
+        "asr": "15:12",
+        "maghrib": "18:02",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-17",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rajab",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:00",
+        "fajr": "04:10",
+        "sunrise": "05:32",
+        "dhuha": "05:57",
+        "dhuhr": "11:48",
+        "asr": "15:12",
+        "maghrib": "18:02",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-18",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rajab",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:01",
+        "fajr": "04:11",
+        "sunrise": "05:33",
+        "dhuha": "05:57",
+        "dhuhr": "11:49",
+        "asr": "15:12",
+        "maghrib": "18:02",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-19",
+      "weekday_id": "Senin",
+      "hijri_month": "Rajab",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:01",
+        "fajr": "04:11",
+        "sunrise": "05:33",
+        "dhuha": "05:58",
+        "dhuhr": "11:49",
+        "asr": "15:12",
+        "maghrib": "18:02",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-20",
+      "weekday_id": "Selasa",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:02",
+        "fajr": "04:12",
+        "sunrise": "05:34",
+        "dhuha": "05:58",
+        "dhuhr": "11:49",
+        "asr": "15:12",
+        "maghrib": "18:03",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-21",
+      "weekday_id": "Rabu",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:02",
+        "fajr": "04:12",
+        "sunrise": "05:34",
+        "dhuha": "05:58",
+        "dhuhr": "11:50",
+        "asr": "15:12",
+        "maghrib": "18:03",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-22",
+      "weekday_id": "Kamis",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:03",
+        "fajr": "04:13",
+        "sunrise": "05:34",
+        "dhuha": "05:59",
+        "dhuhr": "11:50",
+        "asr": "15:12",
+        "maghrib": "18:03",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-23",
+      "weekday_id": "Jumat",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:03",
+        "fajr": "04:13",
+        "sunrise": "05:35",
+        "dhuha": "05:59",
+        "dhuhr": "11:50",
+        "asr": "15:12",
+        "maghrib": "18:03",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-24",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:04",
+        "fajr": "04:14",
+        "sunrise": "05:35",
+        "dhuha": "05:59",
+        "dhuhr": "11:50",
+        "asr": "15:12",
+        "maghrib": "18:03",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-25",
+      "weekday_id": "Ahad",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:04",
+        "fajr": "04:14",
+        "sunrise": "05:36",
+        "dhuha": "06:00",
+        "dhuhr": "11:51",
+        "asr": "15:12",
+        "maghrib": "18:03",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-26",
+      "weekday_id": "Senin",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:05",
+        "fajr": "04:15",
+        "sunrise": "05:36",
+        "dhuha": "06:00",
+        "dhuhr": "11:51",
+        "asr": "15:12",
+        "maghrib": "18:03",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-27",
+      "weekday_id": "Selasa",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:05",
+        "fajr": "04:15",
+        "sunrise": "05:36",
+        "dhuha": "06:00",
+        "dhuhr": "11:51",
+        "asr": "15:12",
+        "maghrib": "18:03",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-28",
+      "weekday_id": "Rabu",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:06",
+        "fajr": "04:16",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:51",
+        "asr": "15:12",
+        "maghrib": "18:03",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-29",
+      "weekday_id": "Kamis",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:06",
+        "fajr": "04:16",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:51",
+        "asr": "15:12",
+        "maghrib": "18:04",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-30",
+      "weekday_id": "Jumat",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:07",
+        "fajr": "04:17",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:52",
+        "asr": "15:11",
+        "maghrib": "18:04",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-01-31",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:07",
+        "fajr": "04:17",
+        "sunrise": "05:38",
+        "dhuha": "06:02",
+        "dhuhr": "11:52",
+        "asr": "15:11",
+        "maghrib": "18:04",
+        "isha": "19:16"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-januari-2026.pdf"
+    },
+    {
+      "date": "2026-02-01",
+      "weekday_id": "Ahad",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:38",
+        "dhuha": "06:02",
+        "dhuhr": "11:52",
+        "asr": "15:11",
+        "maghrib": "18:04",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-02",
+      "weekday_id": "Senin",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:38",
+        "dhuha": "06:02",
+        "dhuhr": "11:52",
+        "asr": "15:11",
+        "maghrib": "18:03",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-03",
+      "weekday_id": "Selasa",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:38",
+        "dhuha": "06:02",
+        "dhuhr": "11:52",
+        "asr": "15:10",
+        "maghrib": "18:03",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-04",
+      "weekday_id": "Rabu",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:52",
+        "asr": "15:10",
+        "maghrib": "18:03",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-05",
+      "weekday_id": "Kamis",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:39",
+        "dhuha": "06:03",
+        "dhuhr": "11:52",
+        "asr": "15:10",
+        "maghrib": "18:03",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-06",
+      "weekday_id": "Jumat",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:39",
+        "dhuha": "06:03",
+        "dhuhr": "11:52",
+        "asr": "15:09",
+        "maghrib": "18:03",
+        "isha": "19:15"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-07",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:39",
+        "dhuha": "06:03",
+        "dhuhr": "11:53",
+        "asr": "15:09",
+        "maghrib": "18:03",
+        "isha": "19:14"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-08",
+      "weekday_id": "Ahad",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:53",
+        "asr": "15:09",
+        "maghrib": "18:03",
+        "isha": "19:14"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-09",
+      "weekday_id": "Senin",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:53",
+        "asr": "15:08",
+        "maghrib": "18:03",
+        "isha": "19:14"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-10",
+      "weekday_id": "Selasa",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:40",
+        "dhuha": "06:04",
+        "dhuhr": "11:53",
+        "asr": "15:08",
+        "maghrib": "18:03",
+        "isha": "19:14"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-11",
+      "weekday_id": "Rabu",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:40",
+        "dhuha": "06:04",
+        "dhuhr": "11:53",
+        "asr": "15:07",
+        "maghrib": "18:03",
+        "isha": "19:13"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-12",
+      "weekday_id": "Kamis",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:40",
+        "dhuha": "06:04",
+        "dhuhr": "11:53",
+        "asr": "15:07",
+        "maghrib": "18:02",
+        "isha": "19:13"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-13",
+      "weekday_id": "Jumat",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:40",
+        "dhuha": "06:04",
+        "dhuhr": "11:53",
+        "asr": "15:06",
+        "maghrib": "18:02",
+        "isha": "19:13"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-14",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:53",
+        "asr": "15:05",
+        "maghrib": "18:02",
+        "isha": "19:12"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-15",
+      "weekday_id": "Ahad",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:53",
+        "asr": "15:05",
+        "maghrib": "18:02",
+        "isha": "19:12"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-16",
+      "weekday_id": "Senin",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:52",
+        "asr": "15:04",
+        "maghrib": "18:02",
+        "isha": "19:12"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-17",
+      "weekday_id": "Selasa",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:52",
+        "asr": "15:03",
+        "maghrib": "18:01",
+        "isha": "19:11"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-18",
+      "weekday_id": "Rabu",
+      "hijri_month": "Sya'ban",
+      "hijri_day": 30,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:52",
+        "asr": "15:03",
+        "maghrib": "18:01",
+        "isha": "19:11"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-19",
+      "weekday_id": "Kamis",
+      "hijri_month": "Ramadan",
+      "hijri_day": 1,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:52",
+        "asr": "15:02",
+        "maghrib": "18:02",
+        "isha": "19:11"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-20",
+      "weekday_id": "Jumat",
+      "hijri_month": "Ramadan",
+      "hijri_day": 2,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:52",
+        "asr": "15:01",
+        "maghrib": "18:02",
+        "isha": "19:10"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-21",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Ramadan",
+      "hijri_day": 3,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:52",
+        "asr": "15:01",
+        "maghrib": "18:01",
+        "isha": "19:10"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-22",
+      "weekday_id": "Ahad",
+      "hijri_month": "Ramadan",
+      "hijri_day": 4,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:52",
+        "asr": "15:00",
+        "maghrib": "18:01",
+        "isha": "19:09"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-23",
+      "weekday_id": "Senin",
+      "hijri_month": "Ramadan",
+      "hijri_day": 5,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:52",
+        "asr": "14:59",
+        "maghrib": "18:01",
+        "isha": "19:09"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-24",
+      "weekday_id": "Selasa",
+      "hijri_month": "Ramadan",
+      "hijri_day": 6,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:52",
+        "asr": "14:58",
+        "maghrib": "18:00",
+        "isha": "19:09"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-25",
+      "weekday_id": "Rabu",
+      "hijri_month": "Ramadan",
+      "hijri_day": 7,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:52",
+        "asr": "14:57",
+        "maghrib": "18:00",
+        "isha": "19:08"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-26",
+      "weekday_id": "Kamis",
+      "hijri_month": "Ramadan",
+      "hijri_day": 8,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:51",
+        "asr": "14:56",
+        "maghrib": "18:00",
+        "isha": "19:08"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-27",
+      "weekday_id": "Jumat",
+      "hijri_month": "Ramadan",
+      "hijri_day": 9,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:42",
+        "dhuha": "06:05",
+        "dhuhr": "11:51",
+        "asr": "14:55",
+        "maghrib": "17:59",
+        "isha": "19:07"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-02-28",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Ramadan",
+      "hijri_day": 10,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:42",
+        "dhuha": "06:05",
+        "dhuhr": "11:51",
+        "asr": "14:54",
+        "maghrib": "17:59",
+        "isha": "19:07"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-februari-2026.pdf"
+    },
+    {
+      "date": "2026-03-01",
+      "weekday_id": "Ahad",
+      "hijri_month": "Ramadan",
+      "hijri_day": 11,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:51",
+        "asr": "14:53",
+        "maghrib": "17:59",
+        "isha": "19:06"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-02",
+      "weekday_id": "Senin",
+      "hijri_month": "Ramadan",
+      "hijri_day": 12,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:51",
+        "asr": "14:52",
+        "maghrib": "17:58",
+        "isha": "19:06"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-03",
+      "weekday_id": "Selasa",
+      "hijri_month": "Ramadan",
+      "hijri_day": 13,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:50",
+        "asr": "14:51",
+        "maghrib": "17:58",
+        "isha": "19:06"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-04",
+      "weekday_id": "Rabu",
+      "hijri_month": "Ramadan",
+      "hijri_day": 14,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:50",
+        "asr": "14:50",
+        "maghrib": "17:57",
+        "isha": "19:05"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-05",
+      "weekday_id": "Kamis",
+      "hijri_month": "Ramadan",
+      "hijri_day": 15,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:50",
+        "asr": "14:51",
+        "maghrib": "17:57",
+        "isha": "19:05"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-06",
+      "weekday_id": "Jumat",
+      "hijri_month": "Ramadan",
+      "hijri_day": 16,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:50",
+        "asr": "14:51",
+        "maghrib": "17:57",
+        "isha": "19:04"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-07",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Ramadan",
+      "hijri_day": 17,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:50",
+        "asr": "14:52",
+        "maghrib": "17:56",
+        "isha": "19:04"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-08",
+      "weekday_id": "Ahad",
+      "hijri_month": "Ramadan",
+      "hijri_day": 18,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:49",
+        "asr": "14:52",
+        "maghrib": "17:56",
+        "isha": "19:03"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-09",
+      "weekday_id": "Senin",
+      "hijri_month": "Ramadan",
+      "hijri_day": 19,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:49",
+        "asr": "14:52",
+        "maghrib": "17:55",
+        "isha": "19:03"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-10",
+      "weekday_id": "Selasa",
+      "hijri_month": "Ramadan",
+      "hijri_day": 20,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:49",
+        "asr": "14:53",
+        "maghrib": "17:55",
+        "isha": "19:02"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-11",
+      "weekday_id": "Rabu",
+      "hijri_month": "Ramadan",
+      "hijri_day": 21,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:49",
+        "asr": "14:53",
+        "maghrib": "17:54",
+        "isha": "19:02"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-12",
+      "weekday_id": "Kamis",
+      "hijri_month": "Ramadan",
+      "hijri_day": 22,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:48",
+        "asr": "14:54",
+        "maghrib": "17:54",
+        "isha": "19:01"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-13",
+      "weekday_id": "Jumat",
+      "hijri_month": "Ramadan",
+      "hijri_day": 23,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:48",
+        "asr": "14:54",
+        "maghrib": "17:54",
+        "isha": "19:01"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-14",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Ramadan",
+      "hijri_day": 24,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:48",
+        "asr": "14:54",
+        "maghrib": "17:53",
+        "isha": "19:00"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-15",
+      "weekday_id": "Ahad",
+      "hijri_month": "Ramadan",
+      "hijri_day": 25,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:47",
+        "asr": "14:54",
+        "maghrib": "17:53",
+        "isha": "19:00"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-16",
+      "weekday_id": "Senin",
+      "hijri_month": "Ramadan",
+      "hijri_day": 26,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:41",
+        "dhuha": "06:03",
+        "dhuhr": "11:47",
+        "asr": "14:55",
+        "maghrib": "17:52",
+        "isha": "18:59"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-17",
+      "weekday_id": "Selasa",
+      "hijri_month": "Ramadan",
+      "hijri_day": 27,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:47",
+        "asr": "14:55",
+        "maghrib": "17:52",
+        "isha": "18:59"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-18",
+      "weekday_id": "Rabu",
+      "hijri_month": "Ramadan",
+      "hijri_day": 28,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:47",
+        "asr": "14:55",
+        "maghrib": "17:51",
+        "isha": "18:58"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-19",
+      "weekday_id": "Kamis",
+      "hijri_month": "Ramadan",
+      "hijri_day": 29,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:46",
+        "asr": "14:55",
+        "maghrib": "17:51",
+        "isha": "18:58"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-20",
+      "weekday_id": "Jumat",
+      "hijri_month": "Ramadan",
+      "hijri_day": 30,
+      "is_ramadan": true,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:46",
+        "asr": "14:56",
+        "maghrib": "17:50",
+        "isha": "18:57"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-21",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Syawal",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:46",
+        "asr": "14:56",
+        "maghrib": "17:49",
+        "isha": "18:57"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-22",
+      "weekday_id": "Ahad",
+      "hijri_month": "Syawal",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:45",
+        "asr": "14:56",
+        "maghrib": "17:48",
+        "isha": "18:56"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-23",
+      "weekday_id": "Senin",
+      "hijri_month": "Syawal",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:45",
+        "asr": "14:56",
+        "maghrib": "17:48",
+        "isha": "18:56"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-24",
+      "weekday_id": "Selasa",
+      "hijri_month": "Syawal",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:45",
+        "asr": "14:56",
+        "maghrib": "17:47",
+        "isha": "18:55"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-25",
+      "weekday_id": "Rabu",
+      "hijri_month": "Syawal",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:40",
+        "dhuha": "06:02",
+        "dhuhr": "11:44",
+        "asr": "14:56",
+        "maghrib": "17:47",
+        "isha": "18:55"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-26",
+      "weekday_id": "Kamis",
+      "hijri_month": "Syawal",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:44",
+        "asr": "14:56",
+        "maghrib": "17:46",
+        "isha": "18:55"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-27",
+      "weekday_id": "Jumat",
+      "hijri_month": "Syawal",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:44",
+        "asr": "14:57",
+        "maghrib": "17:46",
+        "isha": "18:54"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-28",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Syawal",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:44",
+        "asr": "14:57",
+        "maghrib": "17:45",
+        "isha": "18:54"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-29",
+      "weekday_id": "Ahad",
+      "hijri_month": "Syawal",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:43",
+        "asr": "14:57",
+        "maghrib": "17:45",
+        "isha": "18:53"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-30",
+      "weekday_id": "Senin",
+      "hijri_month": "Syawal",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:43",
+        "asr": "14:57",
+        "maghrib": "17:44",
+        "isha": "18:53"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-03-31",
+      "weekday_id": "Selasa",
+      "hijri_month": "Syawal",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:43",
+        "asr": "14:57",
+        "maghrib": "17:44",
+        "isha": "18:52"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-maret-2026.pdf"
+    },
+    {
+      "date": "2026-04-01",
+      "weekday_id": "Rabu",
+      "hijri_month": "Syawal",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:42",
+        "asr": "14:57",
+        "maghrib": "17:44",
+        "isha": "18:52"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-02",
+      "weekday_id": "Kamis",
+      "hijri_month": "Syawal",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:42",
+        "asr": "14:57",
+        "maghrib": "17:43",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-03",
+      "weekday_id": "Jumat",
+      "hijri_month": "Syawal",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:42",
+        "asr": "14:57",
+        "maghrib": "17:43",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-04",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Syawal",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:42",
+        "asr": "14:57",
+        "maghrib": "17:42",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-05",
+      "weekday_id": "Ahad",
+      "hijri_month": "Syawal",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:41",
+        "asr": "14:57",
+        "maghrib": "17:42",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-06",
+      "weekday_id": "Senin",
+      "hijri_month": "Syawal",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:41",
+        "asr": "14:57",
+        "maghrib": "17:41",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-07",
+      "weekday_id": "Selasa",
+      "hijri_month": "Syawal",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:41",
+        "asr": "14:57",
+        "maghrib": "17:41",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-08",
+      "weekday_id": "Rabu",
+      "hijri_month": "Syawal",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:40",
+        "asr": "14:57",
+        "maghrib": "17:40",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-09",
+      "weekday_id": "Kamis",
+      "hijri_month": "Syawal",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:40",
+        "asr": "14:57",
+        "maghrib": "17:40",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-10",
+      "weekday_id": "Jumat",
+      "hijri_month": "Syawal",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:40",
+        "asr": "14:57",
+        "maghrib": "17:39",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-11",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Syawal",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:40",
+        "asr": "14:57",
+        "maghrib": "17:39",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-12",
+      "weekday_id": "Ahad",
+      "hijri_month": "Syawal",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:39",
+        "asr": "14:57",
+        "maghrib": "17:39",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-13",
+      "weekday_id": "Senin",
+      "hijri_month": "Syawal",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:39",
+        "asr": "14:57",
+        "maghrib": "17:38",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-14",
+      "weekday_id": "Selasa",
+      "hijri_month": "Syawal",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:39",
+        "asr": "14:57",
+        "maghrib": "17:38",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-15",
+      "weekday_id": "Rabu",
+      "hijri_month": "Syawal",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:39",
+        "asr": "14:57",
+        "maghrib": "17:37",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-16",
+      "weekday_id": "Kamis",
+      "hijri_month": "Syawal",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:38",
+        "asr": "14:57",
+        "maghrib": "17:37",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-17",
+      "weekday_id": "Jumat",
+      "hijri_month": "Syawal",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:38",
+        "asr": "14:57",
+        "maghrib": "17:37",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-18",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Syawal",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:38",
+        "asr": "14:57",
+        "maghrib": "17:36",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-19",
+      "weekday_id": "Ahad",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:38",
+        "asr": "14:56",
+        "maghrib": "17:36",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-20",
+      "weekday_id": "Senin",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:37",
+        "asr": "14:56",
+        "maghrib": "17:35",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-21",
+      "weekday_id": "Selasa",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:37",
+        "asr": "14:56",
+        "maghrib": "17:35",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-22",
+      "weekday_id": "Rabu",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:37",
+        "asr": "14:56",
+        "maghrib": "17:35",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-23",
+      "weekday_id": "Kamis",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:37",
+        "asr": "14:56",
+        "maghrib": "17:34",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-24",
+      "weekday_id": "Jumat",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:37",
+        "asr": "14:56",
+        "maghrib": "17:34",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-25",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:36",
+        "asr": "14:56",
+        "maghrib": "17:34",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-26",
+      "weekday_id": "Ahad",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:36",
+        "asr": "14:56",
+        "maghrib": "17:33",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-27",
+      "weekday_id": "Senin",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:36",
+        "asr": "14:56",
+        "maghrib": "17:33",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-28",
+      "weekday_id": "Selasa",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:36",
+        "asr": "14:56",
+        "maghrib": "17:33",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-29",
+      "weekday_id": "Rabu",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:36",
+        "asr": "14:56",
+        "maghrib": "17:32",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-04-30",
+      "weekday_id": "Kamis",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:36",
+        "asr": "14:56",
+        "maghrib": "17:32",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-april-2026.pdf"
+    },
+    {
+      "date": "2026-05-01",
+      "weekday_id": "Jumat",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:36",
+        "asr": "14:56",
+        "maghrib": "17:32",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-02",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:32",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-03",
+      "weekday_id": "Ahad",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:31",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-04",
+      "weekday_id": "Senin",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:31",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-05",
+      "weekday_id": "Selasa",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:31",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-06",
+      "weekday_id": "Rabu",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:31",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-07",
+      "weekday_id": "Kamis",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:31",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-08",
+      "weekday_id": "Jumat",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:30",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-09",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:30",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-10",
+      "weekday_id": "Ahad",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:30",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-11",
+      "weekday_id": "Senin",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:30",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-12",
+      "weekday_id": "Selasa",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:01",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:30",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-13",
+      "weekday_id": "Rabu",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:37",
+        "dhuha": "06:02",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:30",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-14",
+      "weekday_id": "Kamis",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:38",
+        "dhuha": "06:02",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-15",
+      "weekday_id": "Jumat",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:38",
+        "dhuha": "06:02",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-16",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:38",
+        "dhuha": "06:02",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-17",
+      "weekday_id": "Ahad",
+      "hijri_month": "Dzulqa'dah",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:38",
+        "dhuha": "06:02",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-18",
+      "weekday_id": "Senin",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:38",
+        "dhuha": "06:02",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-19",
+      "weekday_id": "Selasa",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:38",
+        "dhuha": "06:03",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-20",
+      "weekday_id": "Rabu",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:38",
+        "dhuha": "06:03",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-21",
+      "weekday_id": "Kamis",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:39",
+        "dhuha": "06:03",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-22",
+      "weekday_id": "Jumat",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:39",
+        "dhuha": "06:03",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-23",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:39",
+        "dhuha": "06:03",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-24",
+      "weekday_id": "Ahad",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:39",
+        "dhuha": "06:04",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-25",
+      "weekday_id": "Senin",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:39",
+        "dhuha": "06:04",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-26",
+      "weekday_id": "Selasa",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:39",
+        "dhuha": "06:04",
+        "dhuhr": "11:35",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-27",
+      "weekday_id": "Rabu",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:40",
+        "dhuha": "06:04",
+        "dhuhr": "11:36",
+        "asr": "14:56",
+        "maghrib": "17:29",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-28",
+      "weekday_id": "Kamis",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:40",
+        "dhuha": "06:04",
+        "dhuhr": "11:36",
+        "asr": "14:57",
+        "maghrib": "17:29",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-29",
+      "weekday_id": "Jumat",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:40",
+        "dhuha": "06:05",
+        "dhuhr": "11:36",
+        "asr": "14:57",
+        "maghrib": "17:29",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-30",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:40",
+        "dhuha": "06:05",
+        "dhuhr": "11:36",
+        "asr": "14:57",
+        "maghrib": "17:29",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-05-31",
+      "weekday_id": "Ahad",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:40",
+        "dhuha": "06:05",
+        "dhuhr": "11:36",
+        "asr": "14:57",
+        "maghrib": "17:29",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-mei-2026.pdf"
+    },
+    {
+      "date": "2026-06-01",
+      "weekday_id": "Senin",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:36",
+        "asr": "14:57",
+        "maghrib": "17:29",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-02",
+      "weekday_id": "Selasa",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:41",
+        "dhuha": "06:06",
+        "dhuhr": "11:36",
+        "asr": "14:57",
+        "maghrib": "17:29",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-03",
+      "weekday_id": "Rabu",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:41",
+        "dhuha": "06:06",
+        "dhuhr": "11:37",
+        "asr": "14:57",
+        "maghrib": "17:29",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-04",
+      "weekday_id": "Kamis",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:41",
+        "dhuha": "06:06",
+        "dhuhr": "11:37",
+        "asr": "14:58",
+        "maghrib": "17:30",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-05",
+      "weekday_id": "Jumat",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:42",
+        "dhuha": "06:06",
+        "dhuhr": "11:37",
+        "asr": "14:58",
+        "maghrib": "17:30",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-06",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:42",
+        "dhuha": "06:07",
+        "dhuhr": "11:37",
+        "asr": "14:58",
+        "maghrib": "17:30",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-07",
+      "weekday_id": "Ahad",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:42",
+        "dhuha": "06:07",
+        "dhuhr": "11:37",
+        "asr": "14:58",
+        "maghrib": "17:30",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-08",
+      "weekday_id": "Senin",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:42",
+        "dhuha": "06:07",
+        "dhuhr": "11:37",
+        "asr": "14:58",
+        "maghrib": "17:30",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-09",
+      "weekday_id": "Selasa",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:43",
+        "dhuha": "06:07",
+        "dhuhr": "11:38",
+        "asr": "14:58",
+        "maghrib": "17:30",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-10",
+      "weekday_id": "Rabu",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:43",
+        "dhuha": "06:08",
+        "dhuhr": "11:38",
+        "asr": "14:59",
+        "maghrib": "17:30",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-11",
+      "weekday_id": "Kamis",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:43",
+        "dhuha": "06:08",
+        "dhuhr": "11:38",
+        "asr": "14:59",
+        "maghrib": "17:31",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-12",
+      "weekday_id": "Jumat",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:43",
+        "dhuha": "06:08",
+        "dhuhr": "11:38",
+        "asr": "14:59",
+        "maghrib": "17:31",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-13",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:43",
+        "dhuha": "06:08",
+        "dhuhr": "11:38",
+        "asr": "14:59",
+        "maghrib": "17:31",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-14",
+      "weekday_id": "Ahad",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:44",
+        "dhuha": "06:09",
+        "dhuhr": "11:39",
+        "asr": "14:59",
+        "maghrib": "17:31",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-15",
+      "weekday_id": "Senin",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:44",
+        "dhuha": "06:09",
+        "dhuhr": "11:39",
+        "asr": "15:00",
+        "maghrib": "17:31",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-16",
+      "weekday_id": "Selasa",
+      "hijri_month": "Dzulhijjah",
+      "hijri_day": 30,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:44",
+        "dhuha": "06:09",
+        "dhuhr": "11:39",
+        "asr": "15:00",
+        "maghrib": "17:32",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-17",
+      "weekday_id": "Rabu",
+      "hijri_month": "Muharam",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:44",
+        "dhuha": "06:09",
+        "dhuhr": "11:39",
+        "asr": "15:00",
+        "maghrib": "17:32",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-18",
+      "weekday_id": "Kamis",
+      "hijri_month": "Muharam",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:45",
+        "dhuha": "06:10",
+        "dhuhr": "11:40",
+        "asr": "15:00",
+        "maghrib": "17:32",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-19",
+      "weekday_id": "Jumat",
+      "hijri_month": "Muharam",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:45",
+        "dhuha": "06:10",
+        "dhuhr": "11:40",
+        "asr": "15:00",
+        "maghrib": "17:32",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-20",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Muharam",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:45",
+        "dhuha": "06:10",
+        "dhuhr": "11:40",
+        "asr": "15:01",
+        "maghrib": "17:32",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-21",
+      "weekday_id": "Ahad",
+      "hijri_month": "Muharam",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:45",
+        "dhuha": "06:10",
+        "dhuhr": "11:40",
+        "asr": "15:01",
+        "maghrib": "17:33",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-22",
+      "weekday_id": "Senin",
+      "hijri_month": "Muharam",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:46",
+        "dhuha": "06:11",
+        "dhuhr": "11:40",
+        "asr": "15:01",
+        "maghrib": "17:33",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-23",
+      "weekday_id": "Selasa",
+      "hijri_month": "Muharam",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:46",
+        "dhuha": "06:11",
+        "dhuhr": "11:41",
+        "asr": "15:01",
+        "maghrib": "17:33",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-24",
+      "weekday_id": "Rabu",
+      "hijri_month": "Muharam",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:46",
+        "dhuha": "06:11",
+        "dhuhr": "11:41",
+        "asr": "15:02",
+        "maghrib": "17:33",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-25",
+      "weekday_id": "Kamis",
+      "hijri_month": "Muharam",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:46",
+        "dhuha": "06:11",
+        "dhuhr": "11:41",
+        "asr": "15:02",
+        "maghrib": "17:33",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-26",
+      "weekday_id": "Jumat",
+      "hijri_month": "Muharam",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:46",
+        "dhuha": "06:11",
+        "dhuhr": "11:41",
+        "asr": "15:02",
+        "maghrib": "17:34",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-27",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Muharam",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:47",
+        "dhuha": "06:12",
+        "dhuhr": "11:41",
+        "asr": "15:02",
+        "maghrib": "17:34",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-28",
+      "weekday_id": "Ahad",
+      "hijri_month": "Muharam",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:47",
+        "dhuha": "06:12",
+        "dhuhr": "11:42",
+        "asr": "15:02",
+        "maghrib": "17:34",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-29",
+      "weekday_id": "Senin",
+      "hijri_month": "Muharam",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:47",
+        "dhuha": "06:12",
+        "dhuhr": "11:42",
+        "asr": "15:03",
+        "maghrib": "17:34",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-06-30",
+      "weekday_id": "Selasa",
+      "hijri_month": "Muharam",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:47",
+        "dhuha": "06:12",
+        "dhuhr": "11:42",
+        "asr": "15:03",
+        "maghrib": "17:35",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juni-2026.pdf"
+    },
+    {
+      "date": "2026-07-01",
+      "weekday_id": "Rabu",
+      "hijri_month": "Muharam",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:47",
+        "dhuha": "06:12",
+        "dhuhr": "11:42",
+        "asr": "15:03",
+        "maghrib": "17:35",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-02",
+      "weekday_id": "Kamis",
+      "hijri_month": "Muharam",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:47",
+        "dhuha": "06:12",
+        "dhuhr": "11:42",
+        "asr": "15:03",
+        "maghrib": "17:35",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-03",
+      "weekday_id": "Jumat",
+      "hijri_month": "Muharam",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:16",
+        "fajr": "04:26",
+        "sunrise": "05:48",
+        "dhuha": "06:12",
+        "dhuhr": "11:43",
+        "asr": "15:04",
+        "maghrib": "17:35",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-04",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Muharam",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:16",
+        "fajr": "04:26",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:43",
+        "asr": "15:04",
+        "maghrib": "17:36",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-05",
+      "weekday_id": "Ahad",
+      "hijri_month": "Muharam",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:16",
+        "fajr": "04:26",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:43",
+        "asr": "15:04",
+        "maghrib": "17:36",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-06",
+      "weekday_id": "Senin",
+      "hijri_month": "Muharam",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:16",
+        "fajr": "04:26",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:43",
+        "asr": "15:04",
+        "maghrib": "17:36",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-07",
+      "weekday_id": "Selasa",
+      "hijri_month": "Muharam",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:16",
+        "fajr": "04:26",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:43",
+        "asr": "15:04",
+        "maghrib": "17:36",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-08",
+      "weekday_id": "Rabu",
+      "hijri_month": "Muharam",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:44",
+        "asr": "15:04",
+        "maghrib": "17:36",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-09",
+      "weekday_id": "Kamis",
+      "hijri_month": "Muharam",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:37",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-10",
+      "weekday_id": "Jumat",
+      "hijri_month": "Muharam",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:37",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-11",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Muharam",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:37",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-12",
+      "weekday_id": "Ahad",
+      "hijri_month": "Muharam",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:37",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-13",
+      "weekday_id": "Senin",
+      "hijri_month": "Muharam",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:37",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-14",
+      "weekday_id": "Selasa",
+      "hijri_month": "Muharam",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:38",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-15",
+      "weekday_id": "Rabu",
+      "hijri_month": "Muharam",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:44",
+        "asr": "15:06",
+        "maghrib": "17:38",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-16",
+      "weekday_id": "Kamis",
+      "hijri_month": "Safar",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:38",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-17",
+      "weekday_id": "Jumat",
+      "hijri_month": "Safar",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:38",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-18",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Safar",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:38",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-19",
+      "weekday_id": "Ahad",
+      "hijri_month": "Safar",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:38",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-20",
+      "weekday_id": "Senin",
+      "hijri_month": "Safar",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:39",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-21",
+      "weekday_id": "Selasa",
+      "hijri_month": "Safar",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:39",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-22",
+      "weekday_id": "Rabu",
+      "hijri_month": "Safar",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:49",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:39",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-23",
+      "weekday_id": "Kamis",
+      "hijri_month": "Safar",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:39",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-24",
+      "weekday_id": "Jumat",
+      "hijri_month": "Safar",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:39",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-25",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Safar",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:39",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-26",
+      "weekday_id": "Ahad",
+      "hijri_month": "Safar",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:48",
+        "dhuha": "06:13",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:39",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-27",
+      "weekday_id": "Senin",
+      "hijri_month": "Safar",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:48",
+        "dhuha": "06:12",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:39",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-28",
+      "weekday_id": "Selasa",
+      "hijri_month": "Safar",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:48",
+        "dhuha": "06:12",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-29",
+      "weekday_id": "Rabu",
+      "hijri_month": "Safar",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:48",
+        "dhuha": "06:12",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-30",
+      "weekday_id": "Kamis",
+      "hijri_month": "Safar",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:48",
+        "dhuha": "06:12",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-07-31",
+      "weekday_id": "Jumat",
+      "hijri_month": "Safar",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:48",
+        "dhuha": "06:12",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-juli-2026.pdf"
+    },
+    {
+      "date": "2026-08-01",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Safar",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:47",
+        "dhuha": "06:11",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-02",
+      "weekday_id": "Ahad",
+      "hijri_month": "Safar",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:47",
+        "dhuha": "06:11",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-03",
+      "weekday_id": "Senin",
+      "hijri_month": "Safar",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:47",
+        "dhuha": "06:11",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-04",
+      "weekday_id": "Selasa",
+      "hijri_month": "Safar",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:47",
+        "dhuha": "06:11",
+        "dhuhr": "11:45",
+        "asr": "15:06",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-05",
+      "weekday_id": "Rabu",
+      "hijri_month": "Safar",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:47",
+        "dhuha": "06:11",
+        "dhuhr": "11:45",
+        "asr": "15:05",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-06",
+      "weekday_id": "Kamis",
+      "hijri_month": "Safar",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:18",
+        "fajr": "04:28",
+        "sunrise": "05:46",
+        "dhuha": "06:10",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-07",
+      "weekday_id": "Jumat",
+      "hijri_month": "Safar",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:46",
+        "dhuha": "06:10",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-08",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Safar",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:46",
+        "dhuha": "06:10",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-09",
+      "weekday_id": "Ahad",
+      "hijri_month": "Safar",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:46",
+        "dhuha": "06:09",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-10",
+      "weekday_id": "Senin",
+      "hijri_month": "Safar",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:45",
+        "dhuha": "06:09",
+        "dhuhr": "11:44",
+        "asr": "15:05",
+        "maghrib": "17:40",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-11",
+      "weekday_id": "Selasa",
+      "hijri_month": "Safar",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:45",
+        "dhuha": "06:09",
+        "dhuhr": "11:44",
+        "asr": "15:04",
+        "maghrib": "17:40",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-12",
+      "weekday_id": "Rabu",
+      "hijri_month": "Safar",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:17",
+        "fajr": "04:27",
+        "sunrise": "05:45",
+        "dhuha": "06:08",
+        "dhuhr": "11:44",
+        "asr": "15:04",
+        "maghrib": "17:40",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-13",
+      "weekday_id": "Kamis",
+      "hijri_month": "Safar",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:16",
+        "fajr": "04:26",
+        "sunrise": "05:44",
+        "dhuha": "06:08",
+        "dhuhr": "11:43",
+        "asr": "15:04",
+        "maghrib": "17:40",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-14",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:16",
+        "fajr": "04:26",
+        "sunrise": "05:44",
+        "dhuha": "06:08",
+        "dhuhr": "11:43",
+        "asr": "15:04",
+        "maghrib": "17:40",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-15",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:16",
+        "fajr": "04:26",
+        "sunrise": "05:44",
+        "dhuha": "06:07",
+        "dhuhr": "11:43",
+        "asr": "15:03",
+        "maghrib": "17:40",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-16",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:16",
+        "fajr": "04:26",
+        "sunrise": "05:43",
+        "dhuha": "06:07",
+        "dhuhr": "11:43",
+        "asr": "15:03",
+        "maghrib": "17:40",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-17",
+      "weekday_id": "Senin",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:43",
+        "dhuha": "06:07",
+        "dhuhr": "11:43",
+        "asr": "15:03",
+        "maghrib": "17:40",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-18",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:43",
+        "dhuha": "06:06",
+        "dhuhr": "11:42",
+        "asr": "15:02",
+        "maghrib": "17:40",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-19",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:42",
+        "dhuha": "06:06",
+        "dhuhr": "11:42",
+        "asr": "15:02",
+        "maghrib": "17:40",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-20",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:15",
+        "fajr": "04:25",
+        "sunrise": "05:42",
+        "dhuha": "06:05",
+        "dhuhr": "11:42",
+        "asr": "15:02",
+        "maghrib": "17:40",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-21",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:42",
+        "dhuha": "06:05",
+        "dhuhr": "11:42",
+        "asr": "15:01",
+        "maghrib": "17:39",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-22",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:41",
+        "dhuha": "06:05",
+        "dhuhr": "11:41",
+        "asr": "15:01",
+        "maghrib": "17:39",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-23",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:14",
+        "fajr": "04:24",
+        "sunrise": "05:41",
+        "dhuha": "06:04",
+        "dhuhr": "11:41",
+        "asr": "15:01",
+        "maghrib": "17:39",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-24",
+      "weekday_id": "Senin",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:40",
+        "dhuha": "06:04",
+        "dhuhr": "11:41",
+        "asr": "15:00",
+        "maghrib": "17:39",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-25",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:40",
+        "dhuha": "06:03",
+        "dhuhr": "11:41",
+        "asr": "15:00",
+        "maghrib": "17:39",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-26",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:13",
+        "fajr": "04:23",
+        "sunrise": "05:39",
+        "dhuha": "06:03",
+        "dhuhr": "11:40",
+        "asr": "14:59",
+        "maghrib": "17:39",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-27",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:40",
+        "asr": "14:59",
+        "maghrib": "17:39",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-28",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:39",
+        "dhuha": "06:02",
+        "dhuhr": "11:40",
+        "asr": "14:58",
+        "maghrib": "17:39",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-29",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:12",
+        "fajr": "04:22",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:39",
+        "asr": "14:58",
+        "maghrib": "17:38",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-30",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:38",
+        "dhuha": "06:01",
+        "dhuhr": "11:39",
+        "asr": "14:57",
+        "maghrib": "17:38",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-08-31",
+      "weekday_id": "Senin",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:11",
+        "fajr": "04:21",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:39",
+        "asr": "14:57",
+        "maghrib": "17:38",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-agustus-2026.pdf"
+    },
+    {
+      "date": "2026-09-01",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:37",
+        "dhuha": "06:00",
+        "dhuhr": "11:39",
+        "asr": "14:56",
+        "maghrib": "17:38",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-02",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:10",
+        "fajr": "04:20",
+        "sunrise": "05:36",
+        "dhuha": "05:59",
+        "dhuhr": "11:38",
+        "asr": "14:56",
+        "maghrib": "17:38",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-03",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:36",
+        "dhuha": "05:59",
+        "dhuhr": "11:38",
+        "asr": "14:55",
+        "maghrib": "17:38",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-04",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:35",
+        "dhuha": "05:58",
+        "dhuhr": "11:38",
+        "asr": "14:55",
+        "maghrib": "17:38",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-05",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:09",
+        "fajr": "04:19",
+        "sunrise": "05:35",
+        "dhuha": "05:58",
+        "dhuhr": "11:37",
+        "asr": "14:54",
+        "maghrib": "17:37",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-06",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:34",
+        "dhuha": "05:57",
+        "dhuhr": "11:37",
+        "asr": "14:53",
+        "maghrib": "17:37",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-07",
+      "weekday_id": "Senin",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:08",
+        "fajr": "04:18",
+        "sunrise": "05:34",
+        "dhuha": "05:57",
+        "dhuhr": "11:37",
+        "asr": "14:53",
+        "maghrib": "17:37",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-08",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:07",
+        "fajr": "04:17",
+        "sunrise": "05:33",
+        "dhuha": "05:56",
+        "dhuhr": "11:36",
+        "asr": "14:52",
+        "maghrib": "17:37",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-09",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:07",
+        "fajr": "04:17",
+        "sunrise": "05:33",
+        "dhuha": "05:56",
+        "dhuhr": "11:36",
+        "asr": "14:51",
+        "maghrib": "17:37",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-10",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:06",
+        "fajr": "04:16",
+        "sunrise": "05:32",
+        "dhuha": "05:55",
+        "dhuhr": "11:36",
+        "asr": "14:51",
+        "maghrib": "17:37",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-11",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:06",
+        "fajr": "04:16",
+        "sunrise": "05:32",
+        "dhuha": "05:55",
+        "dhuhr": "11:35",
+        "asr": "14:50",
+        "maghrib": "17:36",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-12",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rabiul Awal",
+      "hijri_day": 30,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:05",
+        "fajr": "04:15",
+        "sunrise": "05:31",
+        "dhuha": "05:54",
+        "dhuhr": "11:35",
+        "asr": "14:49",
+        "maghrib": "17:36",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-13",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:05",
+        "fajr": "04:15",
+        "sunrise": "05:31",
+        "dhuha": "05:54",
+        "dhuhr": "11:34",
+        "asr": "14:49",
+        "maghrib": "17:36",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-14",
+      "weekday_id": "Senin",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:04",
+        "fajr": "04:14",
+        "sunrise": "05:30",
+        "dhuha": "05:53",
+        "dhuhr": "11:34",
+        "asr": "14:48",
+        "maghrib": "17:36",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-15",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:04",
+        "fajr": "04:14",
+        "sunrise": "05:29",
+        "dhuha": "05:52",
+        "dhuhr": "11:34",
+        "asr": "14:47",
+        "maghrib": "17:36",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-16",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:03",
+        "fajr": "04:13",
+        "sunrise": "05:29",
+        "dhuha": "05:52",
+        "dhuhr": "11:33",
+        "asr": "14:46",
+        "maghrib": "17:35",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-17",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:03",
+        "fajr": "04:13",
+        "sunrise": "05:28",
+        "dhuha": "05:51",
+        "dhuhr": "11:33",
+        "asr": "14:46",
+        "maghrib": "17:35",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-18",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:02",
+        "fajr": "04:12",
+        "sunrise": "05:28",
+        "dhuha": "05:51",
+        "dhuhr": "11:33",
+        "asr": "14:45",
+        "maghrib": "17:35",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-19",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:02",
+        "fajr": "04:12",
+        "sunrise": "05:27",
+        "dhuha": "05:50",
+        "dhuhr": "11:32",
+        "asr": "14:44",
+        "maghrib": "17:35",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-20",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:01",
+        "fajr": "04:11",
+        "sunrise": "05:27",
+        "dhuha": "05:50",
+        "dhuhr": "11:32",
+        "asr": "14:43",
+        "maghrib": "17:35",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-21",
+      "weekday_id": "Senin",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:01",
+        "fajr": "04:11",
+        "sunrise": "05:26",
+        "dhuha": "05:49",
+        "dhuhr": "11:32",
+        "asr": "14:43",
+        "maghrib": "17:35",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-22",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:00",
+        "fajr": "04:10",
+        "sunrise": "05:26",
+        "dhuha": "05:49",
+        "dhuhr": "11:31",
+        "asr": "14:42",
+        "maghrib": "17:34",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-23",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "04:00",
+        "fajr": "04:10",
+        "sunrise": "05:25",
+        "dhuha": "05:48",
+        "dhuhr": "11:31",
+        "asr": "14:41",
+        "maghrib": "17:34",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-24",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:59",
+        "fajr": "04:09",
+        "sunrise": "05:25",
+        "dhuha": "05:48",
+        "dhuhr": "11:31",
+        "asr": "14:40",
+        "maghrib": "17:34",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-25",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:58",
+        "fajr": "04:08",
+        "sunrise": "05:24",
+        "dhuha": "05:47",
+        "dhuhr": "11:30",
+        "asr": "14:39",
+        "maghrib": "17:34",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-26",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:58",
+        "fajr": "04:08",
+        "sunrise": "05:24",
+        "dhuha": "05:47",
+        "dhuhr": "11:30",
+        "asr": "14:38",
+        "maghrib": "17:34",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-27",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:57",
+        "fajr": "04:07",
+        "sunrise": "05:23",
+        "dhuha": "05:46",
+        "dhuhr": "11:30",
+        "asr": "14:38",
+        "maghrib": "17:34",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-28",
+      "weekday_id": "Senin",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:57",
+        "fajr": "04:07",
+        "sunrise": "05:23",
+        "dhuha": "05:46",
+        "dhuhr": "11:29",
+        "asr": "14:37",
+        "maghrib": "17:33",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-29",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:56",
+        "fajr": "04:06",
+        "sunrise": "05:22",
+        "dhuha": "05:45",
+        "dhuhr": "11:29",
+        "asr": "14:36",
+        "maghrib": "17:33",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-09-30",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:56",
+        "fajr": "04:06",
+        "sunrise": "05:22",
+        "dhuha": "05:45",
+        "dhuhr": "11:29",
+        "asr": "14:35",
+        "maghrib": "17:33",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-september-2026.pdf"
+    },
+    {
+      "date": "2026-10-01",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:55",
+        "fajr": "04:05",
+        "sunrise": "05:21",
+        "dhuha": "05:44",
+        "dhuhr": "11:28",
+        "asr": "14:34",
+        "maghrib": "17:33",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-02",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:55",
+        "fajr": "04:05",
+        "sunrise": "05:21",
+        "dhuha": "05:44",
+        "dhuhr": "11:28",
+        "asr": "14:33",
+        "maghrib": "17:33",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-03",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:54",
+        "fajr": "04:04",
+        "sunrise": "05:20",
+        "dhuha": "05:43",
+        "dhuhr": "11:28",
+        "asr": "14:32",
+        "maghrib": "17:33",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-04",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:54",
+        "fajr": "04:04",
+        "sunrise": "05:20",
+        "dhuha": "05:43",
+        "dhuhr": "11:27",
+        "asr": "14:31",
+        "maghrib": "17:33",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-05",
+      "weekday_id": "Senin",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:53",
+        "fajr": "04:03",
+        "sunrise": "05:19",
+        "dhuha": "05:42",
+        "dhuhr": "11:27",
+        "asr": "14:30",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-06",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:52",
+        "fajr": "04:02",
+        "sunrise": "05:19",
+        "dhuha": "05:42",
+        "dhuhr": "11:27",
+        "asr": "14:29",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-07",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:52",
+        "fajr": "04:02",
+        "sunrise": "05:18",
+        "dhuha": "05:41",
+        "dhuhr": "11:26",
+        "asr": "14:29",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-08",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:51",
+        "fajr": "04:01",
+        "sunrise": "05:18",
+        "dhuha": "05:41",
+        "dhuhr": "11:26",
+        "asr": "14:28",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-09",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:51",
+        "fajr": "04:01",
+        "sunrise": "05:17",
+        "dhuha": "05:40",
+        "dhuhr": "11:26",
+        "asr": "14:27",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-10",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:50",
+        "fajr": "04:00",
+        "sunrise": "05:17",
+        "dhuha": "05:40",
+        "dhuhr": "11:26",
+        "asr": "14:26",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-11",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rabiul Akhir",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:50",
+        "fajr": "04:00",
+        "sunrise": "05:16",
+        "dhuha": "05:39",
+        "dhuhr": "11:25",
+        "asr": "14:26",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-12",
+      "weekday_id": "Senin",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:49",
+        "fajr": "03:59",
+        "sunrise": "05:16",
+        "dhuha": "05:39",
+        "dhuhr": "11:25",
+        "asr": "14:27",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-13",
+      "weekday_id": "Selasa",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:49",
+        "fajr": "03:59",
+        "sunrise": "05:15",
+        "dhuha": "05:39",
+        "dhuhr": "11:25",
+        "asr": "14:27",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-14",
+      "weekday_id": "Rabu",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:48",
+        "fajr": "03:58",
+        "sunrise": "05:15",
+        "dhuha": "05:38",
+        "dhuhr": "11:25",
+        "asr": "14:28",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-15",
+      "weekday_id": "Kamis",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:48",
+        "fajr": "03:58",
+        "sunrise": "05:15",
+        "dhuha": "05:38",
+        "dhuhr": "11:24",
+        "asr": "14:29",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-16",
+      "weekday_id": "Jumat",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:47",
+        "fajr": "03:57",
+        "sunrise": "05:14",
+        "dhuha": "05:37",
+        "dhuhr": "11:24",
+        "asr": "14:29",
+        "maghrib": "17:32",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-17",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:47",
+        "fajr": "03:57",
+        "sunrise": "05:14",
+        "dhuha": "05:37",
+        "dhuhr": "11:24",
+        "asr": "14:30",
+        "maghrib": "17:31",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-18",
+      "weekday_id": "Ahad",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:46",
+        "fajr": "03:56",
+        "sunrise": "05:13",
+        "dhuha": "05:37",
+        "dhuhr": "11:24",
+        "asr": "14:30",
+        "maghrib": "17:31",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-19",
+      "weekday_id": "Senin",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:46",
+        "fajr": "03:56",
+        "sunrise": "05:13",
+        "dhuha": "05:36",
+        "dhuhr": "11:23",
+        "asr": "14:31",
+        "maghrib": "17:31",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-20",
+      "weekday_id": "Selasa",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:45",
+        "fajr": "03:55",
+        "sunrise": "05:13",
+        "dhuha": "05:36",
+        "dhuhr": "11:23",
+        "asr": "14:31",
+        "maghrib": "17:31",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-21",
+      "weekday_id": "Rabu",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:45",
+        "fajr": "03:55",
+        "sunrise": "05:12",
+        "dhuha": "05:36",
+        "dhuhr": "11:23",
+        "asr": "14:32",
+        "maghrib": "17:31",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-22",
+      "weekday_id": "Kamis",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:44",
+        "fajr": "03:54",
+        "sunrise": "05:12",
+        "dhuha": "05:35",
+        "dhuhr": "11:23",
+        "asr": "14:32",
+        "maghrib": "17:31",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-23",
+      "weekday_id": "Jumat",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:44",
+        "fajr": "03:54",
+        "sunrise": "05:12",
+        "dhuha": "05:35",
+        "dhuhr": "11:23",
+        "asr": "14:33",
+        "maghrib": "17:31",
+        "isha": "18:41"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-24",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:44",
+        "fajr": "03:54",
+        "sunrise": "05:11",
+        "dhuha": "05:35",
+        "dhuhr": "11:23",
+        "asr": "14:33",
+        "maghrib": "17:32",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-25",
+      "weekday_id": "Ahad",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:43",
+        "fajr": "03:53",
+        "sunrise": "05:11",
+        "dhuha": "05:35",
+        "dhuhr": "11:23",
+        "asr": "14:33",
+        "maghrib": "17:32",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-26",
+      "weekday_id": "Senin",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:43",
+        "fajr": "03:53",
+        "sunrise": "05:11",
+        "dhuha": "05:34",
+        "dhuhr": "11:22",
+        "asr": "14:34",
+        "maghrib": "17:32",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-27",
+      "weekday_id": "Selasa",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:42",
+        "fajr": "03:52",
+        "sunrise": "05:11",
+        "dhuha": "05:34",
+        "dhuhr": "11:22",
+        "asr": "14:34",
+        "maghrib": "17:32",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-28",
+      "weekday_id": "Rabu",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:42",
+        "fajr": "03:52",
+        "sunrise": "05:10",
+        "dhuha": "05:34",
+        "dhuhr": "11:22",
+        "asr": "14:35",
+        "maghrib": "17:32",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-29",
+      "weekday_id": "Kamis",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:42",
+        "fajr": "03:52",
+        "sunrise": "05:10",
+        "dhuha": "05:34",
+        "dhuhr": "11:22",
+        "asr": "14:35",
+        "maghrib": "17:32",
+        "isha": "18:42"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-30",
+      "weekday_id": "Jumat",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:41",
+        "fajr": "03:51",
+        "sunrise": "05:10",
+        "dhuha": "05:33",
+        "dhuhr": "11:22",
+        "asr": "14:36",
+        "maghrib": "17:32",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-10-31",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:41",
+        "fajr": "03:51",
+        "sunrise": "05:10",
+        "dhuha": "05:33",
+        "dhuhr": "11:22",
+        "asr": "14:36",
+        "maghrib": "17:32",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-oktober-2026.pdf"
+    },
+    {
+      "date": "2026-11-01",
+      "weekday_id": "Ahad",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:41",
+        "fajr": "03:51",
+        "sunrise": "05:09",
+        "dhuha": "05:33",
+        "dhuhr": "11:22",
+        "asr": "14:37",
+        "maghrib": "17:32",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-02",
+      "weekday_id": "Senin",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:40",
+        "fajr": "03:50",
+        "sunrise": "05:09",
+        "dhuha": "05:33",
+        "dhuhr": "11:22",
+        "asr": "14:37",
+        "maghrib": "17:32",
+        "isha": "18:43"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-03",
+      "weekday_id": "Selasa",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:40",
+        "fajr": "03:50",
+        "sunrise": "05:09",
+        "dhuha": "05:33",
+        "dhuhr": "11:22",
+        "asr": "14:38",
+        "maghrib": "17:33",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-04",
+      "weekday_id": "Rabu",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:40",
+        "fajr": "03:50",
+        "sunrise": "05:09",
+        "dhuha": "05:33",
+        "dhuhr": "11:22",
+        "asr": "14:38",
+        "maghrib": "17:33",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-05",
+      "weekday_id": "Kamis",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:39",
+        "fajr": "03:49",
+        "sunrise": "05:09",
+        "dhuha": "05:32",
+        "dhuhr": "11:22",
+        "asr": "14:39",
+        "maghrib": "17:33",
+        "isha": "18:44"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-06",
+      "weekday_id": "Jumat",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:39",
+        "fajr": "03:49",
+        "sunrise": "05:09",
+        "dhuha": "05:32",
+        "dhuhr": "11:22",
+        "asr": "14:39",
+        "maghrib": "17:33",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-07",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:39",
+        "fajr": "03:49",
+        "sunrise": "05:09",
+        "dhuha": "05:32",
+        "dhuhr": "11:22",
+        "asr": "14:40",
+        "maghrib": "17:33",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-08",
+      "weekday_id": "Ahad",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:39",
+        "fajr": "03:49",
+        "sunrise": "05:08",
+        "dhuha": "05:32",
+        "dhuhr": "11:22",
+        "asr": "14:40",
+        "maghrib": "17:34",
+        "isha": "18:45"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-09",
+      "weekday_id": "Senin",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:08",
+        "dhuha": "05:32",
+        "dhuhr": "11:22",
+        "asr": "14:41",
+        "maghrib": "17:34",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-10",
+      "weekday_id": "Selasa",
+      "hijri_month": "Jumadal Ula",
+      "hijri_day": 30,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:08",
+        "dhuha": "05:32",
+        "dhuhr": "11:22",
+        "asr": "14:41",
+        "maghrib": "17:34",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-11",
+      "weekday_id": "Rabu",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:08",
+        "dhuha": "05:32",
+        "dhuhr": "11:22",
+        "asr": "14:42",
+        "maghrib": "17:34",
+        "isha": "18:46"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-12",
+      "weekday_id": "Kamis",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:08",
+        "dhuha": "05:32",
+        "dhuhr": "11:23",
+        "asr": "14:42",
+        "maghrib": "17:34",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-13",
+      "weekday_id": "Jumat",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:08",
+        "dhuha": "05:32",
+        "dhuhr": "11:23",
+        "asr": "14:43",
+        "maghrib": "17:35",
+        "isha": "18:47"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-14",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:08",
+        "dhuha": "05:32",
+        "dhuhr": "11:23",
+        "asr": "14:43",
+        "maghrib": "17:35",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "weekday_id": "Ahad",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:08",
+        "dhuha": "05:32",
+        "dhuhr": "11:23",
+        "asr": "14:44",
+        "maghrib": "17:35",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-16",
+      "weekday_id": "Senin",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:08",
+        "dhuha": "05:32",
+        "dhuhr": "11:23",
+        "asr": "14:44",
+        "maghrib": "17:36",
+        "isha": "18:48"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-17",
+      "weekday_id": "Selasa",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:08",
+        "dhuha": "05:32",
+        "dhuhr": "11:23",
+        "asr": "14:45",
+        "maghrib": "17:36",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-18",
+      "weekday_id": "Rabu",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:08",
+        "dhuha": "05:33",
+        "dhuhr": "11:24",
+        "asr": "14:45",
+        "maghrib": "17:36",
+        "isha": "18:49"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-19",
+      "weekday_id": "Kamis",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:08",
+        "dhuha": "05:33",
+        "dhuhr": "11:24",
+        "asr": "14:46",
+        "maghrib": "17:37",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-20",
+      "weekday_id": "Jumat",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:09",
+        "dhuha": "05:33",
+        "dhuhr": "11:24",
+        "asr": "14:46",
+        "maghrib": "17:37",
+        "isha": "18:50"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-21",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:09",
+        "dhuha": "05:33",
+        "dhuhr": "11:24",
+        "asr": "14:47",
+        "maghrib": "17:37",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-22",
+      "weekday_id": "Ahad",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:09",
+        "dhuha": "05:33",
+        "dhuhr": "11:24",
+        "asr": "14:47",
+        "maghrib": "17:38",
+        "isha": "18:51"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-23",
+      "weekday_id": "Senin",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:09",
+        "dhuha": "05:33",
+        "dhuhr": "11:25",
+        "asr": "14:48",
+        "maghrib": "17:38",
+        "isha": "18:52"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-24",
+      "weekday_id": "Selasa",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:09",
+        "dhuha": "05:33",
+        "dhuhr": "11:25",
+        "asr": "14:48",
+        "maghrib": "17:39",
+        "isha": "18:52"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-25",
+      "weekday_id": "Rabu",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:09",
+        "dhuha": "05:34",
+        "dhuhr": "11:25",
+        "asr": "14:49",
+        "maghrib": "17:39",
+        "isha": "18:53"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-26",
+      "weekday_id": "Kamis",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:09",
+        "dhuha": "05:34",
+        "dhuhr": "11:26",
+        "asr": "14:49",
+        "maghrib": "17:39",
+        "isha": "18:53"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-27",
+      "weekday_id": "Jumat",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:10",
+        "dhuha": "05:34",
+        "dhuhr": "11:26",
+        "asr": "14:50",
+        "maghrib": "17:40",
+        "isha": "18:54"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-28",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:37",
+        "fajr": "03:47",
+        "sunrise": "05:10",
+        "dhuha": "05:34",
+        "dhuhr": "11:26",
+        "asr": "14:50",
+        "maghrib": "17:40",
+        "isha": "18:54"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-29",
+      "weekday_id": "Ahad",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:10",
+        "dhuha": "05:35",
+        "dhuhr": "11:27",
+        "asr": "14:51",
+        "maghrib": "17:41",
+        "isha": "18:55"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-11-30",
+      "weekday_id": "Senin",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:10",
+        "dhuha": "05:35",
+        "dhuhr": "11:27",
+        "asr": "14:51",
+        "maghrib": "17:41",
+        "isha": "18:55"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-november-2026.pdf"
+    },
+    {
+      "date": "2026-12-01",
+      "weekday_id": "Selasa",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:11",
+        "dhuha": "05:35",
+        "dhuhr": "11:27",
+        "asr": "14:52",
+        "maghrib": "17:42",
+        "isha": "18:56"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-02",
+      "weekday_id": "Rabu",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 22,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:11",
+        "dhuha": "05:36",
+        "dhuhr": "11:28",
+        "asr": "14:52",
+        "maghrib": "17:42",
+        "isha": "18:57"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-03",
+      "weekday_id": "Kamis",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 23,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:11",
+        "dhuha": "05:36",
+        "dhuhr": "11:28",
+        "asr": "14:53",
+        "maghrib": "17:43",
+        "isha": "18:57"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-04",
+      "weekday_id": "Jumat",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 24,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:38",
+        "fajr": "03:48",
+        "sunrise": "05:12",
+        "dhuha": "05:36",
+        "dhuhr": "11:29",
+        "asr": "14:54",
+        "maghrib": "17:43",
+        "isha": "18:58"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-05",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 25,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:39",
+        "fajr": "03:49",
+        "sunrise": "05:12",
+        "dhuha": "05:37",
+        "dhuhr": "11:29",
+        "asr": "14:54",
+        "maghrib": "17:43",
+        "isha": "18:58"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-06",
+      "weekday_id": "Ahad",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 26,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:39",
+        "fajr": "03:49",
+        "sunrise": "05:12",
+        "dhuha": "05:37",
+        "dhuhr": "11:29",
+        "asr": "14:55",
+        "maghrib": "17:44",
+        "isha": "18:59"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-07",
+      "weekday_id": "Senin",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 27,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:39",
+        "fajr": "03:49",
+        "sunrise": "05:13",
+        "dhuha": "05:37",
+        "dhuhr": "11:30",
+        "asr": "14:55",
+        "maghrib": "17:44",
+        "isha": "18:59"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-08",
+      "weekday_id": "Selasa",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 28,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:39",
+        "fajr": "03:49",
+        "sunrise": "05:13",
+        "dhuha": "05:38",
+        "dhuhr": "11:30",
+        "asr": "14:56",
+        "maghrib": "17:45",
+        "isha": "19:00"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-09",
+      "weekday_id": "Rabu",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 29,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:40",
+        "fajr": "03:50",
+        "sunrise": "05:13",
+        "dhuha": "05:38",
+        "dhuhr": "11:31",
+        "asr": "14:56",
+        "maghrib": "17:45",
+        "isha": "19:01"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-10",
+      "weekday_id": "Kamis",
+      "hijri_month": "Jumadal Akhirah",
+      "hijri_day": 30,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:40",
+        "fajr": "03:50",
+        "sunrise": "05:14",
+        "dhuha": "05:39",
+        "dhuhr": "11:31",
+        "asr": "14:57",
+        "maghrib": "17:46",
+        "isha": "19:01"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-11",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rajab",
+      "hijri_day": 1,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:40",
+        "fajr": "03:50",
+        "sunrise": "05:14",
+        "dhuha": "05:39",
+        "dhuhr": "11:32",
+        "asr": "14:57",
+        "maghrib": "17:46",
+        "isha": "19:02"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-12",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rajab",
+      "hijri_day": 2,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:41",
+        "fajr": "03:51",
+        "sunrise": "05:15",
+        "dhuha": "05:39",
+        "dhuhr": "11:32",
+        "asr": "14:58",
+        "maghrib": "17:47",
+        "isha": "19:02"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-13",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rajab",
+      "hijri_day": 3,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:41",
+        "fajr": "03:51",
+        "sunrise": "05:15",
+        "dhuha": "05:40",
+        "dhuhr": "11:32",
+        "asr": "14:59",
+        "maghrib": "17:47",
+        "isha": "19:03"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-14",
+      "weekday_id": "Senin",
+      "hijri_month": "Rajab",
+      "hijri_day": 4,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:42",
+        "fajr": "03:52",
+        "sunrise": "05:15",
+        "dhuha": "05:40",
+        "dhuhr": "11:33",
+        "asr": "14:59",
+        "maghrib": "17:48",
+        "isha": "19:03"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-15",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rajab",
+      "hijri_day": 5,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:42",
+        "fajr": "03:52",
+        "sunrise": "05:16",
+        "dhuha": "05:41",
+        "dhuhr": "11:33",
+        "asr": "15:00",
+        "maghrib": "17:49",
+        "isha": "19:04"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-16",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rajab",
+      "hijri_day": 6,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:42",
+        "fajr": "03:52",
+        "sunrise": "05:16",
+        "dhuha": "05:41",
+        "dhuhr": "11:34",
+        "asr": "15:00",
+        "maghrib": "17:49",
+        "isha": "19:04"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-17",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rajab",
+      "hijri_day": 7,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:43",
+        "fajr": "03:53",
+        "sunrise": "05:17",
+        "dhuha": "05:42",
+        "dhuhr": "11:34",
+        "asr": "15:01",
+        "maghrib": "17:50",
+        "isha": "19:05"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-18",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rajab",
+      "hijri_day": 8,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:43",
+        "fajr": "03:53",
+        "sunrise": "05:17",
+        "dhuha": "05:42",
+        "dhuhr": "11:35",
+        "asr": "15:01",
+        "maghrib": "17:50",
+        "isha": "19:05"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-19",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rajab",
+      "hijri_day": 9,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:44",
+        "fajr": "03:54",
+        "sunrise": "05:18",
+        "dhuha": "05:43",
+        "dhuhr": "11:35",
+        "asr": "15:02",
+        "maghrib": "17:51",
+        "isha": "19:06"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-20",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rajab",
+      "hijri_day": 10,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:44",
+        "fajr": "03:54",
+        "sunrise": "05:18",
+        "dhuha": "05:43",
+        "dhuhr": "11:36",
+        "asr": "15:02",
+        "maghrib": "17:51",
+        "isha": "19:06"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-21",
+      "weekday_id": "Senin",
+      "hijri_month": "Rajab",
+      "hijri_day": 11,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:45",
+        "fajr": "03:55",
+        "sunrise": "05:19",
+        "dhuha": "05:44",
+        "dhuhr": "11:36",
+        "asr": "15:03",
+        "maghrib": "17:52",
+        "isha": "19:07"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-22",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rajab",
+      "hijri_day": 12,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:45",
+        "fajr": "03:55",
+        "sunrise": "05:19",
+        "dhuha": "05:44",
+        "dhuhr": "11:37",
+        "asr": "15:03",
+        "maghrib": "17:52",
+        "isha": "19:07"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-23",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rajab",
+      "hijri_day": 13,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:46",
+        "fajr": "03:56",
+        "sunrise": "05:20",
+        "dhuha": "05:45",
+        "dhuhr": "11:37",
+        "asr": "15:04",
+        "maghrib": "17:53",
+        "isha": "19:08"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-24",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rajab",
+      "hijri_day": 14,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:46",
+        "fajr": "03:56",
+        "sunrise": "05:20",
+        "dhuha": "05:45",
+        "dhuhr": "11:38",
+        "asr": "15:04",
+        "maghrib": "17:53",
+        "isha": "19:08"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-25",
+      "weekday_id": "Jumat",
+      "hijri_month": "Rajab",
+      "hijri_day": 15,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:47",
+        "fajr": "03:57",
+        "sunrise": "05:21",
+        "dhuha": "05:46",
+        "dhuhr": "11:38",
+        "asr": "15:05",
+        "maghrib": "17:54",
+        "isha": "19:09"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-26",
+      "weekday_id": "Sabtu",
+      "hijri_month": "Rajab",
+      "hijri_day": 16,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:47",
+        "fajr": "03:57",
+        "sunrise": "05:21",
+        "dhuha": "05:46",
+        "dhuhr": "11:39",
+        "asr": "15:05",
+        "maghrib": "17:54",
+        "isha": "19:09"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-27",
+      "weekday_id": "Ahad",
+      "hijri_month": "Rajab",
+      "hijri_day": 17,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:48",
+        "fajr": "03:58",
+        "sunrise": "05:22",
+        "dhuha": "05:47",
+        "dhuhr": "11:39",
+        "asr": "15:06",
+        "maghrib": "17:54",
+        "isha": "19:10"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-28",
+      "weekday_id": "Senin",
+      "hijri_month": "Rajab",
+      "hijri_day": 18,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:48",
+        "fajr": "03:58",
+        "sunrise": "05:22",
+        "dhuha": "05:47",
+        "dhuhr": "11:40",
+        "asr": "15:06",
+        "maghrib": "17:55",
+        "isha": "19:10"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-29",
+      "weekday_id": "Selasa",
+      "hijri_month": "Rajab",
+      "hijri_day": 19,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:49",
+        "fajr": "03:59",
+        "sunrise": "05:23",
+        "dhuha": "05:48",
+        "dhuhr": "11:40",
+        "asr": "15:07",
+        "maghrib": "17:55",
+        "isha": "19:11"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-30",
+      "weekday_id": "Rabu",
+      "hijri_month": "Rajab",
+      "hijri_day": 20,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:49",
+        "fajr": "03:59",
+        "sunrise": "05:23",
+        "dhuha": "05:48",
+        "dhuhr": "11:41",
+        "asr": "15:07",
+        "maghrib": "17:56",
+        "isha": "19:11"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    },
+    {
+      "date": "2026-12-31",
+      "weekday_id": "Kamis",
+      "hijri_month": "Rajab",
+      "hijri_day": 21,
+      "is_ramadan": false,
+      "times_wib": {
+        "imsak": "03:50",
+        "fajr": "04:00",
+        "sunrise": "05:24",
+        "dhuha": "05:49",
+        "dhuhr": "11:41",
+        "asr": "15:07",
+        "maghrib": "17:56",
+        "isha": "19:11"
+      },
+      "source_pdf": "nu-online-jadwal-shalat-bangsri-desember-2026.pdf"
+    }
+  ]
+}

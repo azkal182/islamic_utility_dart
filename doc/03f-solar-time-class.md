@@ -59,6 +59,14 @@ Langkah:
    )
 ```
 
+Sunrise and sunset are solved only when the solar center reaches the standard
+−50/60° altitude. If it does not, `SolarTime` retains internal transit-based
+anchors for high-latitude fallback math; `PrayerTimes.eventForPrayer` reports
+the public event as unavailable and its non-null getter throws `StateError`.
+Asr uses solar declination interpolated to transit. Solar altitude crossings
+are refined by the bracketed solver documented in
+[`03e-transit-hour-angle.md`](03e-transit-hour-angle.md).
+
 ## Fields
 
 | Field | Tipe | Keterangan |

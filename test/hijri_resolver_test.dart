@@ -6,10 +6,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('HijriResolver', () {
-    final resolver = HijriResolver([
-      LocalHijriProvider(),
-      UmmAlQuraProvider(),
-    ]);
+    final resolver = HijriResolver([LocalHijriProvider(), UmmAlQuraProvider()]);
 
     test('routes to local provider', () {
       final h = resolver.fromGregorian(

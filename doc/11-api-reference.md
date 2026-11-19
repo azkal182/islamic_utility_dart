@@ -39,6 +39,7 @@ Enum:
 - `muslimWorldLeague`, `egyptian`, `indonesian`, `karachi`, `ummAlQura`
 - `qatar`, `dubai`, `kuwait`, `moonsightingCommittee`, `singapore`
 - `turkiye`, `tehran`, `northAmerica`, `morocco`, `other`
+- `lfnu`
 
 Property:
 
@@ -54,8 +55,10 @@ CalculationParameters(
   double fajrAngle,
   double ishaAngle, {
   int dhuhaOffsetMinutes = 20,
+  double? dhuhaAngle,
   int? ishaInterval,
   double? maghribAngle,
+  int ramadanMaghribAdjustmentMinutes = 0,
   Madhab? madhab,
   Shafaq? shafaq,
   HighLatitudeRule? highLatitudeRule,
@@ -83,8 +86,29 @@ PrayerTimes({
   required Coordinates coordinates,
   required CalculationParameters calculationParameters,
   bool precision = false,
+  bool Function(DateTime date)? isRamadanOn,
 })
 ```
+
+`Coordinates(latitude, longitude, {elevation = 0})` accepts elevation in
+meters. It adjusts sunrise/sunset horizon altitude; zero preserves the
+sea-level convention. `CalculationMethod.lfnu` uses Fajr −20°, Isha −18°,
+Dhuha +4.5°, Shafi Asr, Dhuhr +1 minute, Imsak 10 minutes before Fajr, and
+one-minute Maghrib ihtiyath only when the supplied `isRamadanOn` callback
+returns true for that UTC calendar date.
+
+`precision: true` retains second-level event times. `precision: false` rounds
+to the nearest minute (seconds 00–29 down; 30–59 up). It does not mean that
+every event is always rounded up. The application may apply another display
+policy to precision results when a specific schedule source requires it.
+
+For a client comparing against the supplied LFNU Bangsri 2026 PDFs, the
+validated display policy is nearest-minute for Terbit and round-up for other
+events. Keep `precision: true`, apply that policy in the client presentation
+layer, and retain the unrounded event for calculations and boundaries. This
+policy reduced the fixture comparison to 35 mismatches in 2,920 event values;
+it is specific to that PDF reference. NU Online's FAQ describes round-up for
+all events, so clients targeting that app should use its stated policy instead.
 
 Outputs (UTC):
 - `imsak`, `fajr`, `dhuha`, `sunrise`, `dhuhr`, `asr`, `maghrib`, `isha`, `ishaBefore`, `fajrAfter`
@@ -92,14 +116,15 @@ Outputs (UTC):
 Functions:
 
 ```dart
-Prayer currentPrayer({required DateTime date})
-Prayer nextPrayer({DateTime? date, NextPrayerOptions options})
+Prayer currentPrayer({required DateTime date, DateTime? locationDate})
+Prayer nextPrayer({DateTime? date, DateTime? locationDate, NextPrayerOptions options})
 NextPrayerDetails nextPrayerDetails({
   required DateTime at,
   required DateTime locationDate,
   NextPrayerOptions options,
 })
 DateTime timeForPrayer(Prayer prayer)
+PrayerEventResult eventForPrayer(Prayer prayer)
 ```
 
 By default, next-event candidates are Imsak, Fajr, sunrise, Dhuha, Dhuhr, Asr,
@@ -107,6 +132,21 @@ Maghrib, and Isha. Use `NextPrayerOptions.skip` to omit one or more candidates.
 Imsak is included on every date by default; `ImsakPolicy.ramadanOnly` includes
 it only when `isRamadanOn(localDate)` returns true, and `ImsakPolicy.never`
 omits it.
+
+`eventForPrayer` reports the event time and its `PrayerEventSource`:
+`astronomical`, `calculationInterval`, `highLatitudeFallback`, or
+`unavailable`. In ordinary schedule calculation, missing horizon crossings
+are supplied with marked high-latitude estimates so all prayer-time fields
+remain populated: sunrise/sunset use six hours around transit, and unavailable
+Asr uses the midpoint between transit and sunset. These estimates are labeled
+`highLatitudeFallback` and are included by `nextPrayerDetails`. Fajr and Isha
+whose twilight angles cannot be reached use the configured high-latitude rule
+and are labeled `highLatitudeFallback`. `unavailable` remains available for
+future providers that cannot supply a usable fallback.
+`fajrAfter` uses the next day's Fajr calculation and Fajr adjustments;
+`ishaBefore` uses the previous day's Isha calculation and Isha adjustments.
+Imsak and Dhuha apply their own adjustment entries after their base event and
+offset.
 
 The `isRamadanOn` callback is required for `ramadanOnly`. It receives the
 target location's calendar date at UTC midnight. It is called for today and
@@ -120,6 +160,8 @@ this API when the actual next occurrence time matters; `nextPrayer` returns
 only the prayer enum. Pairing that enum with `timeForPrayer` cannot distinguish
 a next-day occurrence from the same event on the schedule object's date (for
 example, tomorrow's Imsak); use `nextPrayerDetails` to display its actual time.
+For `currentPrayer` and the enum-only `nextPrayer`, pass `locationDate` when
+the instant's UTC date differs from the target location's calendar date.
 
 ### SunnahTimes
 

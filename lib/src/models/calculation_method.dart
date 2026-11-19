@@ -1,4 +1,5 @@
 import 'package:islamic_utility/src/models/calculation_parameters.dart';
+import 'package:islamic_utility/src/models/madhab.dart';
 import 'package:islamic_utility/src/models/prayer.dart';
 
 enum CalculationMethod {
@@ -16,6 +17,7 @@ enum CalculationMethod {
   tehran,
   northAmerica,
   morocco,
+  lfnu,
   other;
 
   CalculationParameters get parameters {
@@ -67,6 +69,15 @@ enum CalculationMethod {
           ..methodAdjustments[Prayer.sunrise] = -3
           ..methodAdjustments[Prayer.dhuhr] = 5
           ..methodAdjustments[Prayer.maghrib] = 5;
+      case CalculationMethod.lfnu:
+        return CalculationParameters(
+          this,
+          20,
+          18,
+          dhuhaAngle: 4.5,
+          madhab: Madhab.shafi,
+          ramadanMaghribAdjustmentMinutes: 1,
+        )..methodAdjustments[Prayer.dhuhr] = 1;
       case CalculationMethod.other:
         return CalculationParameters(this, 0, 0);
     }

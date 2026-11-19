@@ -1,5 +1,1 @@
-enum Shafaq {
-  general,
-  ahmer,
-  abyad,
-}
+enum Shafaq { general, ahmer, abyad }

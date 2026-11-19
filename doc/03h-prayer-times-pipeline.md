@@ -9,7 +9,12 @@ Dokumen ini menjelaskan urutan lengkap perhitungan di `PrayerTimes` constructor 
 | `date` | DateTime | Tanggal target (komponen year/month/day saja) |
 | `coordinates` | Coordinates | latitude, longitude dalam degrees |
 | `calculationParameters` | CalculationParameters | method, angles, adjustments |
-| `precision` | bool | true = detik-level, false = bulatkan ke menit |
+| `precision` | bool | true = pertahankan detik, false = bulatkan ke menit terdekat |
+
+Pada `precision: false`, detik 00–29 dibulatkan turun dan detik 30–59 ke menit
+berikutnya. Ini adalah pembulatan menit terdekat, bukan kebijakan `round up`
+untuk semua event. Konsumen yang memerlukan kebijakan tampilan lain harus
+menerapkannya secara eksplisit setelah menerima hasil presisi.
 
 ## Output
 
@@ -98,11 +103,12 @@ safeFajr():
     nightFraction = portion × night
     return sunriseTime - nightFraction
 
-if fajrTime is NaN OR safeFajr > fajrTime:
+if the Fajr angle is geometrically unreachable OR safeFajr > fajrTime:
   fajrTime = safeFajr
 ```
 
-> Logika yang sama berlaku untuk `fajrAfterTime`.
+Logika yang sama berlaku untuk `fajrAfterTime`. The result is exposed as
+`PrayerEventSource.highLatitudeFallback` when the angle cannot be reached.
 
 ### Langkah 7: Hitung Isha
 
@@ -141,11 +147,17 @@ safeIsha():
     nightFraction = portion × night
     return sunsetTime + nightFraction
 
-if ishaTime is NaN OR safeIsha < ishaTime:
+if the Isha angle is geometrically unreachable OR safeIsha < ishaTime:
   ishaTime = safeIsha
 ```
 
-> Logika yang sama berlaku untuk `ishaBeforeTime`.
+Logika yang sama berlaku untuk `ishaBeforeTime`. A positive method-defined
+interval is reported as `PrayerEventSource.calculationInterval`.
+
+If the solar center never reaches the sunrise/sunset altitude, the event is
+reported as `PrayerEventSource.unavailable`. `eventForPrayer` returns null,
+`nextPrayerDetails` omits the event, and reading the corresponding non-null
+convenience getter throws `StateError`.
 
 ### Langkah 8: Hitung Maghrib
 
@@ -179,6 +191,14 @@ isha    = roundedMinute(ishaTime    + ishaAdj,    precision)
 fajrAfter  = roundedMinute(fajrAfterTime  + fajrAdj, precision)
 ishaBefore = roundedMinute(ishaBeforeTime + ishaAdj, precision)
 ```
+
+`fajrAfter` is the next civil day's Fajr schedule and therefore uses the same
+Fajr adjustments; `ishaBefore` is the previous civil day's Isha schedule and
+uses the same Isha adjustments. The dedicated `fajrAfter` and `ishaBefore`
+adjustment-map entries do not override their owning prayer's adjustment.
+Imsak is derived from the adjusted Fajr time and then receives its own Imsak
+adjustment. Dhuha is derived from adjusted sunrise plus its configured offset,
+then receives its own Dhuha adjustment.
 
 ---
 

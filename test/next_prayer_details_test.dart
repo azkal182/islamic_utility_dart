@@ -44,6 +44,38 @@ void main() {
       expect(details.isNextDay, isFalse);
     });
 
+    test('local midnight rollover is independent of the UTC date', () {
+      // New York is UTC-4 on these dates. These UTC instants are 23:59 on
+      // May 1 and 00:01 on May 2 at the target location.
+      const newYork = Coordinates(40.7128, -74.0060);
+      PrayerTimes newYorkSchedule(DateTime date) => PrayerTimes(
+        date: date,
+        coordinates: newYork,
+        calculationParameters: CalculationMethod.northAmerica.parameters,
+        precision: true,
+      );
+
+      final beforeLocalMidnight = DateTime.utc(2026, 5, 2, 3, 59);
+      final afterLocalMidnight = DateTime.utc(2026, 5, 2, 4, 1);
+      final mayFirst = newYorkSchedule(DateTime.utc(2026, 5, 1));
+      final maySecond = newYorkSchedule(DateTime.utc(2026, 5, 2));
+
+      final before = mayFirst.nextPrayerDetails(
+        at: beforeLocalMidnight,
+        locationDate: DateTime.utc(2026, 5, 1),
+      );
+      final after = maySecond.nextPrayerDetails(
+        at: afterLocalMidnight,
+        locationDate: DateTime.utc(2026, 5, 2),
+      );
+
+      expect(before.prayer, Prayer.imsak);
+      expect(before.isNextDay, isTrue);
+      expect(after.prayer, Prayer.imsak);
+      expect(after.isNextDay, isFalse);
+      expect(after.time, before.time);
+    });
+
     test('legacy nextPrayer advances to the requested local date', () {
       const utcCoordinates = Coordinates(0, 0);
       PrayerTimes utcSchedule(DateTime date) => PrayerTimes(

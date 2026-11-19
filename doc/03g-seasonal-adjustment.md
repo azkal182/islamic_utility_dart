@@ -118,6 +118,12 @@ Input:
 
 Dalam `PrayerTimes`, seasonal adjustment **hanya** digunakan oleh metode `moonsightingCommittee`:
 
+Untuk semua metode, engine memeriksa apakah ketinggian sudut twilight metode
+tercapai pada tanggal tersebut. Jika tidak tercapai, event twilight langsung
+menggunakan `HighLatitudeRule` yang dipilih; engine tidak memperlakukan jam
+semu dekat transit sebagai Fajr atau Isha. Aturan ini tidak menentukan waktu
+sunrise/sunset ketika Matahari tidak terbit atau terbenam sama sekali.
+
 ### Untuk Fajr (sebagai `safeFajr()`)
 ```
 if method == moonsightingCommittee:
